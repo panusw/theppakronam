@@ -15,7 +15,9 @@ const HAIR_LABELS: Array[String] = [
 	"HAIR_BOWL", "HAIR_CURLY", "HAIR_LONG",
 	"HAIR_MOP",  "HAIR_SHORT", "HAIR_SPIKY",
 ]
-const IDLE_PATH := "res://assets/sprites/character/human/IDLE/"
+const IDLE_PATH   := "res://assets/sprites/character/human/IDLE/"
+const IDLE_FRAMES := 9
+const IDLE_FPS    := 8.0
 
 # ---------------------------------------------------------------------------
 # Node refs (matched to character_creator.tscn)
@@ -41,6 +43,8 @@ var _outfit_key:     String = "navy"
 var _outfit2_key:    String = "red"
 var _hair_color_key: String = "brown"
 
+var _anim_time: float = 0.0
+
 var _body_mat: ShaderMaterial
 var _tool_mat: ShaderMaterial
 var _hair_mat: ShaderMaterial
@@ -60,6 +64,15 @@ func _ready() -> void:
 	_setup_materials()
 	_build_ui()
 	_update_preview()
+
+
+func _process(delta: float) -> void:
+	_anim_time += delta
+	var frame := int(_anim_time * IDLE_FPS) % IDLE_FRAMES
+	_body.frame = frame
+	_tool.frame = frame
+	if _hair.visible:
+		_hair.frame = frame
 
 
 func _setup_materials() -> void:
