@@ -1,5 +1,4 @@
 extends Node
-class_name GachaEngine
 ## Gacha pull system — pity tracking, weighted rarity roll, item selection.
 ## Authenticated players: server-authoritative pull via gacha_pull RPC.
 ## Guest players: local roll (no anti-cheat needed for offline data).

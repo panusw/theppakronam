@@ -1,5 +1,4 @@
 extends Node
-class_name SkillTreeGraph
 ## In-memory skill tree graph built from Supabase data.
 ## Provides O(1) lookup for unlock eligibility and neighbor traversal.
 ## Load once per session via load_for_player(); reload after band change.
@@ -94,7 +93,7 @@ func get_all_nodes() -> Array:
 	return _nodes.values()
 
 
-func get_node(node_id: String) -> Dictionary:
+func get_skill_node(node_id: String) -> Dictionary:
 	return _nodes.get(node_id, {})
 
 
@@ -131,7 +130,7 @@ func get_unlockable_ids() -> Array:
 	return result
 
 
-func get_children(node_id: String) -> Array:
+func get_node_children(node_id: String) -> Array:
 	return _edges_fwd.get(node_id, [])
 
 

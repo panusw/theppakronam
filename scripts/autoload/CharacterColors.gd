@@ -109,9 +109,9 @@ func apply_body_colors(
 		outfit_key:  String,
 		outfit2_key: String
 ) -> void:
-	var sk  := SKIN_PRESETS.get(skin_key,      SKIN_PRESETS["light"])
-	var ok  := OUTFIT_PRESETS.get(outfit_key,  OUTFIT_PRESETS["navy"])
-	var s2k := OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"])
+	var sk:  Array = SKIN_PRESETS.get(skin_key,       SKIN_PRESETS["light"])
+	var ok:  Array = OUTFIT_PRESETS.get(outfit_key,   OUTFIT_PRESETS["navy"])
+	var s2k: Array = OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"])
 	mat.set_shader_parameter("color1_dark",  sk[0])
 	mat.set_shader_parameter("color1_light", sk[2])
 	mat.set_shader_parameter("color2_dark",  ok[0])
@@ -127,9 +127,9 @@ func apply_hair_colors(
 		outfit_key:  String,
 		outfit2_key: String
 ) -> void:
-	var hk  := HAIR_PRESETS.get(hair_key,      HAIR_PRESETS["brown"])
-	var ok  := OUTFIT_PRESETS.get(outfit_key,  OUTFIT_PRESETS["navy"])
-	var s2k := OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"])
+	var hk:  Array = HAIR_PRESETS.get(hair_key,       HAIR_PRESETS["brown"])
+	var ok:  Array = OUTFIT_PRESETS.get(outfit_key,   OUTFIT_PRESETS["navy"])
+	var s2k: Array = OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"])
 	mat.set_shader_parameter("color1_dark",  hk[0])
 	mat.set_shader_parameter("color1_light", hk[2])
 	mat.set_shader_parameter("color2_dark",  s2k[0])   # G channel = shirt boundary

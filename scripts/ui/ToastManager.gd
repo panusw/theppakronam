@@ -1,5 +1,4 @@
 extends Node
-class_name ToastManager
 ## Singleton for transient toast notifications.
 ## Add as autoload; scene uses %ToastContainer if available.
 ## Usage: ToastManager.show("ข้อความ")  or  .show("msg", Color.RED, 3.0)

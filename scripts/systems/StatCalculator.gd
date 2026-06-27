@@ -1,5 +1,4 @@
 extends Node
-class_name StatCalculator
 ## Stat calculation: base + divinity bonus + equipment affixes + skill nodes.
 ## Production: server recomputes via Supabase and writes to player_stat_cache.
 ## Local: preview-only (equip compare, skill tree hover).

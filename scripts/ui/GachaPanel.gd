@@ -106,7 +106,7 @@ func _show_results(items: Array) -> void:
 
 func _make_card(item: Dictionary) -> PanelContainer:
 	var rarity: String = item.get("rarity", "common")
-	var col := RARITY_COLOR.get(rarity, Color.WHITE)
+	var col: Color = RARITY_COLOR.get(rarity, Color.WHITE)
 
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(106, 126)

@@ -140,7 +140,7 @@ func _build_graph() -> void:
 	# Draw edges first (Line2D)
 	for node in nodes:
 		var nid := str(node.get("id", ""))
-		for child_id in SkillTreeGraph.get_children(nid):
+		for child_id in SkillTreeGraph.get_node_children(nid):
 			if not _node_positions.has(nid) or not _node_positions.has(child_id):
 				continue
 			var line        := Line2D.new()
@@ -192,7 +192,7 @@ func _refresh_edge_colors() -> void:
 	var nodes := SkillTreeGraph.get_all_nodes()
 	for node in nodes:
 		var nid := str(node.get("id", ""))
-		var children_ids := SkillTreeGraph.get_children(nid)
+		var children_ids := SkillTreeGraph.get_node_children(nid)
 		for child_id in children_ids:
 			if idx < _edge_lines.get_child_count():
 				var line: Line2D = _edge_lines.get_child(idx) as Line2D
@@ -268,7 +268,7 @@ func _try_select_node(world_pos: Vector2) -> void:
 	vis.selected = true
 	vis.queue_redraw()
 
-	_show_side_panel(SkillTreeGraph.get_node(_selected_id))
+	_show_side_panel(SkillTreeGraph.get_skill_node(_selected_id))
 
 
 func _deselect() -> void:
@@ -361,7 +361,7 @@ func _on_node_unlocked(node_id: String) -> void:
 
 	# Refresh side panel if this node is currently selected
 	if _selected_id == node_id:
-		_show_side_panel(SkillTreeGraph.get_node(node_id))
+		_show_side_panel(SkillTreeGraph.get_skill_node(node_id))
 
 
 func _on_unlock_failed(_node_id: String, reason: String) -> void:
