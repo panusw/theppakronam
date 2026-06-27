@@ -261,7 +261,8 @@ func _select_hair_style(idx: int) -> void:
 	else:
 		_hair.visible = true
 		_hair.texture = load(IDLE_PATH + "%s_idle_strip9.png" % HAIR_STYLES[idx])
-		_update_preview()
+		_hair.hframes = IDLE_FRAMES
+	_update_preview()
 
 
 func _select_skin(key: String) -> void:

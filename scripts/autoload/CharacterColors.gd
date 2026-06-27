@@ -1,21 +1,27 @@
 extends Node
 ## Singleton — character palette presets and runtime palette texture builder.
-## Source colors eyedropped from base_idle_strip9.png using Pixelorama.
+## Source colors verified against actual pixel values in the sprite sheets.
 
 # ---------------------------------------------------------------------------
-# SOURCE COLORS (eyedropped จาก base_idle_strip9.png)
+# SOURCE COLORS — pixel-exact values from base_idle_strip9.png
+# (verified with System.Drawing pixel scan, not derived)
 # ---------------------------------------------------------------------------
 
-## ผิวหนัง midtone — shadow/highlight derive อัตโนมัติด้วย _shades()
-const SKIN_MID:    Color = Color(0.910, 0.678, 0.490)  # #e8ad7d
+# ผิวหนัง (BODY layer)
+const SKIN_SHAD:    Color = Color(0.7843, 0.4980, 0.3569)  # #C87F5B  เงาผิว
+const SKIN_MID:     Color = Color(0.9098, 0.6784, 0.4902)  # #E8AD7D  ผิวกลาง
 
-## เอี้ยม / overalls (ชั้นนอก)
-const OUTFIT_MID:  Color = Color(0.216, 0.267, 0.392)  # #374464
+# เอี้ยม / overalls (ชั้นนอก)
+const OUTFIT_SHAD:  Color = Color(0.1412, 0.1686, 0.2588)  # #242B42  เงาเอี้ยม
+const OUTFIT_MID:   Color = Color(0.2157, 0.2667, 0.3922)  # #374464  เอี้ยมกลาง
+const OUTFIT_HIGH:  Color = Color(0.2196, 0.2706, 0.3961)  # #384565  ไฮไลท์เอี้ยม
 
-## เสื้อตัวใน / shirt (ชั้นใน)
-const OUTFIT2_MID: Color = Color(0.914, 0.196, 0.271)  # #e93245
+# เสื้อตัวใน / shirt (ชั้นใน)
+const OUTFIT2_SHAD: Color = Color(0.6471, 0.1216, 0.2000)  # #A51F33  เงาเสื้อ
+const OUTFIT2_MID:  Color = Color(0.9137, 0.1961, 0.2706)  # #E93245  เสื้อกลาง
+const OUTFIT2_HIGH: Color = Color(0.9804, 0.4431, 0.4784)  # #FA717A  ไฮไลท์เสื้อ
 
-## ผม — eyedropped จาก bowlhair_idle_strip9.png (Pixelorama)
+# ผม — pixel-exact จาก bowlhair_idle_strip9.png
 const HAIR_DARK: Color = Color(0.247, 0.153, 0.192)    # #3f2731 เงา / ด้านข้าง
 const HAIR_MID:  Color = Color(0.459, 0.235, 0.224)    # #753c39 สีหลัก / ด้านบน
 const HAIR_HIGH: Color = Color(0.733, 0.427, 0.325)    # #bb6d53 แสงสะท้อน
@@ -81,11 +87,6 @@ enum Layer { BODY, HAIR }
 # Helpers
 # ---------------------------------------------------------------------------
 
-## สร้าง 3-shade array จาก midtone: [darkened, mid, lightened]
-func _shades(mid: Color) -> Array:
-	return [mid.darkened(0.30), mid, mid.lightened(0.22)]
-
-
 ## สร้าง ImageTexture 1×N จาก Array of Color — ใช้เป็น shader uniform
 func build_texture(colors: Array) -> ImageTexture:
 	var img := Image.create(colors.size(), 1, false, Image.FORMAT_RGBA8)
@@ -96,16 +97,8 @@ func build_texture(colors: Array) -> ImageTexture:
 
 ## ตั้ง shader uniforms บน ShaderMaterial ของ sprite layer ที่ระบุ
 ##
-## BODY layer (base_*.png):
-##   src = skin[3] + outfit[3] + outfit2[3] = 9 สี
-##   แต่ละ group อิสระ — เลือก skin / outfit / outfit2 แยกกัน
-##
-## HAIR layer (bowlhair_*.png ฯลฯ):
-##   src = hair[3] = 3 สี
-##
-## ใช้งาน:
-##   CharacterColors.apply_to_material(body_mat, "light", "navy", "red", "brown", Layer.BODY)
-##   CharacterColors.apply_to_material(hair_mat, "",      "",     "",    "black", Layer.HAIR)
+## BODY layer: src = 9 pixel-exact colors (3 per group: skin / outfit / shirt)
+## HAIR layer: src = 3 pixel-exact hair colors
 func apply_to_material(
 		mat:         ShaderMaterial,
 		skin_key:    String,
@@ -119,7 +112,10 @@ func apply_to_material(
 
 	match layer:
 		Layer.BODY:
-			src = _shades(SKIN_MID) + _shades(OUTFIT_MID) + _shades(OUTFIT2_MID)
+			# ใช้ค่าสีจริงจากสไปรต์ (pixel-exact) — ไม่ derive จาก midtone
+			src = [SKIN_SHAD,    SKIN_MID,    SKIN_MID,
+			       OUTFIT_SHAD,  OUTFIT_MID,  OUTFIT_HIGH,
+			       OUTFIT2_SHAD, OUTFIT2_MID, OUTFIT2_HIGH]
 			tgt = (SKIN_PRESETS.get(skin_key,     SKIN_PRESETS["light"])
 				 + OUTFIT_PRESETS.get(outfit_key,  OUTFIT_PRESETS["navy"])
 				 + OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"]))
