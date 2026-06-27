@@ -91,13 +91,23 @@ func _setup_materials() -> void:
 	_hair.hframes = IDLE_FRAMES
 	_hair.frame   = 0
 
-	_body.texture  = load(IDLE_PATH + "base_idle_strip9.png")
-	_tool.texture  = load(IDLE_PATH + "tools_idle_strip9.png")
+	var body_tex := load(IDLE_PATH + "base_idle_strip9.png") as Texture2D
+	var tool_tex := load(IDLE_PATH + "tools_idle_strip9.png") as Texture2D
+	if body_tex == null or tool_tex == null:
+		push_error("CharacterCreator: ไม่พบ sprite ตัวละคร — ลอง Project > Tools > Reimport CSV / reimport assets ใน Godot editor")
+	_body.texture = body_tex
+	_tool.texture = tool_tex
 	_hair.visible  = false  # default index 0 = ล้าน
 
 	# โหลด mask texture สำหรับ body และ tools
-	_body_mat.set_shader_parameter("mask_texture", load(IDLE_PATH + "mask_base_idle_strip9.png"))
-	_tool_mat.set_shader_parameter("mask_texture", load(IDLE_PATH + "mask_tools_idle_strip9.png"))
+	var body_mask := load(IDLE_PATH + "mask_base_idle_strip9.png") as Texture2D
+	var tool_mask := load(IDLE_PATH + "mask_tools_idle_strip9.png") as Texture2D
+	if body_mask == null or tool_mask == null:
+		push_error("CharacterCreator: ไม่พบ mask texture — ต้อง reimport ใน Godot editor ก่อน (Project > Reimport All)")
+	if body_mask != null:
+		_body_mat.set_shader_parameter("mask_texture", body_mask)
+	if tool_mask != null:
+		_tool_mat.set_shader_parameter("mask_texture", tool_mask)
 
 # ---------------------------------------------------------------------------
 # UI construction (all option rows built at runtime)
@@ -253,12 +263,18 @@ func _select_hair_style(idx: int) -> void:
 	if HAIR_STYLES[idx].is_empty():
 		_hair.visible = false
 	else:
-		_hair.visible = true
 		var style := HAIR_STYLES[idx]
-		_hair.texture = load(IDLE_PATH + "%s_idle_strip9.png" % style)
-		_hair.hframes = IDLE_FRAMES
-		_hair_mat.set_shader_parameter("mask_texture",
-				load(IDLE_PATH + "mask_%s_idle_strip9.png" % style))
+		var hair_tex  := load(IDLE_PATH + "%s_idle_strip9.png" % style) as Texture2D
+		var hair_mask := load(IDLE_PATH + "mask_%s_idle_strip9.png" % style) as Texture2D
+		if hair_tex != null:
+			_hair.texture = hair_tex
+			_hair.hframes = IDLE_FRAMES
+			_hair.visible = true
+		else:
+			_hair.visible = false
+			push_error("CharacterCreator: ไม่พบ hair sprite '%s'" % style)
+		if hair_mask != null:
+			_hair_mat.set_shader_parameter("mask_texture", hair_mask)
 	_update_preview()
 
 
@@ -334,7 +350,8 @@ func _on_create_done(data: Variant) -> void:
 		return
 
 	GameState.character_id = char_id
-	get_tree().change_scene_to_file("res://scenes/world_map.tscn")
+	# ไปที่ character_select เสมอ เพื่อให้ผู้เล่นกด "เล่น" เลือกตัวละคร
+	get_tree().change_scene_to_file("res://scenes/character_select.tscn")
 
 
 func _on_create_failed(code: int, message: String) -> void:
