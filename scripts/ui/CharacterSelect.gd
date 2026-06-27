@@ -39,6 +39,10 @@ func _ready() -> void:
 
 
 func _load_characters() -> void:
+	if GameState.is_guest:
+		_lbl_loading.visible = false
+		_populate_slots_guest()
+		return
 	_lbl_loading.text    = tr("CS_LOADING")
 	_lbl_loading.visible = true
 	SupabaseClient.request_completed.connect(_on_chars_loaded, CONNECT_ONE_SHOT)
@@ -144,6 +148,48 @@ func _add_spacer(parent: VBoxContainer, height: int) -> void:
 	parent.add_child(sp)
 
 # ---------------------------------------------------------------------------
+# Guest mode — GameState already populated by load_guest() before this scene
+# ---------------------------------------------------------------------------
+
+func _populate_slots_guest() -> void:
+	for i in 3:
+		for child in _slots[i].get_children():
+			child.queue_free()
+	var guest_char := {
+		"name":            GameState.character_name,
+		"difficulty":      GameState.difficulty,
+		"divinity_level":  GameState.divinity_level,
+		"divinity_exp":    GameState.divinity_exp,
+		"current_band":    GameState.current_band,
+		"current_floor":   GameState.current_floor,
+		"current_camp_id": GameState.current_camp_id,
+		"world_energy":    GameState.world_energy,
+		"battle_energy":   GameState.battle_energy,
+		"gold":            GameState.gold,
+		"gems":            GameState.gems,
+		"gacha_pity":      GameState.gacha_pity,
+		"hunger":          GameState.hunger,
+		"thirst":          GameState.thirst,
+		"fatigue":         GameState.fatigue,
+	}
+	_build_occupied_slot(_slots[0], guest_char)
+	_build_guest_locked_slot(_slots[1])
+	_build_guest_locked_slot(_slots[2])
+
+
+func _build_guest_locked_slot(panel: PanelContainer) -> void:
+	var vbox := VBoxContainer.new()
+	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	vbox.size_flags_vertical   = Control.SIZE_EXPAND_FILL
+	vbox.alignment             = BoxContainer.ALIGNMENT_CENTER
+	panel.add_child(vbox)
+	var lbl := Label.new()
+	lbl.text                 = tr("CS_GUEST_LOCKED")
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.modulate             = Color(0.5, 0.5, 0.5, 1.0)
+	vbox.add_child(lbl)
+
+# ---------------------------------------------------------------------------
 # Character selection — โหลด GameState ทั้งหมดจากข้อมูลที่ดึงมาแล้ว
 # ---------------------------------------------------------------------------
 
@@ -189,6 +235,13 @@ func _on_delete_input_changed(text: String) -> void:
 
 func _on_delete_confirmed() -> void:
 	_btn_delete_confirm.disabled = true
+	if GameState.is_guest:
+		_close_delete_modal()
+		GameState.delete_guest_save()
+		GameState.reset_session()
+		GameState.is_guest = true
+		get_tree().change_scene_to_file("res://scenes/character_creator.tscn")
+		return
 	SupabaseClient.request_completed.connect(_on_delete_done, CONNECT_ONE_SHOT)
 	SupabaseClient.request_failed.connect(_on_delete_failed, CONNECT_ONE_SHOT)
 	SupabaseClient.db_patch(

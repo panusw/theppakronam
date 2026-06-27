@@ -154,8 +154,8 @@ func _on_auth_failed(code: int, message: String) -> void:
 func _on_guest() -> void:
 	GameState.is_guest = true
 	if GameState.load_guest():
-		# มี save อยู่แล้ว — เข้าเกมต่อได้เลย
-		get_tree().change_scene_to_file("res://scenes/world_map.tscn")
+		# มี save อยู่แล้ว — ไปหน้าเลือกตัวละคร เพื่อให้ลบ/สร้างใหม่ได้
+		get_tree().change_scene_to_file("res://scenes/character_select.tscn")
 	else:
 		# ยังไม่มี save — สร้างตัวละครใหม่
 		get_tree().change_scene_to_file("res://scenes/character_creator.tscn")

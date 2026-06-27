@@ -323,7 +323,7 @@ func _on_confirm() -> void:
 
 	if GameState.is_guest:
 		GameState.save_guest()
-		get_tree().change_scene_to_file("res://scenes/world_map.tscn")
+		get_tree().change_scene_to_file("res://scenes/character_select.tscn")
 		return
 
 	_btn_confirm.disabled = true

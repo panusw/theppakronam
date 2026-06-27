@@ -49,6 +49,7 @@ CS_BTN_CONFIRM_DELETE,ยืนยันการลบ,Confirm Delete
 CS_BTN_CANCEL,ยกเลิก,Cancel
 CS_ERR_DELETE,"ลบไม่สำเร็จ (รหัส %d) — ลองอีกครั้ง","Delete failed (code %d) — try again"
 CS_BTN_BACK,กลับ,Back
+CS_GUEST_LOCKED,🔒 เฉพาะสมาชิก,🔒 Members only
 CS_UNKNOWN_NAME,ไม่ทราบชื่อ,Unknown
 WM_UNKNOWN_CHAR,ไม่ทราบชื่อ,Unknown
 WM_WORLD_ENERGY,"⚡ %d / 100","⚡ %d / 100"
