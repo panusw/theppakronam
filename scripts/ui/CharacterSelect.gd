@@ -10,11 +10,11 @@ class_name CharacterSelect
 	$SlotContainer/Slot2,
 	$SlotContainer/Slot3,
 ]
-@onready var _lbl_loading:        Label    = $LblLoading
+@onready var _lbl_loading:        Label          = $LblLoading
 @onready var _delete_modal:       PanelContainer = $DeleteModal
-@onready var _lbl_delete_warning: Label    = $DeleteModal/VBox/LblDeleteWarning
-@onready var _input_delete:       LineEdit = $DeleteModal/VBox/InputDeleteConfirm
-@onready var _btn_delete_confirm: Button   = $DeleteModal/VBox/HBox/BtnDeleteConfirm
+@onready var _lbl_delete_warning: Label          = $DeleteModal/VBox/LblDeleteWarning
+@onready var _input_delete:       LineEdit       = $DeleteModal/VBox/InputDeleteConfirm
+@onready var _btn_delete_confirm: Button         = $DeleteModal/VBox/HBox/BtnDeleteConfirm
 
 var _characters: Array[Dictionary] = []
 var _pending_delete: Dictionary    = {}
@@ -24,13 +24,12 @@ var _pending_delete: Dictionary    = {}
 # ---------------------------------------------------------------------------
 
 func _ready() -> void:
-	# Static scene text → tr()
-	$Header.text                                      = tr("CS_HEADER")
-	$DeleteModal/VBox/LblDeleteTitle.text             = tr("CS_DELETE_TITLE")
-	_input_delete.placeholder_text                    = tr("CS_DELETE_PLACEHOLDER")
-	_btn_delete_confirm.text                          = tr("CS_BTN_CONFIRM_DELETE")
-	$DeleteModal/VBox/HBox/BtnDeleteCancel.text       = tr("CS_BTN_CANCEL")
-	$BtnBack.text                                     = tr("CS_BTN_BACK")
+	$Header.text                                = tr("CS_HEADER")
+	$DeleteModal/VBox/LblDeleteTitle.text       = tr("CS_DELETE_TITLE")
+	_input_delete.placeholder_text              = tr("CS_DELETE_PLACEHOLDER")
+	_btn_delete_confirm.text                    = tr("CS_BTN_CONFIRM_DELETE")
+	$DeleteModal/VBox/HBox/BtnDeleteCancel.text = tr("CS_BTN_CANCEL")
+	$BtnBack.text                               = tr("CS_BTN_BACK")
 	_delete_modal.visible = false
 	$DeleteModal/VBox/HBox/BtnDeleteCancel.pressed.connect(_close_delete_modal)
 	_btn_delete_confirm.pressed.connect(_on_delete_confirmed)
@@ -44,9 +43,10 @@ func _load_characters() -> void:
 	_lbl_loading.visible = true
 	SupabaseClient.request_completed.connect(_on_chars_loaded, CONNECT_ONE_SHOT)
 	SupabaseClient.request_failed.connect(_on_chars_failed, CONNECT_ONE_SHOT)
+	# Query players table — RLS กรองเฉพาะ user ของตัวเองอัตโนมัติ
 	SupabaseClient.db_get(
-		"characters",
-		"?player_id=eq.%s&deleted_at=is.null&select=*&order=created_at.asc&limit=3" % GameState.player_id
+		"players",
+		"?user_id=eq.%s&deleted_at=is.null&select=*&order=created_at.asc&limit=3" % GameState.player_id
 	)
 
 # ---------------------------------------------------------------------------
@@ -89,16 +89,16 @@ func _build_occupied_slot(panel: PanelContainer, char_data: Dictionary) -> void:
 	panel.add_child(vbox)
 
 	var lbl_name := Label.new()
-	lbl_name.text                = char_data.get("name", "?")
+	lbl_name.text                 = char_data.get("name", "?")
 	lbl_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(lbl_name)
 
 	var div: int   = char_data.get("divinity_level", 0)
-	var band: int  = char_data.get("band", 1)
-	var floor: int = char_data.get("floor", 1)
+	var band: int  = char_data.get("current_band",  1)
+	var floor: int = char_data.get("current_floor", 1)
 
 	var lbl_info := Label.new()
-	lbl_info.text                = tr("CS_DIVINITY_INFO") % [div, band, floor]
+	lbl_info.text                 = tr("CS_DIVINITY_INFO") % [div, band, floor]
 	lbl_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(lbl_info)
 
@@ -126,7 +126,7 @@ func _build_empty_slot(panel: PanelContainer) -> void:
 	panel.add_child(vbox)
 
 	var lbl_plus := Label.new()
-	lbl_plus.text                = "+"
+	lbl_plus.text                 = "+"
 	lbl_plus.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(lbl_plus)
 
@@ -144,12 +144,26 @@ func _add_spacer(parent: VBoxContainer, height: int) -> void:
 	parent.add_child(sp)
 
 # ---------------------------------------------------------------------------
-# Character selection
+# Character selection — โหลด GameState ทั้งหมดจากข้อมูลที่ดึงมาแล้ว
 # ---------------------------------------------------------------------------
 
 func _select_character(char_data: Dictionary) -> void:
-	GameState.character_id   = char_data.get("id", "")
-	GameState.character_name = char_data.get("name", "")
+	GameState.character_id        = char_data.get("id",             "")
+	GameState.character_name      = char_data.get("name",           "")
+	GameState.difficulty          = char_data.get("difficulty",     "normal")
+	GameState.divinity_level      = char_data.get("divinity_level", 0)
+	GameState.divinity_exp        = char_data.get("divinity_exp",   0)
+	GameState.current_band        = char_data.get("current_band",   1)
+	GameState.current_floor       = char_data.get("current_floor",  1)
+	GameState.current_camp_id     = char_data.get("current_camp_id", "")
+	GameState.world_energy        = char_data.get("world_energy",   100)
+	GameState.battle_energy       = char_data.get("battle_energy",  10)
+	GameState.gold                = char_data.get("gold",           0)
+	GameState.gems                = char_data.get("gems",           0)
+	GameState.gacha_pity          = char_data.get("gacha_pity",     0)
+	GameState.hunger              = float(char_data.get("hunger",   100.0))
+	GameState.thirst              = float(char_data.get("thirst",   100.0))
+	GameState.fatigue             = float(char_data.get("fatigue",  100.0))
 	var appearance = char_data.get("appearance", {})
 	if appearance is Dictionary:
 		GameState.pending_appearance = appearance
@@ -164,9 +178,9 @@ func _request_delete(char_data: Dictionary) -> void:
 	var char_name: String = char_data.get("name", "")
 	_lbl_delete_warning.text = (tr("CS_DELETE_WARNING_LINE1") % char_name) \
 		+ "\n" + tr("CS_DELETE_WARNING_LINE2")
-	_input_delete.text       = ""
+	_input_delete.text           = ""
 	_btn_delete_confirm.disabled = true
-	_delete_modal.visible    = true
+	_delete_modal.visible        = true
 
 
 func _on_delete_input_changed(text: String) -> void:
@@ -178,7 +192,7 @@ func _on_delete_confirmed() -> void:
 	SupabaseClient.request_completed.connect(_on_delete_done, CONNECT_ONE_SHOT)
 	SupabaseClient.request_failed.connect(_on_delete_failed, CONNECT_ONE_SHOT)
 	SupabaseClient.db_patch(
-		"characters",
+		"players",
 		"?id=eq.%s" % _pending_delete.get("id", ""),
 		{"deleted_at": Time.get_datetime_string_from_system(true)}
 	)

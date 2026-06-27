@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://tp_hud"]
 
+[ext_resource type="Script" path="res://scripts/ui/HudOverlay.gd" id="1_hud"]
+
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
 layer = 10
 
 [node name="TopBar" type="HBoxContainer" parent="."]

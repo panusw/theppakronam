@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://tp_combat"]
 
+[ext_resource type="Script" path="res://scripts/ui/CombatScene.gd" id="1_cs"]
+
 [node name="Combat" type="Node"]
+script = ExtResource("1_cs")
 
 [node name="Background" type="Sprite2D" parent="."]
 
@@ -34,6 +37,40 @@ value = 0.0
 layout_mode = 2
 text = "🔋 10"
 
+[node name="EnemyBar" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+offset_left = 640.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 56.0
+
+[node name="LblEnemyName" type="Label" parent="UI/EnemyBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ศัตรู"
+
+[node name="EnemyHPBar" type="ProgressBar" parent="UI/EnemyBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+value = 100.0
+
+[node name="EnemyATBBar" type="ProgressBar" parent="UI/EnemyBar"]
+layout_mode = 2
+size_flags_horizontal = 1
+custom_minimum_size = Vector2(80, 0)
+max_value = 100.0
+value = 0.0
+
+[node name="CombatLog" type="RichTextLabel" parent="UI"]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 440.0
+offset_right = 640.0
+offset_bottom = 560.0
+bbcode_enabled = true
+scroll_following = true
+
 [node name="ActionPanel" type="PanelContainer" parent="UI"]
 layout_mode = 1
 offset_left = 0.0
@@ -53,10 +90,12 @@ text = "โจมตี"
 [node name="BtnSkill" type="Button" parent="UI/ActionPanel/ActionButtons"]
 layout_mode = 2
 text = "สกิล"
+disabled = true
 
 [node name="BtnItem" type="Button" parent="UI/ActionPanel/ActionButtons"]
 layout_mode = 2
 text = "ไอเทม"
+disabled = true
 
 [node name="BtnFlee" type="Button" parent="UI/ActionPanel/ActionButtons"]
 layout_mode = 2
@@ -67,11 +106,83 @@ layout_mode = 2
 text = "จับ"
 visible = false
 
-[node name="CombatLog" type="RichTextLabel" parent="UI"]
+[node name="DicePanel" type="PanelContainer" parent="UI"]
 layout_mode = 1
-offset_left = 0.0
-offset_top = 440.0
-offset_right = 640.0
-offset_bottom = 560.0
-bbcode_enabled = true
-scroll_following = true
+offset_left = 390.0
+offset_top = 200.0
+offset_right = 890.0
+offset_bottom = 480.0
+visible = false
+
+[node name="Margin" type="MarginContainer" parent="UI/DicePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="UI/DicePanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LblDiceTitle" type="Label" parent="UI/DicePanel/Margin/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "ทอยเต๋า"
+theme_override_font_sizes/font_size = 18
+
+[node name="LblDiceValue" type="Label" parent="UI/DicePanel/Margin/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "—"
+theme_override_font_sizes/font_size = 64
+
+[node name="LblDiceEffect" type="Label" parent="UI/DicePanel/Margin/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+text = ""
+
+[node name="BtnDiceRoll" type="Button" parent="UI/DicePanel/Margin/VBox"]
+layout_mode = 2
+text = "🎲 ทอย"
+
+[node name="BtnDiceConfirm" type="Button" parent="UI/DicePanel/Margin/VBox"]
+layout_mode = 2
+text = "ยืนยัน"
+visible = false
+
+[node name="ResultPanel" type="PanelContainer" parent="UI"]
+layout_mode = 1
+offset_left = 390.0
+offset_top = 200.0
+offset_right = 890.0
+offset_bottom = 480.0
+visible = false
+
+[node name="Margin" type="MarginContainer" parent="UI/ResultPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="UI/ResultPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LblResult" type="Label" parent="UI/ResultPanel/Margin/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+text = ""
+theme_override_font_sizes/font_size = 32
+
+[node name="LblRewards" type="Label" parent="UI/ResultPanel/Margin/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+text = ""
+
+[node name="BtnBackToMap" type="Button" parent="UI/ResultPanel/Margin/VBox"]
+layout_mode = 2
+text = "กลับสู่แผนที่"

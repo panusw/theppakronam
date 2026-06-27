@@ -2,8 +2,10 @@ extends Node
 ## Singleton — Supabase REST API wrapper using Godot HTTPRequest.
 ## All stat-sensitive operations must go through server-side RPC functions.
 ## Client sends action → server validates → returns result.
+##
+## Credentials: copy supabase.cfg.example → supabase.cfg and fill in your values.
+## supabase.cfg is gitignored and never committed.
 
-# Set these from a config file or environment before use.
 var supabase_url: String = ""
 var supabase_anon_key: String = ""
 
@@ -16,17 +18,36 @@ signal request_failed(code: int, message: String)
 
 
 func _ready() -> void:
+	_load_config()
 	_http = HTTPRequest.new()
 	add_child(_http)
 	_http.request_completed.connect(_on_raw_completed)
 
 
-func _make_headers() -> PackedStringArray:
+func _load_config() -> void:
+	var cfg := ConfigFile.new()
+	var path := "res://supabase.cfg"
+	if cfg.load(path) != OK:
+		push_warning("SupabaseClient: supabase.cfg not found — copy supabase.cfg.example and fill in your credentials")
+		return
+	supabase_url     = cfg.get_value("supabase", "url",      "")
+	supabase_anon_key = cfg.get_value("supabase", "anon_key", "")
+	if supabase_url.is_empty() or supabase_anon_key.is_empty():
+		push_warning("SupabaseClient: supabase.cfg is missing url or anon_key")
+
+
+func is_configured() -> bool:
+	return not supabase_url.is_empty() and not supabase_anon_key.is_empty()
+
+
+func _make_headers(upsert: bool = false) -> PackedStringArray:
+	var prefer := "resolution=merge-duplicates,return=representation" if upsert \
+		else "return=representation"
 	return PackedStringArray([
 		"Content-Type: application/json",
 		"apikey: " + supabase_anon_key,
 		"Authorization: Bearer " + GameState.auth_token,
-		"Prefer: return=representation",
+		"Prefer: " + prefer,
 	])
 
 
@@ -42,6 +63,10 @@ func db_post(table: String, body: Dictionary) -> void:
 
 func db_patch(table: String, query: String, body: Dictionary) -> void:
 	_enqueue("/rest/v1/" + table + query, HTTPClient.METHOD_PATCH, body)
+
+
+func db_upsert(table: String, body: Dictionary) -> void:
+	_enqueue("/rest/v1/" + table, HTTPClient.METHOD_POST, body, true)
 
 
 func call_rpc(func_name: String, params: Dictionary) -> void:
@@ -64,8 +89,12 @@ func auth_logout() -> void:
 
 # --- Internal queue ---
 
-func _enqueue(endpoint: String, method: int, body: Dictionary) -> void:
-	_queue.append({"endpoint": endpoint, "method": method, "body": body})
+func _enqueue(endpoint: String, method: int, body: Dictionary, upsert: bool = false) -> void:
+	if not is_configured():
+		push_error("SupabaseClient: not configured — fill in supabase.cfg")
+		request_failed.emit(0, "Supabase not configured")
+		return
+	_queue.append({"endpoint": endpoint, "method": method, "body": body, "upsert": upsert})
 	if not _busy:
 		_flush()
 
@@ -78,7 +107,7 @@ func _flush() -> void:
 	var req: Dictionary = _queue.pop_front()
 	var url: String = supabase_url + req["endpoint"]
 	var body_str: String = JSON.stringify(req["body"]) if not req["body"].is_empty() else ""
-	_http.request(url, _make_headers(), req["method"], body_str)
+	_http.request(url, _make_headers(req.get("upsert", false)), req["method"], body_str)
 
 
 func _on_raw_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://tp_skill_web"]
 
+[ext_resource type="Script" path="res://scripts/ui/SkillWebRenderer.gd" id="1_swr"]
+
 [node name="SkillWeb" type="Control"]
+script = ExtResource("1_swr")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

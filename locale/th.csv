@@ -61,6 +61,16 @@ WM_WARNING_PREFIX,"⚠  %s","⚠  %s"
 WM_WARNING_SUFFIX,หยุดพักที่แคมป์,Rest at camp
 WM_BTN_COMBAT,⚔ สู้,⚔ Fight
 WM_BTN_INVENTORY,🎒 กระเป๋า,🎒 Inventory
-WM_BTN_CRAFT,🔨 คราฟ,🔨 Craft
+WM_BTN_CRAFT,🌐 สกิล,🌐 Skills
 WM_BTN_GACHA,✨ ดึง,✨ Gacha
 WM_BTN_MENU,☰ เมนู,☰ Menu
+WM_CAMP_ENERGY,"⚡ %d พลังงาน","⚡ %d Energy"
+WM_CAMP_ENERGY_FREE,⚡ ฟรี,⚡ Free
+WM_BTN_TRAVEL,เดินทาง,Travel
+GACHA_TITLE,ห้องสุ่ม,Gacha
+GACHA_BTN_PULL1,"สุ่ม ×1  (100 💎)","Pull ×1  (100 💎)"
+GACHA_BTN_PULL10,"สุ่ม ×10  (900 💎)","Pull ×10  (900 💎)"
+GACHA_BTN_CLOSE,กลับ,Back
+GACHA_PULLING,กำลังสุ่ม...,Pulling...
+GACHA_ERR_NO_GEMS,💎 อัญมณีไม่พอ,💎 Not enough gems
+SKILL_ERR_REQUIREMENTS,ไม่ผ่านเงื่อนไขปลดล็อก,Requirements not met

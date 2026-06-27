@@ -103,3 +103,24 @@ text = "เล่นแบบผู้เยี่ยมชม"
 [node name="BtnQuit" type="Button" parent="CenterContainer/VBox" unique_id=1496842187]
 layout_mode = 2
 text = "ออกจากเกม"
+
+[node name="LangSpacer" type="Control" parent="CenterContainer/VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="LangRow" type="HBoxContainer" parent="CenterContainer/VBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 0
+
+[node name="BtnTH" type="Button" parent="CenterContainer/VBox/LangRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "ภาษาไทย"
+
+[node name="BtnEN" type="Button" parent="CenterContainer/VBox/LangRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "English"

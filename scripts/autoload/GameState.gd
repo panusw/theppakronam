@@ -49,6 +49,7 @@ var gacha_pity: int = 0  # resets on epic+
 var current_band: int = 1
 var current_floor: int = 1
 var current_camp_id: String = ""
+var current_camp_type: String = "normal"
 
 # --- Inventory (lightweight manifest; full data fetched per-session) ---
 var inventory: Array[Dictionary] = []
@@ -92,6 +93,57 @@ func set_survival(h: float, t: float, f: float) -> void:
 
 func is_exhausted() -> bool:
 	return battle_energy <= 0
+
+
+const GUEST_SAVE_PATH := "user://save_guest.cfg"
+
+func save_guest() -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value("character", "name",           character_name)
+	cfg.set_value("character", "appearance",      pending_appearance)
+	cfg.set_value("character", "difficulty",      difficulty)
+	cfg.set_value("character", "divinity_level",  divinity_level)
+	cfg.set_value("character", "divinity_exp",    divinity_exp)
+	cfg.set_value("character", "current_band",    current_band)
+	cfg.set_value("character", "current_floor",   current_floor)
+	cfg.set_value("character", "world_energy",    world_energy)
+	cfg.set_value("character", "battle_energy",   battle_energy)
+	cfg.set_value("character", "gold",            gold)
+	cfg.set_value("character", "gems",            gems)
+	cfg.set_value("character", "gacha_pity",      gacha_pity)
+	cfg.set_value("character", "hunger",          hunger)
+	cfg.set_value("character", "thirst",          thirst)
+	cfg.set_value("character", "fatigue",         fatigue)
+	cfg.save(GUEST_SAVE_PATH)
+
+
+func load_guest() -> bool:
+	var cfg := ConfigFile.new()
+	if cfg.load(GUEST_SAVE_PATH) != OK:
+		return false
+	character_name      = cfg.get_value("character", "name",          "")
+	if character_name.is_empty():
+		return false
+	pending_appearance  = cfg.get_value("character", "appearance",    {})
+	difficulty          = cfg.get_value("character", "difficulty",    "normal")
+	divinity_level      = cfg.get_value("character", "divinity_level", 0)
+	divinity_exp        = cfg.get_value("character", "divinity_exp",   0)
+	current_band        = cfg.get_value("character", "current_band",   1)
+	current_floor       = cfg.get_value("character", "current_floor",  1)
+	world_energy        = cfg.get_value("character", "world_energy",  100)
+	battle_energy       = cfg.get_value("character", "battle_energy",  10)
+	gold                = cfg.get_value("character", "gold",            0)
+	gems                = cfg.get_value("character", "gems",            0)
+	gacha_pity          = cfg.get_value("character", "gacha_pity",     0)
+	hunger              = cfg.get_value("character", "hunger",        100.0)
+	thirst              = cfg.get_value("character", "thirst",        100.0)
+	fatigue             = cfg.get_value("character", "fatigue",       100.0)
+	is_guest            = true
+	return true
+
+
+func delete_guest_save() -> void:
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(GUEST_SAVE_PATH))
 
 
 func reset_session() -> void:

@@ -3,6 +3,8 @@ class_name MainMenu
 
 enum Mode { LOGIN, REGISTER }
 
+const SETTINGS_PATH := "user://settings.cfg"
+
 # ---------------------------------------------------------------------------
 # Node refs
 # ---------------------------------------------------------------------------
@@ -14,6 +16,8 @@ enum Mode { LOGIN, REGISTER }
 @onready var _lbl_status:    Label    = $CenterContainer/VBox/LblStatus
 @onready var _btn_login_tab: Button   = $CenterContainer/VBox/ModeToggle/BtnLoginTab
 @onready var _btn_reg_tab:   Button   = $CenterContainer/VBox/ModeToggle/BtnRegisterTab
+@onready var _btn_th:        Button   = $CenterContainer/VBox/LangRow/BtnTH
+@onready var _btn_en:        Button   = $CenterContainer/VBox/LangRow/BtnEN
 
 var _mode: Mode = Mode.LOGIN
 
@@ -22,7 +26,19 @@ var _mode: Mode = Mode.LOGIN
 # ---------------------------------------------------------------------------
 
 func _ready() -> void:
-	# Static labels not set by scene editor → set via tr() for localization
+	_load_locale()
+	_refresh_text()
+	_switch_mode(Mode.LOGIN)
+	_btn_login_tab.pressed.connect(func(): _switch_mode(Mode.LOGIN))
+	_btn_reg_tab.pressed.connect(func(): _switch_mode(Mode.REGISTER))
+	_btn_submit.pressed.connect(_on_submit)
+	$CenterContainer/VBox/BtnGuest.pressed.connect(_on_guest)
+	$CenterContainer/VBox/BtnQuit.pressed.connect(get_tree().quit)
+	_btn_th.pressed.connect(func(): _set_locale("th"))
+	_btn_en.pressed.connect(func(): _set_locale("en"))
+
+
+func _refresh_text() -> void:
 	$CenterContainer/VBox/Title.text    = tr("MM_TITLE")
 	$CenterContainer/VBox/Subtitle.text = tr("MM_SUBTITLE")
 	_input_email.placeholder_text       = tr("MM_PLACEHOLDER_EMAIL")
@@ -32,12 +48,7 @@ func _ready() -> void:
 	$CenterContainer/VBox/BtnQuit.text  = tr("MM_BTN_QUIT")
 	_btn_login_tab.text                 = tr("MM_TAB_LOGIN")
 	_btn_reg_tab.text                   = tr("MM_TAB_REGISTER")
-	_switch_mode(Mode.LOGIN)
-	_btn_login_tab.pressed.connect(func(): _switch_mode(Mode.LOGIN))
-	_btn_reg_tab.pressed.connect(func(): _switch_mode(Mode.REGISTER))
-	_btn_submit.pressed.connect(_on_submit)
-	$CenterContainer/VBox/BtnGuest.pressed.connect(_on_guest)
-	$CenterContainer/VBox/BtnQuit.pressed.connect(get_tree().quit)
+	_update_lang_buttons()
 
 
 func _switch_mode(mode: Mode) -> void:
@@ -47,6 +58,33 @@ func _switch_mode(mode: Mode) -> void:
 	_btn_login_tab.button_pressed = (mode == Mode.LOGIN)
 	_btn_reg_tab.button_pressed   = (mode == Mode.REGISTER)
 	_lbl_status.text = ""
+
+# ---------------------------------------------------------------------------
+# Language
+# ---------------------------------------------------------------------------
+
+func _load_locale() -> void:
+	var cfg := ConfigFile.new()
+	var locale := "th"
+	if cfg.load(SETTINGS_PATH) == OK:
+		locale = cfg.get_value("display", "locale", "th")
+	TranslationServer.set_locale(locale)
+
+
+func _set_locale(locale: String) -> void:
+	TranslationServer.set_locale(locale)
+	var cfg := ConfigFile.new()
+	cfg.load(SETTINGS_PATH)
+	cfg.set_value("display", "locale", locale)
+	cfg.save(SETTINGS_PATH)
+	_refresh_text()
+	_switch_mode(_mode)
+
+
+func _update_lang_buttons() -> void:
+	var current := TranslationServer.get_locale()
+	_btn_th.button_pressed = current.begins_with("th")
+	_btn_en.button_pressed = current.begins_with("en")
 
 # ---------------------------------------------------------------------------
 # Submit
@@ -69,7 +107,6 @@ func _on_submit() -> void:
 	_set_status(tr("MM_STATUS_LOADING"))
 	_btn_submit.disabled = true
 
-	# CONNECT_ONE_SHOT: auto-disconnect after first fire (handles queue correctly)
 	SupabaseClient.request_completed.connect(_on_auth_done, CONNECT_ONE_SHOT)
 	SupabaseClient.request_failed.connect(_on_auth_failed, CONNECT_ONE_SHOT)
 
@@ -97,7 +134,6 @@ func _on_auth_done(data: Variant) -> void:
 	GameState.player_id  = data.get("user", {}).get("id", "")
 
 	if _mode == Mode.REGISTER:
-		# First login — go create a character
 		get_tree().change_scene_to_file("res://scenes/character_creator.tscn")
 	else:
 		get_tree().change_scene_to_file("res://scenes/character_select.tscn")
@@ -105,7 +141,6 @@ func _on_auth_done(data: Variant) -> void:
 
 func _on_auth_failed(code: int, message: String) -> void:
 	_btn_submit.disabled = false
-	# Supabase returns JSON error body — try to extract human-readable message
 	var parsed := JSON.new()
 	if parsed.parse(message) == OK and parsed.get_data() is Dictionary:
 		var d: Dictionary = parsed.get_data()
@@ -118,8 +153,12 @@ func _on_auth_failed(code: int, message: String) -> void:
 
 func _on_guest() -> void:
 	GameState.is_guest = true
-	# Guest skips auth → straight to character creator (offline prototype only)
-	get_tree().change_scene_to_file("res://scenes/character_creator.tscn")
+	if GameState.load_guest():
+		# มี save อยู่แล้ว — เข้าเกมต่อได้เลย
+		get_tree().change_scene_to_file("res://scenes/world_map.tscn")
+	else:
+		# ยังไม่มี save — สร้างตัวละครใหม่
+		get_tree().change_scene_to_file("res://scenes/character_creator.tscn")
 
 # ---------------------------------------------------------------------------
 # Helper

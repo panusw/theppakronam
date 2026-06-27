@@ -306,6 +306,7 @@ func _on_confirm() -> void:
 	GameState.pending_appearance = appearance
 
 	if GameState.is_guest:
+		GameState.save_guest()
 		get_tree().change_scene_to_file("res://scenes/world_map.tscn")
 		return
 
@@ -350,4 +351,7 @@ func _set_status(text: String) -> void:
 
 
 func _on_back() -> void:
-	get_tree().change_scene_to_file("res://scenes/character_select.tscn")
+	if GameState.is_guest or not GameState.is_logged_in():
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	else:
+		get_tree().change_scene_to_file("res://scenes/character_select.tscn")

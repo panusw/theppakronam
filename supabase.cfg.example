@@ -1,0 +1,7 @@
+[supabase]
+
+; Project URL — copy จาก Supabase Dashboard > Settings > API > Project URL
+url="https://YOUR_PROJECT_ID.supabase.co"
+
+; anon public key — copy จาก Supabase Dashboard > Settings > API > Project API Keys > anon public
+anon_key="YOUR_ANON_KEY_HERE"

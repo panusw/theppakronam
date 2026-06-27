@@ -6,11 +6,43 @@
 
 ## สถานะล่าสุด
 
-**วันที่อัปเดต:** มิถุนายน 2026
-**Phase ปัจจุบัน:** Phase 1 เริ่มต้น — Godot 4.7 project พร้อมแล้ว
-**สิ่งที่มีแล้ว:** Schema SQL + React prototype + **Godot project scaffold ครบ**
-**Godot version:** 4.7 (project.godot อัปเดตโดย Godot editor เมื่อเปิดครั้งแรก)
-**สิ่งที่ต้องทำต่อ:** วาง Sunnyside sprites + เชื่อม Supabase + implement core systems
+**วันที่อัปเดต:** 27 มิถุนายน 2026 (Session 3)
+**Phase ปัจจุบัน:** Phase 1 กำลังดำเนินการ — core gameplay loop ครบ, พร้อม test ใน Godot
+**สิ่งที่มีแล้ว:** SQL schemas ครบ 6 ไฟล์, Scripts ครบทุก scene, Gameplay loop: Menu→Character→WorldMap→Combat/Gacha/SkillWeb
+**Godot version:** 4.7
+**สิ่งที่ต้องทำต่อ:** เปิด Godot → test gameplay loop ทั้งหมด → แก้ runtime bugs ที่พบ
+
+### SQL Schemas ที่รันใน Supabase แล้ว (ครบทุกไฟล์)
+
+| ไฟล์ | สถานะ |
+|---|---|
+| `sql/schema_character_v1.sql` | ✅ รันแล้ว |
+| `sql/schema_core_v2.sql` | ✅ รันแล้ว |
+| `sql/schema_tower_v2.sql` | ✅ รันแล้ว |
+| `sql/schema_skilltree_v2.sql` | ✅ รันแล้ว |
+| `sql/schema_gacha_v1.sql` | ✅ รันแล้ว |
+| `sql/schema_combat_v1.sql` | ✅ รันแล้ว |
+
+### Scripts ที่เขียนเสร็จแล้ว (Session 2-3)
+
+| ไฟล์ | สถานะ |
+|---|---|
+| `scripts/ui/CampGraphRenderer.gd` | ✅ draw camp graph ใน Node2D |
+| `scripts/ui/GachaPanel.gd` | ✅ pull UI + result cards |
+| `scripts/ui/WorldMap.gd` | ✅ camp navigation + travel + stat refresh |
+| `scripts/ui/SkillWebRenderer.gd` | ✅ skill tree graph ใน SubViewport, pan/click/unlock |
+| `scripts/combat/MinigameDice.gd` | ✅ d20 flee/capture |
+| `scripts/combat/CombatEntity.gd` | ✅ shared player+enemy data class |
+| `scripts/combat/ATBCombat.gd` | ✅ FF7-style ATB game loop |
+| `scripts/combat/EnemyCombatAI.gd` | ✅ 5 archetypes |
+| `scripts/ui/CombatScene.gd` | ✅ combat UI controller |
+
+### Bug ที่แก้ใน Session 3
+
+- **player_id vs character_id**: ทุก DB operation ที่อ้าง `players.id` แก้เป็น `GameState.character_id` ครบแล้ว
+  - `GameState.player_id` = Supabase auth UUID (set ตอน login, ใช้แค่ CharacterSelect query)
+  - `GameState.character_id` = `players.id` UUID (set ตอนเลือก/สร้างตัวละคร)
+- **StatCalculator ไม่เคยถูกเรียก**: เพิ่ม `StatCalculator.request_refresh()` ใน `WorldMap._ready()`
 
 ---
 
@@ -32,6 +64,59 @@
 ---
 
 ## สิ่งที่ตกลงในแต่ละ session
+
+### Session: Supabase เชื่อมสำเร็จ + SQL Schemas + Core System Scripts (27 มิถุนายน 2026)
+
+#### Supabase Setup — เสร็จสมบูรณ์
+
+| ขั้นตอน | สถานะ |
+|---|---|
+| `supabase.cfg` (gitignored) — URL + anon key จริง | ✅ |
+| `SupabaseClient.gd` โหลด credentials จากไฟล์ | ✅ |
+| `supabase.cfg.example` template สำหรับ dev ใหม่ | ✅ |
+| `.gitignore` เพิ่ม supabase.cfg | ✅ |
+
+**Supabase Project:** `ocginzefcvsmwqayyjwr.supabase.co`
+**Key format:** `sb_publishable_*` (Supabase new format, เทียบเท่า anon key เดิม)
+
+#### SQL Schemas รันใน Supabase แล้ว (5 ไฟล์)
+
+| ไฟล์ | Tables หลัก | สถานะ |
+|---|---|---|
+| `sql/schema_character_v1.sql` | players, create_character RPC, active_characters view | ✅ รันแล้ว |
+| `sql/schema_tower_v2.sql` | tower_bands/floors/camps/connections, player_camp_state, server_boss_kills, bestiary_monsters, auto_hunt_sessions, weather_pool + Band 1 seed (9 floors, 24 camps) | ✅ รันแล้ว |
+| `sql/schema_core_v2.sql` | items, player_items, player_equipment, player_stat_cache + seed items ~25 รายการ | ✅ รันแล้ว |
+| `sql/schema_skilltree_v2.sql` | skill_nodes (54 nodes: Universal 29 + Band 1 25), skill_edges, player_skill_nodes, unlock_skill_node RPC, auto-unlock center node trigger | ✅ รันแล้ว |
+| `sql/schema_gacha_v1.sql` | gacha_pull RPC (pity + weighted roll + insert player_items) | ⏳ ต้องรันยังไม่ได้รัน |
+
+**RLS Policy:** ทุกตาราง RLS ON — master data (tower/items/skill_nodes) = SELECT ทุกคน, player data = เฉพาะเจ้าของ
+
+**Triggers อัตโนมัติ:** สร้าง player → auto-create player_equipment row + player_stat_cache row + unlock center skill node
+
+#### Character Flow — ทำงานครบ end-to-end
+
+- **Main Menu**: Language toggle (TH/EN) บันทึกใน `user://settings.cfg`
+- **Guest mode**: `GameState.save_guest()` / `load_guest()` ผ่าน `user://save_guest.cfg`
+- **Register/Login**: Supabase Auth → redirect ไป character_creator / character_select
+- **Character Creator**: Sunnyside sprites + mask shader + palette swap ครบ, ปุ่ม Back แก้ไขแล้ว (guest กลับ main_menu, account กลับ character_select)
+- **Character Select**: โหลด players จาก Supabase ถูกต้อง (แก้ bug: table `players` ไม่ใช่ `characters`, column `user_id` ไม่ใช่ `player_id`)
+- **World Map**: บันทึก guest data ก่อน reset session
+
+#### Core System Scripts — เขียนเสร็จแล้ว
+
+| ไฟล์ | ฟังก์ชันหลัก |
+|---|---|
+| `scripts/systems/GachaEngine.gd` | `load_pool()`, `pull_single()`, `pull_multi()`, pity tracking, fallback pool สำหรับ guest |
+| `scripts/systems/StatCalculator.gd` | `request_refresh()` ดึง server cache, `preview()` local compute, `DIVINITY_BONUS` table level 0-10, `format_stat()` |
+| `scripts/systems/SkillTreeGraph.gd` | `load_for_player()` โหลด nodes+edges+unlocked, `is_unlockable()` check adjacency+divinity+gold, `unlock_node()` RPC, `get_total_node_bonuses()` สำหรับ StatCalculator |
+
+#### สิ่งที่ต้องทำต่อใน Godot
+
+1. **เพิ่ม Autoload** — Project Settings → Autoload: `GachaEngine`, `StatCalculator`, `SkillTreeGraph`
+2. **รัน `sql/schema_gacha_v1.sql`** ใน Supabase SQL Editor
+3. **World Map navigation** — โหลด camp graph จาก Supabase, แสดง node ที่คลิกได้
+
+---
 
 ### Session: ออกแบบ core concept
 - ชื่อเกม: **เทพปกรณัม** (Theppakronam / Tower of Convergence)
@@ -540,33 +625,30 @@
 - Schema ใหม่: schema_marketplace_v1.sql (marketplace_listings)
 - schema_character_v1.sql เพิ่ม columns: difficulty, char_type (offline/online), death_locked
 
-### Session: Mask PNG สร้างครบทุก Action (มิถุนายน 2026)
+### Session: Mask PNG สร้างครบทุก Action + Import Settings (มิถุนายน 2026)
 
-**สถานะ mask files:**
+**สถานะ mask files — เสร็จสมบูรณ์จาก VS Code:**
 
 | สิ่งที่ทำเสร็จแล้ว | จำนวน |
 |---|---|
 | Mask PNGs สร้างด้วย PowerShell (ทุก action, ทุกทรงผม) | 160 ไฟล์ |
+| `.import` sidecar files พร้อม Lossless + no mipmaps | 160 ไฟล์ |
 | ทุก folder ผ่านการตรวจ sprites = masks | 20/20 folder |
 
-**Action ที่มี mask แล้ว:** ATTACK / AXE / CARRY / CASTING / CAUGHT / DEATH / DIG / DOING / HAMMERING / HURT / IDLE / JUMP / MINING / REELING / ROLL / RUN / SWIMMING / WAITING / WALKING / WATERING
+**Action ที่มี mask + .import แล้ว:** ATTACK / AXE / CARRY / CASTING / CAUGHT / DEATH / DIG / DOING / HAMMERING / HURT / IDLE / JUMP / MINING / REELING / ROLL / RUN / SWIMMING / WAITING / WALKING / WATERING
+
+**Import settings ที่ตั้งไว้ใน .import ทุกไฟล์:**
+- `compress/mode=0` = Lossless ✅
+- `mipmaps/generate=false` ✅
+- `filter_nearest` — จัดการโดย shader uniform hint โดยตรง ไม่ต้องตั้งใน import ✅
 
 ---
 
-#### ⚠️ TODO (ต้องทำด้วยมือใน Godot Editor)
+#### เมื่อเปิด Godot ครั้งถัดไป
 
-**152 mask files ที่สร้างใหม่ยังไม่มี import settings ที่ถูกต้อง** — ถ้าไม่ตั้งค่า shader จะอ่านสีผิดเพราะ lossy compression
+Godot จะพบ `.import` files ที่ชี้ไปยัง `.ctex` ที่ยังไม่มี → **reimport อัตโนมัติ**ด้วย settings ที่ถูกต้อง ไม่ต้องตั้งค่าด้วยมือใน Import tab
 
-วิธีทำ:
-1. เปิด Godot Editor → FileSystem panel
-2. เลือก mask PNG ทีละไฟล์ (หรือ shift-click หลายไฟล์พร้อมกัน) → Import tab
-3. ตั้งค่าให้ครบ:
-   - **Compress Mode = Lossless**
-   - **Mipmaps = Off**
-   - **Filter = Nearest**
-4. กด **Reimport**
-
-> IDLE masks 8 ไฟล์ถูกตั้งค่าไว้แล้วในรอบก่อน — ทำเฉพาะ 152 ไฟล์ที่เหลือ (19 action folders)
+> ไม่มี TODO ด้านมือเหลืออยู่สำหรับ mask import settings
 
 ---
 
@@ -877,17 +959,24 @@ HAIR_LUM1: 0.186–0.507  (hair:   #3F2731 → #BB6D53)
 ## สิ่งที่ต้องออกแบบต่อ (Backlog)
 
 ### ด่วน (ก่อนเขียน code Phase 1)
-- [x] ~~schema_combat_v1.sql~~ — draft อยู่ใน GAME_DESIGN.md §4 แล้ว → **ต้องสร้างใน Supabase จริง**
-- [x] ~~schema_upgrade_v1.sql~~ — draft อยู่ใน GAME_DESIGN.md §14 → **ต้องสร้างใน Supabase จริง**
+- [x] ~~schema_combat_v1.sql~~ — draft อยู่ใน GAME_DESIGN.md §4 แล้ว
+- [x] ~~schema_upgrade_v1.sql~~ — draft อยู่ใน GAME_DESIGN.md §14
 - [x] ~~Supabase auth~~ — ตัดสินใจแล้ว: Username + Password
 - [x] ~~**Godot project structure**~~ — ✅ เสร็จแล้ว Godot 4.7
-- [ ] **สร้าง schema ใน Supabase จริง** — run SQL files ทั้งหมด
+- [x] ~~สร้าง schema ใน Supabase จริง~~ — ✅ รันครบ 4 จาก 5 ไฟล์ (schema_gacha_v1.sql ยังไม่ได้รัน)
+- [x] ~~เชื่อม Supabase จาก Godot~~ — ✅ SupabaseClient.gd โหลด credentials จาก supabase.cfg
+- [x] ~~Character create/save/load~~ — ✅ ทำงานครบ end-to-end (auth + DB + guest fallback)
+- [x] ~~Core system scripts~~ — ✅ GachaEngine + StatCalculator + SkillTreeGraph เขียนเสร็จ
 
-### Phase 1 Backlog
+### Phase 1 Next Steps
+- [ ] **รัน schema_gacha_v1.sql** ใน Supabase SQL Editor
+- [ ] **เพิ่ม GachaEngine/StatCalculator/SkillTreeGraph เป็น Autoload** ใน Godot Project Settings
+- [ ] **World Map navigation** — โหลด camp graph, แสดง node ที่คลิกได้, ใช้ World Energy
+- [ ] **GachaPanel.gd** — UI สำหรับดึง gacha + แสดงผลลัพธ์
+- [ ] **SkillWebRenderer.gd** — วาด graph ด้วย `draw_line()` + `draw_circle()` + แสดง node state
+- [ ] Energy regen — Godot timer หรือ server-side timestamp?
 - [ ] Minigame mechanic สำหรับ skill node upgrade
 - [ ] Monster capture mechanic — timing-based หรือ rng?
-- [ ] Energy regen — Godot timer หรือ server-side timestamp?
-- [ ] SkillWebRenderer.gd — วาด graph ด้วย `draw_line()` + `draw_circle()`
 
 ### Phase 2+ Backlog
 - [ ] Weapon refine system — minigame + ore consumption
@@ -923,16 +1012,24 @@ HAIR_LUM1: 0.186–0.507  (hair:   #3F2731 → #BB6D53)
 | | |
 |---|---|
 | Provider | Supabase |
-| Region | (ยังไม่เลือก) |
-| Auth method | (ยังไม่ตัดสินใจ — anonymous vs account) |
-| RLS | ต้องวาง policy ก่อน launch |
-| Godot connection | `HTTPRequest` node → REST API |
+| Project URL | `https://ocginzefcvsmwqayyjwr.supabase.co` |
+| Auth method | Email + Password (Supabase Auth) |
+| RLS | ✅ เปิดทุกตาราง + policy วางแล้ว |
+| Godot connection | `HTTPRequest` node → REST API (`SupabaseClient.gd`) |
+| Credentials file | `res://supabase.cfg` (gitignored — ห้าม commit) |
+| Example template | `res://supabase.cfg.example` (committed) |
 
 **Supabase URL pattern:**
 ```
-https://<project>.supabase.co/rest/v1/<table>
-Authorization: Bearer <anon_key>
-apikey: <anon_key>
+https://ocginzefcvsmwqayyjwr.supabase.co/rest/v1/<table>
+Authorization: Bearer <auth_token>  ← ได้จาก login
+apikey: <anon_key>                  ← จาก supabase.cfg
+```
+
+**RPC pattern:**
+```
+POST /rest/v1/rpc/<function_name>
+Body: {"p_param": value}
 ```
 
 ---

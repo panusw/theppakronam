@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://tp_world_map"]
+[gd_scene load_steps=3 format=3 uid="uid://tp_world_map"]
 
 [ext_resource type="Script" path="res://scripts/ui/WorldMap.gd" id="1_wm"]
+[ext_resource type="Script" path="res://scripts/ui/CampGraphRenderer.gd" id="2_cgr"]
 
 [node name="WorldMap" type="Node2D"]
 script = ExtResource("1_wm")
@@ -11,6 +12,9 @@ autostart = false
 
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
+
+[node name="CampGraph" type="Node2D" parent="."]
+script = ExtResource("2_cgr")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -163,6 +167,58 @@ offset_bottom = 390.0
 horizontal_alignment = 1
 vertical_alignment = 1
 visible = false
+
+[node name="CampInfoPanel" type="PanelContainer" parent="HUD"]
+layout_mode = 1
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -105.0
+offset_right = 160.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Margin" type="MarginContainer" parent="HUD/CampInfoPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="HUD/CampInfoPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblCampName" type="Label" parent="HUD/CampInfoPanel/Margin/VBox"]
+layout_mode = 2
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 17
+
+[node name="LblCampType" type="Label" parent="HUD/CampInfoPanel/Margin/VBox"]
+layout_mode = 2
+unique_name_in_owner = true
+
+[node name="LblEnergyCost" type="Label" parent="HUD/CampInfoPanel/Margin/VBox"]
+layout_mode = 2
+unique_name_in_owner = true
+
+[node name="BtnTravel" type="Button" parent="HUD/CampInfoPanel/Margin/VBox"]
+layout_mode = 2
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "เดินทาง"
+
+[node name="BtnClose" type="Button" parent="HUD/CampInfoPanel/Margin/VBox"]
+layout_mode = 2
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "ยกเลิก"
 
 [node name="BottomBar" type="HBoxContainer" parent="HUD"]
 layout_mode = 1
