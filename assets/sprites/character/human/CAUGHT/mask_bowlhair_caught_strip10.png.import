@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gb0cs6j5wce9h"
-path="res://.godot/imported/mask_bowlhair_caught_strip10.png-971dab8ccf7b4f8cb3c528e0e855da98.ctex"
+uid="uid://in4u4j1kgi4v"
+path="res://.godot/imported/mask_bowlhair_caught_strip10.png-a972e1db107ca1806b4d452b7ff7fec1.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CAUGHT/mask_bowlhair_caught_strip10.png"
-dest_files=["res://.godot/imported/mask_bowlhair_caught_strip10.png-971dab8ccf7b4f8cb3c528e0e855da98.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_caught_strip10.png-a972e1db107ca1806b4d452b7ff7fec1.ctex"]
 
 [params]
 

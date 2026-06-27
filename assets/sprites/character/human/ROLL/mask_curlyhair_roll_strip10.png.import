@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7rbarcxlm57gz"
-path="res://.godot/imported/mask_curlyhair_roll_strip10.png-276ca6ad62514088ba04c4a044b8ccd4.ctex"
+uid="uid://dbu0tbtpndbbh"
+path="res://.godot/imported/mask_curlyhair_roll_strip10.png-22d4fa700cf3ec0f19f9b0139208c8c2.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ROLL/mask_curlyhair_roll_strip10.png"
-dest_files=["res://.godot/imported/mask_curlyhair_roll_strip10.png-276ca6ad62514088ba04c4a044b8ccd4.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_roll_strip10.png-22d4fa700cf3ec0f19f9b0139208c8c2.ctex"]
 
 [params]
 

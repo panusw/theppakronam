@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ay9g11sw9n6bg"
-path="res://.godot/imported/mask_base_mining_strip10.png-eebb33605d9e43d79cba89b0d8bdaeb3.ctex"
+uid="uid://cq2fmh2da2tg6"
+path="res://.godot/imported/mask_base_mining_strip10.png-187985e73dba4d15ec8bac8bc13a22ec.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/MINING/mask_base_mining_strip10.png"
-dest_files=["res://.godot/imported/mask_base_mining_strip10.png-eebb33605d9e43d79cba89b0d8bdaeb3.ctex"]
+dest_files=["res://.godot/imported/mask_base_mining_strip10.png-187985e73dba4d15ec8bac8bc13a22ec.ctex"]
 
 [params]
 

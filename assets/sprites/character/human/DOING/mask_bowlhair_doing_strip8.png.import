@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tot4vj6ewxqks"
-path="res://.godot/imported/mask_bowlhair_doing_strip8.png-007281391b4e46ed8aeb17b93d42e56e.ctex"
+uid="uid://dr75oo23amai1"
+path="res://.godot/imported/mask_bowlhair_doing_strip8.png-829e8098207bde09cddd8ef41ad1a8db.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DOING/mask_bowlhair_doing_strip8.png"
-dest_files=["res://.godot/imported/mask_bowlhair_doing_strip8.png-007281391b4e46ed8aeb17b93d42e56e.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_doing_strip8.png-829e8098207bde09cddd8ef41ad1a8db.ctex"]
 
 [params]
 

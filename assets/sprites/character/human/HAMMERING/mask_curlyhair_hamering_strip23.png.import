@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gubwnqh8os9r4"
-path="res://.godot/imported/mask_curlyhair_hamering_strip23.png-3cc5ec9bd5754981a3a60240550e4b97.ctex"
+uid="uid://dsxym7r81yo3r"
+path="res://.godot/imported/mask_curlyhair_hamering_strip23.png-2f3b8b3cf99a616057cc6d0dd05a1768.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/HAMMERING/mask_curlyhair_hamering_strip23.png"
-dest_files=["res://.godot/imported/mask_curlyhair_hamering_strip23.png-3cc5ec9bd5754981a3a60240550e4b97.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_hamering_strip23.png-2f3b8b3cf99a616057cc6d0dd05a1768.ctex"]
 
 [params]
 

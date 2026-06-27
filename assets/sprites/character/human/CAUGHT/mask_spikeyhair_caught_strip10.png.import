@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o7d5v0tglq5ga"
-path="res://.godot/imported/mask_spikeyhair_caught_strip10.png-60820ab2e8fa4042a45d6aca74bf27cf.ctex"
+uid="uid://dxm25b0g7jaks"
+path="res://.godot/imported/mask_spikeyhair_caught_strip10.png-067d86072f8a6eb166f802d5480863fc.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CAUGHT/mask_spikeyhair_caught_strip10.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_caught_strip10.png-60820ab2e8fa4042a45d6aca74bf27cf.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_caught_strip10.png-067d86072f8a6eb166f802d5480863fc.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u7q5p5c4ka8bd"
-path="res://.godot/imported/mask_base_idle_strip9.png-fab9a9f45cda4286b8900130c3a8f9ef.ctex"
+uid="uid://3nw7iakujnx1"
+path="res://.godot/imported/mask_base_idle_strip9.png-e2b9f6b7a9824cde82dc9b0c851bc5fd.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/IDLE/mask_base_idle_strip9.png"
-dest_files=["res://.godot/imported/mask_base_idle_strip9.png-fab9a9f45cda4286b8900130c3a8f9ef.ctex"]
+dest_files=["res://.godot/imported/mask_base_idle_strip9.png-e2b9f6b7a9824cde82dc9b0c851bc5fd.ctex"]
 
 [params]
 

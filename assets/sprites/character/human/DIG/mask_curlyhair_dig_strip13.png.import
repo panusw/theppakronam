@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vipdt5j3mj5f0"
-path="res://.godot/imported/mask_curlyhair_dig_strip13.png-3bbb3a2707af4db7a0e415ab943fe1c9.ctex"
+uid="uid://jr0etktqkyf4"
+path="res://.godot/imported/mask_curlyhair_dig_strip13.png-10e87821d1988e3a9d0fe0453279b22b.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DIG/mask_curlyhair_dig_strip13.png"
-dest_files=["res://.godot/imported/mask_curlyhair_dig_strip13.png-3bbb3a2707af4db7a0e415ab943fe1c9.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_dig_strip13.png-10e87821d1988e3a9d0fe0453279b22b.ctex"]
 
 [params]
 

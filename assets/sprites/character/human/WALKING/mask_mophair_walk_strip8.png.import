@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e6ptvjfc68acq"
-path="res://.godot/imported/mask_mophair_walk_strip8.png-08531e0097964bc09203596292a05542.ctex"
+uid="uid://b75kn77sscvrm"
+path="res://.godot/imported/mask_mophair_walk_strip8.png-37bbe2ee725c5e422a2daf26c5629343.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WALKING/mask_mophair_walk_strip8.png"
-dest_files=["res://.godot/imported/mask_mophair_walk_strip8.png-08531e0097964bc09203596292a05542.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_walk_strip8.png-37bbe2ee725c5e422a2daf26c5629343.ctex"]
 
 [params]
 

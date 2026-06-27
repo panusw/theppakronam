@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsud3oaec44s0"
-path="res://.godot/imported/mask_curlyhair_walk_strip8.png-1dbe13267951452eaa5484cada90dd8b.ctex"
+uid="uid://c58jp3b6vl1a4"
+path="res://.godot/imported/mask_curlyhair_walk_strip8.png-f09f55f70c4ffe521275ebf6070b6de9.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WALKING/mask_curlyhair_walk_strip8.png"
-dest_files=["res://.godot/imported/mask_curlyhair_walk_strip8.png-1dbe13267951452eaa5484cada90dd8b.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_walk_strip8.png-f09f55f70c4ffe521275ebf6070b6de9.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://9dpu3pzds7e5w"
-path="res://.godot/imported/mask_spikeyhair_mining_strip10.png-03cd5c9d70dd4d1eb182a95db64e5f85.ctex"
+uid="uid://7ibyr23212u0"
+path="res://.godot/imported/mask_spikeyhair_mining_strip10.png-fa68de4877124515b1b793771d843121.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/MINING/mask_spikeyhair_mining_strip10.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_mining_strip10.png-03cd5c9d70dd4d1eb182a95db64e5f85.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_mining_strip10.png-fa68de4877124515b1b793771d843121.ctex"]
 
 [params]
 

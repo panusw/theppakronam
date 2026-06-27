@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4u0l7e44nge3"
-path="res://.godot/imported/mask_curlyhair_axe_strip10.png-679daeb2a8d64b31977cc5dac7df9a43.ctex"
+uid="uid://owhqc1iq7i7o"
+path="res://.godot/imported/mask_curlyhair_axe_strip10.png-b9a4a762089d3928c91aeea5b49172b8.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/AXE/mask_curlyhair_axe_strip10.png"
-dest_files=["res://.godot/imported/mask_curlyhair_axe_strip10.png-679daeb2a8d64b31977cc5dac7df9a43.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_axe_strip10.png-b9a4a762089d3928c91aeea5b49172b8.ctex"]
 
 [params]
 

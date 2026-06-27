@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxr69653iqf8v"
-path="res://.godot/imported/mask_bowlhair_dig_strip13.png-5383f267a67649f3995314e10718586c.ctex"
+uid="uid://bbdm0swwyvhcw"
+path="res://.godot/imported/mask_bowlhair_dig_strip13.png-4179558286f736bba27b73926dd759bf.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DIG/mask_bowlhair_dig_strip13.png"
-dest_files=["res://.godot/imported/mask_bowlhair_dig_strip13.png-5383f267a67649f3995314e10718586c.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_dig_strip13.png-4179558286f736bba27b73926dd759bf.ctex"]
 
 [params]
 

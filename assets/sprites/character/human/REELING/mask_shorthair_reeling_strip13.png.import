@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcsi4drhles9d"
-path="res://.godot/imported/mask_shorthair_reeling_strip13.png-c4ca0125a6aa4af3b09a1ecbf6c8dce2.ctex"
+uid="uid://cod04nf5lhysc"
+path="res://.godot/imported/mask_shorthair_reeling_strip13.png-e178085e8d5892820433bf8b1d249940.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/REELING/mask_shorthair_reeling_strip13.png"
-dest_files=["res://.godot/imported/mask_shorthair_reeling_strip13.png-c4ca0125a6aa4af3b09a1ecbf6c8dce2.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_reeling_strip13.png-e178085e8d5892820433bf8b1d249940.ctex"]
 
 [params]
 

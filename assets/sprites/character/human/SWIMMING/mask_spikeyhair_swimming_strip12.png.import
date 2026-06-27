@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mekllpg84drsg"
-path="res://.godot/imported/mask_spikeyhair_swimming_strip12.png-0a115798070e4a06bd219ebc7715fc24.ctex"
+uid="uid://c5jl03hlbp332"
+path="res://.godot/imported/mask_spikeyhair_swimming_strip12.png-e187c1bc9dbb35909cacc2c256e0bb77.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/SWIMMING/mask_spikeyhair_swimming_strip12.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_swimming_strip12.png-0a115798070e4a06bd219ebc7715fc24.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_swimming_strip12.png-e187c1bc9dbb35909cacc2c256e0bb77.ctex"]
 
 [params]
 

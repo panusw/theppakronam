@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s7f0hw4xsch1l"
-path="res://.godot/imported/mask_curlyhair_jump_strip9.png-2b9a0d4a6ede40759ba328498aa8314b.ctex"
+uid="uid://bydy7pl4r7jlr"
+path="res://.godot/imported/mask_curlyhair_jump_strip9.png-1ad13cb893e4a87da933ab27218e0f1c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/JUMP/mask_curlyhair_jump_strip9.png"
-dest_files=["res://.godot/imported/mask_curlyhair_jump_strip9.png-2b9a0d4a6ede40759ba328498aa8314b.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_jump_strip9.png-1ad13cb893e4a87da933ab27218e0f1c.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fb7oyl72ko3dm"
-path="res://.godot/imported/mask_longhair_run_strip8.png-7bf99194157f42f6804bb8fc0618e0df.ctex"
+uid="uid://7aqcqajparke"
+path="res://.godot/imported/mask_longhair_run_strip8.png-f30bb2b837d6b35f31c320a7760a8622.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/RUN/mask_longhair_run_strip8.png"
-dest_files=["res://.godot/imported/mask_longhair_run_strip8.png-7bf99194157f42f6804bb8fc0618e0df.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_run_strip8.png-f30bb2b837d6b35f31c320a7760a8622.ctex"]
 
 [params]
 

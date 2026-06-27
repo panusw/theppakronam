@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lb6k6l1tm3wh7"
-path="res://.godot/imported/mask_curlyhair_death_strip13.png-cd2de65f86b34a548c953418d3fb4478.ctex"
+uid="uid://dsitgnicu8f5k"
+path="res://.godot/imported/mask_curlyhair_death_strip13.png-aa94b110c12b100b5e1c01169b5dfb09.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DEATH/mask_curlyhair_death_strip13.png"
-dest_files=["res://.godot/imported/mask_curlyhair_death_strip13.png-cd2de65f86b34a548c953418d3fb4478.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_death_strip13.png-aa94b110c12b100b5e1c01169b5dfb09.ctex"]
 
 [params]
 

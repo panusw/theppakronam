@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rvi3bk4v5awo4"
-path="res://.godot/imported/mask_curlyhair_carry_strip8.png-048da54be1a44555af2b668054af47ad.ctex"
+uid="uid://bc0i5fdvfig0w"
+path="res://.godot/imported/mask_curlyhair_carry_strip8.png-f3fd47858741085c3e40e23408ecca5e.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CARRY/mask_curlyhair_carry_strip8.png"
-dest_files=["res://.godot/imported/mask_curlyhair_carry_strip8.png-048da54be1a44555af2b668054af47ad.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_carry_strip8.png-f3fd47858741085c3e40e23408ecca5e.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://aapyxkbtebypo"
-path="res://.godot/imported/mask_spikeyhair_roll_strip10.png-7727692d8f59409d85e641cdc0bed874.ctex"
+uid="uid://dnyyklpe7ni7e"
+path="res://.godot/imported/mask_spikeyhair_roll_strip10.png-aab1e58ec8ba0a4c0e6a5dfb77fa2cb5.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ROLL/mask_spikeyhair_roll_strip10.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_roll_strip10.png-7727692d8f59409d85e641cdc0bed874.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_roll_strip10.png-aab1e58ec8ba0a4c0e6a5dfb77fa2cb5.ctex"]
 
 [params]
 

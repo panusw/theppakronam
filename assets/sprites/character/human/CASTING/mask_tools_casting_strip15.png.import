@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://09w3socrjv5tu"
-path="res://.godot/imported/mask_tools_casting_strip15.png-5c62fc96dcc04955bf724f2e4929f066.ctex"
+uid="uid://3rot7b5lmm1l"
+path="res://.godot/imported/mask_tools_casting_strip15.png-39ca3e213a9f9dc1581d501c107653c5.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CASTING/mask_tools_casting_strip15.png"
-dest_files=["res://.godot/imported/mask_tools_casting_strip15.png-5c62fc96dcc04955bf724f2e4929f066.ctex"]
+dest_files=["res://.godot/imported/mask_tools_casting_strip15.png-39ca3e213a9f9dc1581d501c107653c5.ctex"]
 
 [params]
 

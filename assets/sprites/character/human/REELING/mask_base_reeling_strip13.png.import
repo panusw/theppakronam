@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6myynpqhv4akj"
-path="res://.godot/imported/mask_base_reeling_strip13.png-cbf81ae6bb1f4de7ad597d74a63b32ef.ctex"
+uid="uid://bqbgo4ycum77i"
+path="res://.godot/imported/mask_base_reeling_strip13.png-297ee73fbc3b1e5a4af57fa6a70e8562.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/REELING/mask_base_reeling_strip13.png"
-dest_files=["res://.godot/imported/mask_base_reeling_strip13.png-cbf81ae6bb1f4de7ad597d74a63b32ef.ctex"]
+dest_files=["res://.godot/imported/mask_base_reeling_strip13.png-297ee73fbc3b1e5a4af57fa6a70e8562.ctex"]
 
 [params]
 

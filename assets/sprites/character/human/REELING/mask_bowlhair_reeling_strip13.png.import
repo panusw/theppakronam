@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfqy7efy0u6md"
-path="res://.godot/imported/mask_bowlhair_reeling_strip13.png-2535adf9de554a32aa3ad4e973370551.ctex"
+uid="uid://dy51ifjicgjpv"
+path="res://.godot/imported/mask_bowlhair_reeling_strip13.png-cad829c1dda678679a0438be4f7af219.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/REELING/mask_bowlhair_reeling_strip13.png"
-dest_files=["res://.godot/imported/mask_bowlhair_reeling_strip13.png-2535adf9de554a32aa3ad4e973370551.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_reeling_strip13.png-cad829c1dda678679a0438be4f7af219.ctex"]
 
 [params]
 

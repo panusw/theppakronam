@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://op1a5jt8b721s"
-path="res://.godot/imported/mask_bowlhair_roll_strip10.png-66338af988364fb983a058c3b1d808e0.ctex"
+uid="uid://bl1s15xr5qcf4"
+path="res://.godot/imported/mask_bowlhair_roll_strip10.png-4216204855ea3a9f66dc613d034d1e88.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ROLL/mask_bowlhair_roll_strip10.png"
-dest_files=["res://.godot/imported/mask_bowlhair_roll_strip10.png-66338af988364fb983a058c3b1d808e0.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_roll_strip10.png-4216204855ea3a9f66dc613d034d1e88.ctex"]
 
 [params]
 

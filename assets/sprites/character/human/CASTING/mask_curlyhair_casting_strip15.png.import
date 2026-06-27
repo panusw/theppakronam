@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6pyl0pls5xcsi"
-path="res://.godot/imported/mask_curlyhair_casting_strip15.png-ff3c2fbe045c4097b5962492a895dc0b.ctex"
+uid="uid://sxlvperre6ky"
+path="res://.godot/imported/mask_curlyhair_casting_strip15.png-e66140e346a690f691185bffec1ee200.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CASTING/mask_curlyhair_casting_strip15.png"
-dest_files=["res://.godot/imported/mask_curlyhair_casting_strip15.png-ff3c2fbe045c4097b5962492a895dc0b.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_casting_strip15.png-e66140e346a690f691185bffec1ee200.ctex"]
 
 [params]
 

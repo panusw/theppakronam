@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xxy4xmzo6ycbr"
-path="res://.godot/imported/mask_longhair_doing_strip8.png-f978c94023e94c18b039ab85dce68602.ctex"
+uid="uid://b4bjuolddvi2x"
+path="res://.godot/imported/mask_longhair_doing_strip8.png-165c579810d3afd497814edf65477880.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DOING/mask_longhair_doing_strip8.png"
-dest_files=["res://.godot/imported/mask_longhair_doing_strip8.png-f978c94023e94c18b039ab85dce68602.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_doing_strip8.png-165c579810d3afd497814edf65477880.ctex"]
 
 [params]
 

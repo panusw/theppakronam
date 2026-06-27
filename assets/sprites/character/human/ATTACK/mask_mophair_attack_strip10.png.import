@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://9twfeqxe3p30n"
-path="res://.godot/imported/mask_mophair_attack_strip10.png-f7621de9186b4fd6ace85d5414a1c924.ctex"
+uid="uid://c3alux4bj7f4x"
+path="res://.godot/imported/mask_mophair_attack_strip10.png-0631a49cfc8851cbac518db3eda76812.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ATTACK/mask_mophair_attack_strip10.png"
-dest_files=["res://.godot/imported/mask_mophair_attack_strip10.png-f7621de9186b4fd6ace85d5414a1c924.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_attack_strip10.png-0631a49cfc8851cbac518db3eda76812.ctex"]
 
 [params]
 

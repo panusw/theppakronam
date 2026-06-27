@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://giga8ibelzsso"
-path="res://.godot/imported/mask_spikeyhair_doing_strip8.png-eb531528e2024768927fa71c71d261e6.ctex"
+uid="uid://bo1d7am8ryeot"
+path="res://.godot/imported/mask_spikeyhair_doing_strip8.png-501b17aa9c4d16c2a8907fd6b833ab7d.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DOING/mask_spikeyhair_doing_strip8.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_doing_strip8.png-eb531528e2024768927fa71c71d261e6.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_doing_strip8.png-501b17aa9c4d16c2a8907fd6b833ab7d.ctex"]
 
 [params]
 

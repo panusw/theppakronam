@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://zmapw9q5urgeo"
-path="res://.godot/imported/mask_mophair_axe_strip10.png-739f5ba4fb4743e08bac723d711da331.ctex"
+uid="uid://bvxpmpkipb1wj"
+path="res://.godot/imported/mask_mophair_axe_strip10.png-440b10d064d785d3beea13b6ea97a474.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/AXE/mask_mophair_axe_strip10.png"
-dest_files=["res://.godot/imported/mask_mophair_axe_strip10.png-739f5ba4fb4743e08bac723d711da331.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_axe_strip10.png-440b10d064d785d3beea13b6ea97a474.ctex"]
 
 [params]
 

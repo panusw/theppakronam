@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gm0rsin4scd91"
-path="res://.godot/imported/mask_tools_roll_strip10.png-e6bce08f4f9c480d9403070e9827900a.ctex"
+uid="uid://bsbp03xg4mqbl"
+path="res://.godot/imported/mask_tools_roll_strip10.png-1e81ca1ae221db9484bdccab2300f221.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ROLL/mask_tools_roll_strip10.png"
-dest_files=["res://.godot/imported/mask_tools_roll_strip10.png-e6bce08f4f9c480d9403070e9827900a.ctex"]
+dest_files=["res://.godot/imported/mask_tools_roll_strip10.png-1e81ca1ae221db9484bdccab2300f221.ctex"]
 
 [params]
 

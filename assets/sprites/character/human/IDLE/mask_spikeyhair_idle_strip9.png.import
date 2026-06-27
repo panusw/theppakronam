@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j6zly1gleve4s"
-path="res://.godot/imported/mask_spikeyhair_idle_strip9.png-c40ad7c5ab0a4e78a9b2a65f84846e89.ctex"
+uid="uid://jo7sncc8vyjs"
+path="res://.godot/imported/mask_spikeyhair_idle_strip9.png-c38619c34431a369490375e0555c533c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/IDLE/mask_spikeyhair_idle_strip9.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_idle_strip9.png-c40ad7c5ab0a4e78a9b2a65f84846e89.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_idle_strip9.png-c38619c34431a369490375e0555c533c.ctex"]
 
 [params]
 

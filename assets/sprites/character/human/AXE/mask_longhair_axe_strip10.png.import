@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r2atbvcoox7ur"
-path="res://.godot/imported/mask_longhair_axe_strip10.png-93347a37c04446fca617308ebdd5071b.ctex"
+uid="uid://dlci35qyuewt7"
+path="res://.godot/imported/mask_longhair_axe_strip10.png-42d73086d8beb5b608060d53cac4ab7c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/AXE/mask_longhair_axe_strip10.png"
-dest_files=["res://.godot/imported/mask_longhair_axe_strip10.png-93347a37c04446fca617308ebdd5071b.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_axe_strip10.png-42d73086d8beb5b608060d53cac4ab7c.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2lfv7bscqnlmw"
-path="res://.godot/imported/mask_spikeyhair_casting_strip15.png-b59fb5e283c3450499f320f1e74d42fc.ctex"
+uid="uid://cm6qkmepj7ts0"
+path="res://.godot/imported/mask_spikeyhair_casting_strip15.png-5ae11c548572d2359b4bde58cad1dfb6.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CASTING/mask_spikeyhair_casting_strip15.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_casting_strip15.png-b59fb5e283c3450499f320f1e74d42fc.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_casting_strip15.png-5ae11c548572d2359b4bde58cad1dfb6.ctex"]
 
 [params]
 

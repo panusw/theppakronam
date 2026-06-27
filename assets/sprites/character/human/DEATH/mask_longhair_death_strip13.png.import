@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://402yciv91rkli"
-path="res://.godot/imported/mask_longhair_death_strip13.png-d7fc131d45e04574858d191010fa04d2.ctex"
+uid="uid://d2frhair3morx"
+path="res://.godot/imported/mask_longhair_death_strip13.png-45c70b9ae62c530306add3b7b30150dd.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DEATH/mask_longhair_death_strip13.png"
-dest_files=["res://.godot/imported/mask_longhair_death_strip13.png-d7fc131d45e04574858d191010fa04d2.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_death_strip13.png-45c70b9ae62c530306add3b7b30150dd.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5fnprrtih5dy1"
-path="res://.godot/imported/mask_shorthair_casting_strip15.png-ced78bc20aec47678aff98675df7778d.ctex"
+uid="uid://yttvx308p7mx"
+path="res://.godot/imported/mask_shorthair_casting_strip15.png-dc911ac92a1012e85a8c1d544a12fb9d.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CASTING/mask_shorthair_casting_strip15.png"
-dest_files=["res://.godot/imported/mask_shorthair_casting_strip15.png-ced78bc20aec47678aff98675df7778d.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_casting_strip15.png-dc911ac92a1012e85a8c1d544a12fb9d.ctex"]
 
 [params]
 

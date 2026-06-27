@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jey5h2nec1siy"
-path="res://.godot/imported/mask_bowlhair_attack_strip10.png-68520c7cebdb4a4dad4a252ad20107b4.ctex"
+uid="uid://3yovkwcndlsv"
+path="res://.godot/imported/mask_bowlhair_attack_strip10.png-7bd1311594c1f24dd9f6060f60503750.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ATTACK/mask_bowlhair_attack_strip10.png"
-dest_files=["res://.godot/imported/mask_bowlhair_attack_strip10.png-68520c7cebdb4a4dad4a252ad20107b4.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_attack_strip10.png-7bd1311594c1f24dd9f6060f60503750.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3874rvp5xmosa"
-path="res://.godot/imported/mask_spikeyhair_attack_strip10.png-3de9b69e91454a36b7bda72b31caa84b.ctex"
+uid="uid://bnqv80huy54q7"
+path="res://.godot/imported/mask_spikeyhair_attack_strip10.png-6f23160e685b6784b2b6af3b8f9ae095.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ATTACK/mask_spikeyhair_attack_strip10.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_attack_strip10.png-3de9b69e91454a36b7bda72b31caa84b.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_attack_strip10.png-6f23160e685b6784b2b6af3b8f9ae095.ctex"]
 
 [params]
 

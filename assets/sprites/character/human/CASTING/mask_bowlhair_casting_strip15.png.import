@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g6vbli2xfg4oh"
-path="res://.godot/imported/mask_bowlhair_casting_strip15.png-ffb944cf0f5645268d79730450fbb447.ctex"
+uid="uid://gdrpb7tqnpb5"
+path="res://.godot/imported/mask_bowlhair_casting_strip15.png-ca9e95eb92c2b7d96bf49831ebbc34b4.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CASTING/mask_bowlhair_casting_strip15.png"
-dest_files=["res://.godot/imported/mask_bowlhair_casting_strip15.png-ffb944cf0f5645268d79730450fbb447.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_casting_strip15.png-ca9e95eb92c2b7d96bf49831ebbc34b4.ctex"]
 
 [params]
 

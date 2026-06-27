@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://un2ot5ynpxrfb"
-path="res://.godot/imported/mask_shorthair_axe_strip10.png-133714c7a10a4583ab36cee55399e5fe.ctex"
+uid="uid://cwn2mgoxmd2rs"
+path="res://.godot/imported/mask_shorthair_axe_strip10.png-5724b65141f9bf732db0e4138edb10c2.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/AXE/mask_shorthair_axe_strip10.png"
-dest_files=["res://.godot/imported/mask_shorthair_axe_strip10.png-133714c7a10a4583ab36cee55399e5fe.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_axe_strip10.png-5724b65141f9bf732db0e4138edb10c2.ctex"]
 
 [params]
 

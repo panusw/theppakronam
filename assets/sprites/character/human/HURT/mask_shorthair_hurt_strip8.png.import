@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ganpzteryav7w"
-path="res://.godot/imported/mask_shorthair_hurt_strip8.png-e651b855ad934317ba6dd1d76f3ec3ea.ctex"
+uid="uid://dglrdi5cpjk7r"
+path="res://.godot/imported/mask_shorthair_hurt_strip8.png-d13c38d38a43cf2f9ee734953c749203.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/HURT/mask_shorthair_hurt_strip8.png"
-dest_files=["res://.godot/imported/mask_shorthair_hurt_strip8.png-e651b855ad934317ba6dd1d76f3ec3ea.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_hurt_strip8.png-d13c38d38a43cf2f9ee734953c749203.ctex"]
 
 [params]
 

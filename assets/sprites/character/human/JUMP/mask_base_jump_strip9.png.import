@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8nlfz1tgk1lmd"
-path="res://.godot/imported/mask_base_jump_strip9.png-09164496fe1446a9bec4c18cfa77ec87.ctex"
+uid="uid://dm4276kyyqhxm"
+path="res://.godot/imported/mask_base_jump_strip9.png-91f454a4cb490b22291806b353016dfb.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/JUMP/mask_base_jump_strip9.png"
-dest_files=["res://.godot/imported/mask_base_jump_strip9.png-09164496fe1446a9bec4c18cfa77ec87.ctex"]
+dest_files=["res://.godot/imported/mask_base_jump_strip9.png-91f454a4cb490b22291806b353016dfb.ctex"]
 
 [params]
 

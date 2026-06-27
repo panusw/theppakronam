@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5b1tx87qeq0qi"
-path="res://.godot/imported/mask_curlyhair_attack_strip10.png-d675dc8f81b547ddbcab3859d94990d6.ctex"
+uid="uid://b0r2cemh30tcc"
+path="res://.godot/imported/mask_curlyhair_attack_strip10.png-b016fc9f2f24cda8e81fbd9fcf901b8d.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ATTACK/mask_curlyhair_attack_strip10.png"
-dest_files=["res://.godot/imported/mask_curlyhair_attack_strip10.png-d675dc8f81b547ddbcab3859d94990d6.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_attack_strip10.png-b016fc9f2f24cda8e81fbd9fcf901b8d.ctex"]
 
 [params]
 

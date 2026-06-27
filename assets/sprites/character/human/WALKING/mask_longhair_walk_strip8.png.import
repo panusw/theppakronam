@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://a0moi9r63li9a"
-path="res://.godot/imported/mask_longhair_walk_strip8.png-eddae8ccd6a44df298fd6d8e82b69c07.ctex"
+uid="uid://mhmdtolks5nj"
+path="res://.godot/imported/mask_longhair_walk_strip8.png-2ab1f7af1ab27030d439ddbf48c9b0b3.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WALKING/mask_longhair_walk_strip8.png"
-dest_files=["res://.godot/imported/mask_longhair_walk_strip8.png-eddae8ccd6a44df298fd6d8e82b69c07.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_walk_strip8.png-2ab1f7af1ab27030d439ddbf48c9b0b3.ctex"]
 
 [params]
 

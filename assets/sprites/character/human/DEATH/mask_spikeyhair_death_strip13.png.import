@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ompxy9ollfn74"
-path="res://.godot/imported/mask_spikeyhair_death_strip13.png-185988cd9aa040e9a16a06e2f6c29731.ctex"
+uid="uid://dc21dlc804tld"
+path="res://.godot/imported/mask_spikeyhair_death_strip13.png-4e7102b27ba0768d22f985c8d600356f.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DEATH/mask_spikeyhair_death_strip13.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_death_strip13.png-185988cd9aa040e9a16a06e2f6c29731.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_death_strip13.png-4e7102b27ba0768d22f985c8d600356f.ctex"]
 
 [params]
 

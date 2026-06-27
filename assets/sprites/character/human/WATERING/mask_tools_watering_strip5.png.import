@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ae9bxwul9vkyr"
-path="res://.godot/imported/mask_tools_watering_strip5.png-5f9891e08c124dd68e27d319c3f116f8.ctex"
+uid="uid://bq8guy4g1xgyq"
+path="res://.godot/imported/mask_tools_watering_strip5.png-85781cd0f9f9b015d51215316a7e95c0.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WATERING/mask_tools_watering_strip5.png"
-dest_files=["res://.godot/imported/mask_tools_watering_strip5.png-5f9891e08c124dd68e27d319c3f116f8.ctex"]
+dest_files=["res://.godot/imported/mask_tools_watering_strip5.png-85781cd0f9f9b015d51215316a7e95c0.ctex"]
 
 [params]
 

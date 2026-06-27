@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hih2sekgjpjlc"
-path="res://.godot/imported/mask_curlyhair_hurt_strip8.png-217864bde18b47ddabb6f6d1060cd310.ctex"
+uid="uid://cmqm3crxevcnx"
+path="res://.godot/imported/mask_curlyhair_hurt_strip8.png-f0bab2111f7efcf633aaa1a31a1ee783.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/HURT/mask_curlyhair_hurt_strip8.png"
-dest_files=["res://.godot/imported/mask_curlyhair_hurt_strip8.png-217864bde18b47ddabb6f6d1060cd310.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_hurt_strip8.png-f0bab2111f7efcf633aaa1a31a1ee783.ctex"]
 
 [params]
 

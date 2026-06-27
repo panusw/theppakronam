@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qtq71ppzzxd7s"
-path="res://.godot/imported/mask_tools_death_strip13.png-12beca65307b490cb9275b0d9397b34f.ctex"
+uid="uid://bf4krc4f571xt"
+path="res://.godot/imported/mask_tools_death_strip13.png-6aa619111b4c47bb54cb79b42def69f4.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DEATH/mask_tools_death_strip13.png"
-dest_files=["res://.godot/imported/mask_tools_death_strip13.png-12beca65307b490cb9275b0d9397b34f.ctex"]
+dest_files=["res://.godot/imported/mask_tools_death_strip13.png-6aa619111b4c47bb54cb79b42def69f4.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jxewr4otnjvmu"
-path="res://.godot/imported/mask_base_waiting_strip9.png-300a0a38bfc440ebb22bbe496ef1b5b1.ctex"
+uid="uid://bfpgepnv0abwq"
+path="res://.godot/imported/mask_base_waiting_strip9.png-4b30cb3532d88c0612a4cae0cce996ec.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WAITING/mask_base_waiting_strip9.png"
-dest_files=["res://.godot/imported/mask_base_waiting_strip9.png-300a0a38bfc440ebb22bbe496ef1b5b1.ctex"]
+dest_files=["res://.godot/imported/mask_base_waiting_strip9.png-4b30cb3532d88c0612a4cae0cce996ec.ctex"]
 
 [params]
 

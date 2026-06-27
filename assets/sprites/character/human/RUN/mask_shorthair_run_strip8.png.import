@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://orusci8wmt0go"
-path="res://.godot/imported/mask_shorthair_run_strip8.png-fd5dfdaf77144e37bfe1a5ac05624018.ctex"
+uid="uid://c6ng5lb0hv7ej"
+path="res://.godot/imported/mask_shorthair_run_strip8.png-187e0ab40cdd7e9de619cfb87d1f02c3.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/RUN/mask_shorthair_run_strip8.png"
-dest_files=["res://.godot/imported/mask_shorthair_run_strip8.png-fd5dfdaf77144e37bfe1a5ac05624018.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_run_strip8.png-187e0ab40cdd7e9de619cfb87d1f02c3.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ue9peqo3mrqt4"
-path="res://.godot/imported/mask_base_caught_strip10.png-fe890e8b194b4f10b62955820abe3ef7.ctex"
+uid="uid://bcd56uasj716n"
+path="res://.godot/imported/mask_base_caught_strip10.png-0e59d1ca3b66d67fdbad066d2e854da9.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CAUGHT/mask_base_caught_strip10.png"
-dest_files=["res://.godot/imported/mask_base_caught_strip10.png-fe890e8b194b4f10b62955820abe3ef7.ctex"]
+dest_files=["res://.godot/imported/mask_base_caught_strip10.png-0e59d1ca3b66d67fdbad066d2e854da9.ctex"]
 
 [params]
 

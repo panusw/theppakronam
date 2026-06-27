@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1onlaeiqhi8y6"
-path="res://.godot/imported/mask_bowlhair_axe_strip10.png-da2844f4b42f41d58d4604c3716a3142.ctex"
+uid="uid://dd3r31wcivebf"
+path="res://.godot/imported/mask_bowlhair_axe_strip10.png-f6f30f0e589af8010ba2bc1c1bbc833a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/AXE/mask_bowlhair_axe_strip10.png"
-dest_files=["res://.godot/imported/mask_bowlhair_axe_strip10.png-da2844f4b42f41d58d4604c3716a3142.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_axe_strip10.png-f6f30f0e589af8010ba2bc1c1bbc833a.ctex"]
 
 [params]
 

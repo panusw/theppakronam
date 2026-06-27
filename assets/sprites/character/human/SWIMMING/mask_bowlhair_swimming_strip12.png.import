@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qjt3tes0ygjwv"
-path="res://.godot/imported/mask_bowlhair_swimming_strip12.png-a64054f356aa4e98a8443239faa50c55.ctex"
+uid="uid://c6pnd1b6fkpax"
+path="res://.godot/imported/mask_bowlhair_swimming_strip12.png-12955114dc8d9cc5fc260493a7c13045.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/SWIMMING/mask_bowlhair_swimming_strip12.png"
-dest_files=["res://.godot/imported/mask_bowlhair_swimming_strip12.png-a64054f356aa4e98a8443239faa50c55.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_swimming_strip12.png-12955114dc8d9cc5fc260493a7c13045.ctex"]
 
 [params]
 

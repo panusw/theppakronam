@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kthyh4uh316fw"
-path="res://.godot/imported/mask_spikeyhair_carry_strip8.png-1985e15a8c6d4a11985f42dff17fd351.ctex"
+uid="uid://cvnudl6tghxdi"
+path="res://.godot/imported/mask_spikeyhair_carry_strip8.png-5c125fa765805b0b1dbcb709325b9b40.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CARRY/mask_spikeyhair_carry_strip8.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_carry_strip8.png-1985e15a8c6d4a11985f42dff17fd351.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_carry_strip8.png-5c125fa765805b0b1dbcb709325b9b40.ctex"]
 
 [params]
 

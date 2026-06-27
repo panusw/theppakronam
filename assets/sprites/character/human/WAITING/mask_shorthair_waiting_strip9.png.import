@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nylqy4ronswmr"
-path="res://.godot/imported/mask_shorthair_waiting_strip9.png-cd2a6330a85b4530be6976b23132957d.ctex"
+uid="uid://c1tj3o62tv52t"
+path="res://.godot/imported/mask_shorthair_waiting_strip9.png-e5eb2de3e78747070955aa630dd1d74c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WAITING/mask_shorthair_waiting_strip9.png"
-dest_files=["res://.godot/imported/mask_shorthair_waiting_strip9.png-cd2a6330a85b4530be6976b23132957d.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_waiting_strip9.png-e5eb2de3e78747070955aa630dd1d74c.ctex"]
 
 [params]
 

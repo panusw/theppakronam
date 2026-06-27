@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n2gdy3zggcn32"
-path="res://.godot/imported/mask_curlyhair_doing_strip8.png-c78adefcfaf041bb92483864d53370cf.ctex"
+uid="uid://jeawdmeyc6b8"
+path="res://.godot/imported/mask_curlyhair_doing_strip8.png-1dca8f5006e4cc2eca7edb477ba0c5aa.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DOING/mask_curlyhair_doing_strip8.png"
-dest_files=["res://.godot/imported/mask_curlyhair_doing_strip8.png-c78adefcfaf041bb92483864d53370cf.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_doing_strip8.png-1dca8f5006e4cc2eca7edb477ba0c5aa.ctex"]
 
 [params]
 

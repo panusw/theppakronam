@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqxu7n4uwcshi"
-path="res://.godot/imported/mask_mophair_death_strip13.png-b1dadd23f1254d83b859bf338040b5aa.ctex"
+uid="uid://dgdipgykpjwlg"
+path="res://.godot/imported/mask_mophair_death_strip13.png-591f8a8b063c25a5d792e6f69fbbe15a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DEATH/mask_mophair_death_strip13.png"
-dest_files=["res://.godot/imported/mask_mophair_death_strip13.png-b1dadd23f1254d83b859bf338040b5aa.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_death_strip13.png-591f8a8b063c25a5d792e6f69fbbe15a.ctex"]
 
 [params]
 

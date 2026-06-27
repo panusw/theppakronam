@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://833dac44b23db"
-path="res://.godot/imported/mask_tools_dig_strip13.png-0eba0aaff8684afaa27c380525cff4de.ctex"
+uid="uid://b8qvr8tqjmgh2"
+path="res://.godot/imported/mask_tools_dig_strip13.png-23fc0a2490b43cdf5f9d8651035303eb.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DIG/mask_tools_dig_strip13.png"
-dest_files=["res://.godot/imported/mask_tools_dig_strip13.png-0eba0aaff8684afaa27c380525cff4de.ctex"]
+dest_files=["res://.godot/imported/mask_tools_dig_strip13.png-23fc0a2490b43cdf5f9d8651035303eb.ctex"]
 
 [params]
 

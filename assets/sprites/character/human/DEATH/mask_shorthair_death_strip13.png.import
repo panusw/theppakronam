@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vzvxsvwxdyjlb"
-path="res://.godot/imported/mask_shorthair_death_strip13.png-aa91e4353f9c4e829e2893c478556a02.ctex"
+uid="uid://cv7pyt7xfav8g"
+path="res://.godot/imported/mask_shorthair_death_strip13.png-9eeeead6ffeee20dd70342bb413113ff.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DEATH/mask_shorthair_death_strip13.png"
-dest_files=["res://.godot/imported/mask_shorthair_death_strip13.png-aa91e4353f9c4e829e2893c478556a02.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_death_strip13.png-9eeeead6ffeee20dd70342bb413113ff.ctex"]
 
 [params]
 

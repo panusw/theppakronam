@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6u8u2ga96e127"
-path="res://.godot/imported/mask_longhair_caught_strip10.png-c90eb89b30bb4579aca7569a8e14cdab.ctex"
+uid="uid://cvbkde670gevd"
+path="res://.godot/imported/mask_longhair_caught_strip10.png-45d1fa0d4bdc6c95926202bb916acb64.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CAUGHT/mask_longhair_caught_strip10.png"
-dest_files=["res://.godot/imported/mask_longhair_caught_strip10.png-c90eb89b30bb4579aca7569a8e14cdab.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_caught_strip10.png-45d1fa0d4bdc6c95926202bb916acb64.ctex"]
 
 [params]
 

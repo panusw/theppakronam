@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://myzo7yva6rwd8"
-path="res://.godot/imported/mask_base_doing_strip8.png-4dc7e0cc9243490eb6789425b27858c5.ctex"
+uid="uid://jigx6w7uc4oi"
+path="res://.godot/imported/mask_base_doing_strip8.png-4d8a75d99a5ffc6809918c3af1e1db09.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DOING/mask_base_doing_strip8.png"
-dest_files=["res://.godot/imported/mask_base_doing_strip8.png-4dc7e0cc9243490eb6789425b27858c5.ctex"]
+dest_files=["res://.godot/imported/mask_base_doing_strip8.png-4d8a75d99a5ffc6809918c3af1e1db09.ctex"]
 
 [params]
 

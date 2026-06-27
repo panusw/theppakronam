@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ln48z85jyxofz"
-path="res://.godot/imported/mask_spikeyhair_reeling_strip13.png-ef93ed73e27d42c58d2ee2d3da5528b9.ctex"
+uid="uid://c8veukr0owjnw"
+path="res://.godot/imported/mask_spikeyhair_reeling_strip13.png-e1b3688c0d826291b4d35f8b086b1f32.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/REELING/mask_spikeyhair_reeling_strip13.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_reeling_strip13.png-ef93ed73e27d42c58d2ee2d3da5528b9.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_reeling_strip13.png-e1b3688c0d826291b4d35f8b086b1f32.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p9qltyl0xw3mh"
-path="res://.godot/imported/mask_spikeyhair_hurt_strip8.png-425248c2cdc54d67979da917b8fe5728.ctex"
+uid="uid://do0yt2t7p7npx"
+path="res://.godot/imported/mask_spikeyhair_hurt_strip8.png-cb49ffa079186f4ef60d51397d7014da.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/HURT/mask_spikeyhair_hurt_strip8.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_hurt_strip8.png-425248c2cdc54d67979da917b8fe5728.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_hurt_strip8.png-cb49ffa079186f4ef60d51397d7014da.ctex"]
 
 [params]
 

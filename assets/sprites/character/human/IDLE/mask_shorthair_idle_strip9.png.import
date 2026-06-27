@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://10vdabozybjzo"
-path="res://.godot/imported/mask_shorthair_idle_strip9.png-81fcf4585f374e4d9936f8b253d1150a.ctex"
+uid="uid://djl6owmocs7"
+path="res://.godot/imported/mask_shorthair_idle_strip9.png-3839eb084e93e47b71c81b88a47ae426.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/IDLE/mask_shorthair_idle_strip9.png"
-dest_files=["res://.godot/imported/mask_shorthair_idle_strip9.png-81fcf4585f374e4d9936f8b253d1150a.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_idle_strip9.png-3839eb084e93e47b71c81b88a47ae426.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f9d02uc01nck5"
-path="res://.godot/imported/mask_longhair_swimming_strip12.png-85d7d3e46a434d57855bdc75ee19e84b.ctex"
+uid="uid://b5j83435v0u0l"
+path="res://.godot/imported/mask_longhair_swimming_strip12.png-303e228385de6a5df2e9a3db933ebc80.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/SWIMMING/mask_longhair_swimming_strip12.png"
-dest_files=["res://.godot/imported/mask_longhair_swimming_strip12.png-85d7d3e46a434d57855bdc75ee19e84b.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_swimming_strip12.png-303e228385de6a5df2e9a3db933ebc80.ctex"]
 
 [params]
 

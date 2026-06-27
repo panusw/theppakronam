@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tyd02exs3ow90"
-path="res://.godot/imported/mask_shorthair_walk_strip8.png-0f96ff6c4c3e4dd2b9812b6d00468c24.ctex"
+uid="uid://4g6b6hx05sm5"
+path="res://.godot/imported/mask_shorthair_walk_strip8.png-7953be3e38e4dc09cd369a1c4157782d.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WALKING/mask_shorthair_walk_strip8.png"
-dest_files=["res://.godot/imported/mask_shorthair_walk_strip8.png-0f96ff6c4c3e4dd2b9812b6d00468c24.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_walk_strip8.png-7953be3e38e4dc09cd369a1c4157782d.ctex"]
 
 [params]
 

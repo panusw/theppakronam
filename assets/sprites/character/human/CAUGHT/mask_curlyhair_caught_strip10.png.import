@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k3ja6gzf0f28y"
-path="res://.godot/imported/mask_curlyhair_caught_strip10.png-04d16ec719874ed89a2e3f8bc8d17171.ctex"
+uid="uid://dljpxkqn3ievc"
+path="res://.godot/imported/mask_curlyhair_caught_strip10.png-0e28e4a068c7629d3818d3a8bc4fce93.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CAUGHT/mask_curlyhair_caught_strip10.png"
-dest_files=["res://.godot/imported/mask_curlyhair_caught_strip10.png-04d16ec719874ed89a2e3f8bc8d17171.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_caught_strip10.png-0e28e4a068c7629d3818d3a8bc4fce93.ctex"]
 
 [params]
 

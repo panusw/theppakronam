@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pd5cjzh68vob3"
-path="res://.godot/imported/mask_shorthair_jump_strip9.png-ee0045f231f94c858fef587a239b5a8b.ctex"
+uid="uid://dh3vhh15awinl"
+path="res://.godot/imported/mask_shorthair_jump_strip9.png-3c74563e1911c402c47c792deab39bd2.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/JUMP/mask_shorthair_jump_strip9.png"
-dest_files=["res://.godot/imported/mask_shorthair_jump_strip9.png-ee0045f231f94c858fef587a239b5a8b.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_jump_strip9.png-3c74563e1911c402c47c792deab39bd2.ctex"]
 
 [params]
 

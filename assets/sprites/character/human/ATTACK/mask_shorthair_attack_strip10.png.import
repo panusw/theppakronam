@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://smr2c3t7ax4fl"
-path="res://.godot/imported/mask_shorthair_attack_strip10.png-8077356d6d9b4e70a15d45ed67d9433b.ctex"
+uid="uid://d0txbm7t05usl"
+path="res://.godot/imported/mask_shorthair_attack_strip10.png-acd225cf74eb4a91fd55ec50cb0d287e.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ATTACK/mask_shorthair_attack_strip10.png"
-dest_files=["res://.godot/imported/mask_shorthair_attack_strip10.png-8077356d6d9b4e70a15d45ed67d9433b.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_attack_strip10.png-acd225cf74eb4a91fd55ec50cb0d287e.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fno7rb16tvhld"
-path="res://.godot/imported/mask_longhair_casting_strip15.png-21b73c5c0f5743669c3583b5f47cdf4c.ctex"
+uid="uid://jl1jgbxem2ny"
+path="res://.godot/imported/mask_longhair_casting_strip15.png-d8bc362291b8b0d143eeb46bf724dc2c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CASTING/mask_longhair_casting_strip15.png"
-dest_files=["res://.godot/imported/mask_longhair_casting_strip15.png-21b73c5c0f5743669c3583b5f47cdf4c.ctex"]
+dest_files=["res://.godot/imported/mask_longhair_casting_strip15.png-d8bc362291b8b0d143eeb46bf724dc2c.ctex"]
 
 [params]
 

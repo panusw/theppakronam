@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qrollzydhwyen"
-path="res://.godot/imported/mask_bowlhair_mining_strip10.png-cc6096ee13d14b1c9ea863473a7e726a.ctex"
+uid="uid://nw71nnpnknkh"
+path="res://.godot/imported/mask_bowlhair_mining_strip10.png-f9428802e34221c571f84d6d76984858.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/MINING/mask_bowlhair_mining_strip10.png"
-dest_files=["res://.godot/imported/mask_bowlhair_mining_strip10.png-cc6096ee13d14b1c9ea863473a7e726a.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_mining_strip10.png-f9428802e34221c571f84d6d76984858.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r38hvgs1pqh1e"
-path="res://.godot/imported/mask_mophair_swimming_strip12.png-7bc8774e00654b33a4cf98d4e46c104f.ctex"
+uid="uid://un5pscjn7k86"
+path="res://.godot/imported/mask_mophair_swimming_strip12.png-7501e2b1eb2a7cca36355849b76cb0b8.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/SWIMMING/mask_mophair_swimming_strip12.png"
-dest_files=["res://.godot/imported/mask_mophair_swimming_strip12.png-7bc8774e00654b33a4cf98d4e46c104f.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_swimming_strip12.png-7501e2b1eb2a7cca36355849b76cb0b8.ctex"]
 
 [params]
 

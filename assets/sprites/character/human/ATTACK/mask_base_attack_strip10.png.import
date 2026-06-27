@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fub6usj0c94cp"
-path="res://.godot/imported/mask_base_attack_strip10.png-eff66160319c4689aae166d1f84bcbf6.ctex"
+uid="uid://cvn17gpnj7jy1"
+path="res://.godot/imported/mask_base_attack_strip10.png-8e39e2e2322ecb65bcc6f2f9e7ee676d.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ATTACK/mask_base_attack_strip10.png"
-dest_files=["res://.godot/imported/mask_base_attack_strip10.png-eff66160319c4689aae166d1f84bcbf6.ctex"]
+dest_files=["res://.godot/imported/mask_base_attack_strip10.png-8e39e2e2322ecb65bcc6f2f9e7ee676d.ctex"]
 
 [params]
 

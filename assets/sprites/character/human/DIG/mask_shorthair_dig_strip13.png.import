@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://95qg9o2290465"
-path="res://.godot/imported/mask_shorthair_dig_strip13.png-032b4ed2ee66493180e44bb1aa566fb3.ctex"
+uid="uid://dtwcra2sar0tp"
+path="res://.godot/imported/mask_shorthair_dig_strip13.png-232bed5c4677051e296f244799422453.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DIG/mask_shorthair_dig_strip13.png"
-dest_files=["res://.godot/imported/mask_shorthair_dig_strip13.png-032b4ed2ee66493180e44bb1aa566fb3.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_dig_strip13.png-232bed5c4677051e296f244799422453.ctex"]
 
 [params]
 

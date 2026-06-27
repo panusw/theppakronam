@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4ww9k18gvh6o8"
-path="res://.godot/imported/mask_mophair_watering_strip5.png-8cb4463f270a494eb05f5ef5f38ebfaf.ctex"
+uid="uid://coepseu72ce2p"
+path="res://.godot/imported/mask_mophair_watering_strip5.png-f85b5ca93e8f21b9dbeb7054e59a3cd5.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WATERING/mask_mophair_watering_strip5.png"
-dest_files=["res://.godot/imported/mask_mophair_watering_strip5.png-8cb4463f270a494eb05f5ef5f38ebfaf.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_watering_strip5.png-f85b5ca93e8f21b9dbeb7054e59a3cd5.ctex"]
 
 [params]
 

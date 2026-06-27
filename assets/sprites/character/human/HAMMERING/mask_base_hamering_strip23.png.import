@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1ji8lmcdsf1k"
-path="res://.godot/imported/mask_base_hamering_strip23.png-6a3483fb93b844df9562fdbf9589e3de.ctex"
+uid="uid://co74b02owgeu5"
+path="res://.godot/imported/mask_base_hamering_strip23.png-785d00f8df0425773a46b1feb1a890b2.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/HAMMERING/mask_base_hamering_strip23.png"
-dest_files=["res://.godot/imported/mask_base_hamering_strip23.png-6a3483fb93b844df9562fdbf9589e3de.ctex"]
+dest_files=["res://.godot/imported/mask_base_hamering_strip23.png-785d00f8df0425773a46b1feb1a890b2.ctex"]
 
 [params]
 

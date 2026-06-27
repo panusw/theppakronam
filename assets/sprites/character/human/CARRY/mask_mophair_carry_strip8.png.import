@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5gz6aeqky1r0p"
-path="res://.godot/imported/mask_mophair_carry_strip8.png-3a9393f2075249699358cd917461a19e.ctex"
+uid="uid://bg05igm7apbh8"
+path="res://.godot/imported/mask_mophair_carry_strip8.png-2878ac468cb2d07164d05f2a079b0a9c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CARRY/mask_mophair_carry_strip8.png"
-dest_files=["res://.godot/imported/mask_mophair_carry_strip8.png-3a9393f2075249699358cd917461a19e.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_carry_strip8.png-2878ac468cb2d07164d05f2a079b0a9c.ctex"]
 
 [params]
 

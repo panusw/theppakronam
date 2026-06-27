@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2fyliegkdsa3w"
-path="res://.godot/imported/mask_curlyhair_reeling_strip13.png-49364fe5862647d6a0ef4f5534f58139.ctex"
+uid="uid://kffdwd38utnc"
+path="res://.godot/imported/mask_curlyhair_reeling_strip13.png-912b8b1001d582e16402c8972a15e427.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/REELING/mask_curlyhair_reeling_strip13.png"
-dest_files=["res://.godot/imported/mask_curlyhair_reeling_strip13.png-49364fe5862647d6a0ef4f5534f58139.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_reeling_strip13.png-912b8b1001d582e16402c8972a15e427.ctex"]
 
 [params]
 

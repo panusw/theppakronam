@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct6imzf1n5w9k"
-path="res://.godot/imported/mask_shorthair_mining_strip10.png-dea22cd8d9b641bc81cb25d5e44b997c.ctex"
+uid="uid://c4uywru138d8f"
+path="res://.godot/imported/mask_shorthair_mining_strip10.png-24bea234ef26197e5120a7a3c70f652b.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/MINING/mask_shorthair_mining_strip10.png"
-dest_files=["res://.godot/imported/mask_shorthair_mining_strip10.png-dea22cd8d9b641bc81cb25d5e44b997c.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_mining_strip10.png-24bea234ef26197e5120a7a3c70f652b.ctex"]
 
 [params]
 

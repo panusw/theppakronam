@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6hhpappzc71od"
-path="res://.godot/imported/mask_mophair_doing_strip8.png-fab0348bcf6345e0ad99ebab7dce51d9.ctex"
+uid="uid://cvvmuqjpl5vce"
+path="res://.godot/imported/mask_mophair_doing_strip8.png-3dcd0ec75aa5f940b36899ebcff5c5e4.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/DOING/mask_mophair_doing_strip8.png"
-dest_files=["res://.godot/imported/mask_mophair_doing_strip8.png-fab0348bcf6345e0ad99ebab7dce51d9.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_doing_strip8.png-3dcd0ec75aa5f940b36899ebcff5c5e4.ctex"]
 
 [params]
 

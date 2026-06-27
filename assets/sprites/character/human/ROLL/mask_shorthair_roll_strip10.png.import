@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mhndxtumi7x8d"
-path="res://.godot/imported/mask_shorthair_roll_strip10.png-3a506acb406b4c97af9600b4a6624957.ctex"
+uid="uid://t8nqgnhgd8lf"
+path="res://.godot/imported/mask_shorthair_roll_strip10.png-6b6b05f9a0b81e00682dc8da78ea2dfa.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ROLL/mask_shorthair_roll_strip10.png"
-dest_files=["res://.godot/imported/mask_shorthair_roll_strip10.png-3a506acb406b4c97af9600b4a6624957.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_roll_strip10.png-6b6b05f9a0b81e00682dc8da78ea2dfa.ctex"]
 
 [params]
 

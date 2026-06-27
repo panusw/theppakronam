@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://zhk2k1kzs08hz"
-path="res://.godot/imported/mask_shorthair_carry_strip8.png-0fe144ee58cb43579b6d488bc4201ede.ctex"
+uid="uid://bx5mhwaw1nd40"
+path="res://.godot/imported/mask_shorthair_carry_strip8.png-a17359d8187d5bc1e6cf16e961aced67.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/CARRY/mask_shorthair_carry_strip8.png"
-dest_files=["res://.godot/imported/mask_shorthair_carry_strip8.png-0fe144ee58cb43579b6d488bc4201ede.ctex"]
+dest_files=["res://.godot/imported/mask_shorthair_carry_strip8.png-a17359d8187d5bc1e6cf16e961aced67.ctex"]
 
 [params]
 

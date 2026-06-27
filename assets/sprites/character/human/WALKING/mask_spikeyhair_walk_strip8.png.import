@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uuy7rp53vipc5"
-path="res://.godot/imported/mask_spikeyhair_walk_strip8.png-5f8d7051dc9f492b9c11595cafeb728a.ctex"
+uid="uid://dkelty1savh4b"
+path="res://.godot/imported/mask_spikeyhair_walk_strip8.png-a119fb505e04c239f336b9305e5433a2.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WALKING/mask_spikeyhair_walk_strip8.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_walk_strip8.png-5f8d7051dc9f492b9c11595cafeb728a.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_walk_strip8.png-a119fb505e04c239f336b9305e5433a2.ctex"]
 
 [params]
 

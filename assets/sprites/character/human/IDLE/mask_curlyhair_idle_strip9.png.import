@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n5jb1u1d0bmj3"
-path="res://.godot/imported/mask_curlyhair_idle_strip9.png-1661038ebe0b47e990c568d6ddb58445.ctex"
+uid="uid://dwea8tjk2ynnv"
+path="res://.godot/imported/mask_curlyhair_idle_strip9.png-b0bc1ee0bd46f1132c7a792f6dc74f83.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/IDLE/mask_curlyhair_idle_strip9.png"
-dest_files=["res://.godot/imported/mask_curlyhair_idle_strip9.png-1661038ebe0b47e990c568d6ddb58445.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_idle_strip9.png-b0bc1ee0bd46f1132c7a792f6dc74f83.ctex"]
 
 [params]
 

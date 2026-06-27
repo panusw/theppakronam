@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://finjgwp495r29"
-path="res://.godot/imported/mask_curlyhair_swimming_strip12.png-b3c87ce9984d4f0fb2f41ff478556226.ctex"
+uid="uid://bh3jdrr0yckmp"
+path="res://.godot/imported/mask_curlyhair_swimming_strip12.png-9d478eb8e4d7c6b57c33334914978843.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/SWIMMING/mask_curlyhair_swimming_strip12.png"
-dest_files=["res://.godot/imported/mask_curlyhair_swimming_strip12.png-b3c87ce9984d4f0fb2f41ff478556226.ctex"]
+dest_files=["res://.godot/imported/mask_curlyhair_swimming_strip12.png-9d478eb8e4d7c6b57c33334914978843.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://53nrij6oqkfaz"
-path="res://.godot/imported/mask_mophair_reeling_strip13.png-7b3a6d66161844a1950bdcffe4ff6adc.ctex"
+uid="uid://cvyuom6bocd4"
+path="res://.godot/imported/mask_mophair_reeling_strip13.png-d58be18906f5e8ce88972361f27e6744.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/REELING/mask_mophair_reeling_strip13.png"
-dest_files=["res://.godot/imported/mask_mophair_reeling_strip13.png-7b3a6d66161844a1950bdcffe4ff6adc.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_reeling_strip13.png-d58be18906f5e8ce88972361f27e6744.ctex"]
 
 [params]
 

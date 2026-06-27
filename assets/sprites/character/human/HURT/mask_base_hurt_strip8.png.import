@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ap016ybrmgs0g"
-path="res://.godot/imported/mask_base_hurt_strip8.png-0e157027abaa4acbb9b39cda7b50750d.ctex"
+uid="uid://ba1t7clyk4qqm"
+path="res://.godot/imported/mask_base_hurt_strip8.png-ae76b10e43734af7150ae27b35dff857.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/HURT/mask_base_hurt_strip8.png"
-dest_files=["res://.godot/imported/mask_base_hurt_strip8.png-0e157027abaa4acbb9b39cda7b50750d.ctex"]
+dest_files=["res://.godot/imported/mask_base_hurt_strip8.png-ae76b10e43734af7150ae27b35dff857.ctex"]
 
 [params]
 

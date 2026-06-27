@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6603vcl25pixc"
-path="res://.godot/imported/mask_mophair_roll_strip10.png-fff4d1a6faf649578b9be93ee1f64d0c.ctex"
+uid="uid://cja5rsi40ptau"
+path="res://.godot/imported/mask_mophair_roll_strip10.png-68d3f4d27e58f12ccc0eba3a2b1ce011.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/ROLL/mask_mophair_roll_strip10.png"
-dest_files=["res://.godot/imported/mask_mophair_roll_strip10.png-fff4d1a6faf649578b9be93ee1f64d0c.ctex"]
+dest_files=["res://.godot/imported/mask_mophair_roll_strip10.png-68d3f4d27e58f12ccc0eba3a2b1ce011.ctex"]
 
 [params]
 

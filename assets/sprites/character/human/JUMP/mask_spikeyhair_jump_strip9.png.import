@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ncqqcxk7nllry"
-path="res://.godot/imported/mask_spikeyhair_jump_strip9.png-03fa5d52818d474882ed56d61e7105b6.ctex"
+uid="uid://bpdh0vgnuyi0l"
+path="res://.godot/imported/mask_spikeyhair_jump_strip9.png-b370f2e617f1353895829a75ceaa4b6a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/JUMP/mask_spikeyhair_jump_strip9.png"
-dest_files=["res://.godot/imported/mask_spikeyhair_jump_strip9.png-03fa5d52818d474882ed56d61e7105b6.ctex"]
+dest_files=["res://.godot/imported/mask_spikeyhair_jump_strip9.png-b370f2e617f1353895829a75ceaa4b6a.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k8rfidrl88ayv"
-path="res://.godot/imported/mask_bowlhair_walk_strip8.png-46ae79f32e7346c19ab29ad3d6a58165.ctex"
+uid="uid://b1yxkootwcauk"
+path="res://.godot/imported/mask_bowlhair_walk_strip8.png-87349c297aee61663859ca6bbdd1b586.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/WALKING/mask_bowlhair_walk_strip8.png"
-dest_files=["res://.godot/imported/mask_bowlhair_walk_strip8.png-46ae79f32e7346c19ab29ad3d6a58165.ctex"]
+dest_files=["res://.godot/imported/mask_bowlhair_walk_strip8.png-87349c297aee61663859ca6bbdd1b586.ctex"]
 
 [params]
 

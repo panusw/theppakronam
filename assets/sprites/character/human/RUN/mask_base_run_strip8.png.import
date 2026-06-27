@@ -1,9 +1,9 @@
-﻿[remap]
+[remap]
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iwyfjjt64r4l0"
-path="res://.godot/imported/mask_base_run_strip8.png-79fc9d11468a45da821bebcfdf324d8c.ctex"
+uid="uid://l457mkb7b1qi"
+path="res://.godot/imported/mask_base_run_strip8.png-7f088459f33bdb4af685c54d9543de35.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/character/human/RUN/mask_base_run_strip8.png"
-dest_files=["res://.godot/imported/mask_base_run_strip8.png-79fc9d11468a45da821bebcfdf324d8c.ctex"]
+dest_files=["res://.godot/imported/mask_base_run_strip8.png-7f088459f33bdb4af685c54d9543de35.ctex"]
 
 [params]
 
