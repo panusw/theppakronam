@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://tp_skill_web"]
+
+[node name="SkillWeb" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.031, 0.027, 0.055, 1)
+
+[node name="GraphViewport" type="SubViewportContainer" parent="."]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1024.0
+offset_bottom = 720.0
+
+[node name="GraphSubViewport" type="SubViewport" parent="GraphViewport"]
+size = Vector2i(1024, 720)
+
+[node name="GraphRoot" type="Node2D" parent="GraphViewport/GraphSubViewport"]
+
+[node name="EdgeLines" type="Node2D" parent="GraphViewport/GraphSubViewport/GraphRoot"]
+
+[node name="NodeSprites" type="Node2D" parent="GraphViewport/GraphSubViewport/GraphRoot"]
+
+[node name="Camera2D" type="Camera2D" parent="GraphViewport/GraphSubViewport/GraphRoot"]
+zoom = Vector2(1, 1)
+position_smoothing_enabled = true
+
+[node name="SidePanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 1024.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/separation = 12
+
+[node name="NodeName" type="Label" parent="SidePanel"]
+layout_mode = 2
+text = "เลือก Node"
+horizontal_alignment = 1
+
+[node name="NodeDesc" type="RichTextLabel" parent="SidePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="UnlockCost" type="Label" parent="SidePanel"]
+layout_mode = 2
+text = ""
+
+[node name="BtnUnlock" type="Button" parent="SidePanel"]
+layout_mode = 2
+text = "ปลดล็อก"
+disabled = true
+
+[node name="BtnClose" type="Button" parent="SidePanel"]
+layout_mode = 2
+text = "ปิด"

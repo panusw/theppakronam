@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://tp_char_creator"]
+
+[ext_resource type="Script" path="res://scripts/ui/CharacterCreator.gd" id="1_cc"]
+
+[node name="CharacterCreator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_cc")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.047, 0.047, 0.098, 1)
+
+[node name="PreviewPanel" type="SubViewportContainer" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 560.0
+offset_bottom = 688.0
+
+[node name="PreviewViewport" type="SubViewport" parent="PreviewPanel"]
+size = Vector2i(528, 656)
+transparent_bg = true
+
+[node name="CharacterSprite" type="Node2D" parent="PreviewPanel/PreviewViewport"]
+position = Vector2(264, 400)
+
+[node name="Body" type="Sprite2D" parent="PreviewPanel/PreviewViewport/CharacterSprite"]
+scale = Vector2(4, 4)
+
+[node name="Tool" type="Sprite2D" parent="PreviewPanel/PreviewViewport/CharacterSprite"]
+scale = Vector2(4, 4)
+
+[node name="Hair" type="Sprite2D" parent="PreviewPanel/PreviewViewport/CharacterSprite"]
+scale = Vector2(4, 4)
+
+[node name="OptionsScroll" type="ScrollContainer" parent="."]
+layout_mode = 1
+offset_left = 600.0
+offset_top = 32.0
+offset_right = 1248.0
+offset_bottom = 688.0
+
+[node name="OptionsVBox" type="VBoxContainer" parent="OptionsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10

@@ -1,0 +1,198 @@
+[gd_scene load_steps=2 format=3 uid="uid://tp_world_map"]
+
+[ext_resource type="Script" path="res://scripts/ui/WorldMap.gd" id="1_wm"]
+
+[node name="WorldMap" type="Node2D"]
+script = ExtResource("1_wm")
+
+[node name="DecayTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = false
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="TopPanel" type="PanelContainer" parent="HUD"]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 84.0
+
+[node name="Margin" type="MarginContainer" parent="HUD/TopPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="HBox" type="HBoxContainer" parent="HUD/TopPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="CharSection" type="VBoxContainer" parent="HUD/TopPanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+alignment = 1
+
+[node name="LblCharName" type="Label" parent="HUD/TopPanel/Margin/HBox/CharSection"]
+layout_mode = 2
+unique_name_in_owner = true
+text = "— ไม่มีตัวละคร —"
+
+[node name="LblDivinity" type="Label" parent="HUD/TopPanel/Margin/HBox/CharSection"]
+layout_mode = 2
+unique_name_in_owner = true
+text = "ผู้ท้าชิง"
+
+[node name="VSep1" type="VSeparator" parent="HUD/TopPanel/Margin/HBox"]
+layout_mode = 2
+
+[node name="SurvivalSection" type="VBoxContainer" parent="HUD/TopPanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+alignment = 1
+theme_override_constants/separation = 4
+
+[node name="HungerRow" type="HBoxContainer" parent="HUD/TopPanel/Margin/HBox/SurvivalSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblHungerIcon" type="Label" parent="HUD/TopPanel/Margin/HBox/SurvivalSection/HungerRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(26, 0)
+text = "🍖"
+
+[node name="HungerBar" type="ProgressBar" parent="HUD/TopPanel/Margin/HBox/SurvivalSection/HungerRow"]
+layout_mode = 2
+unique_name_in_owner = true
+size_flags_horizontal = 3
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="ThirstRow" type="HBoxContainer" parent="HUD/TopPanel/Margin/HBox/SurvivalSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblThirstIcon" type="Label" parent="HUD/TopPanel/Margin/HBox/SurvivalSection/ThirstRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(26, 0)
+text = "💧"
+
+[node name="ThirstBar" type="ProgressBar" parent="HUD/TopPanel/Margin/HBox/SurvivalSection/ThirstRow"]
+layout_mode = 2
+unique_name_in_owner = true
+size_flags_horizontal = 3
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="FatigueRow" type="HBoxContainer" parent="HUD/TopPanel/Margin/HBox/SurvivalSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblFatigueIcon" type="Label" parent="HUD/TopPanel/Margin/HBox/SurvivalSection/FatigueRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(26, 0)
+text = "😴"
+
+[node name="FatigueBar" type="ProgressBar" parent="HUD/TopPanel/Margin/HBox/SurvivalSection/FatigueRow"]
+layout_mode = 2
+unique_name_in_owner = true
+size_flags_horizontal = 3
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="VSep2" type="VSeparator" parent="HUD/TopPanel/Margin/HBox"]
+layout_mode = 2
+
+[node name="EnergySection" type="VBoxContainer" parent="HUD/TopPanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+alignment = 1
+theme_override_constants/separation = 4
+
+[node name="LblWorldEnergy" type="Label" parent="HUD/TopPanel/Margin/HBox/EnergySection"]
+layout_mode = 2
+unique_name_in_owner = true
+text = "⚡ 100 / 100"
+
+[node name="LblBattleEnergy" type="Label" parent="HUD/TopPanel/Margin/HBox/EnergySection"]
+layout_mode = 2
+unique_name_in_owner = true
+text = "🔋 10 / 10"
+
+[node name="LocationBar" type="Label" parent="HUD"]
+layout_mode = 1
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 90.0
+offset_right = 640.0
+offset_bottom = 116.0
+text = "หอ 1  ชั้น 1"
+
+[node name="LblTime" type="Label" parent="HUD"]
+layout_mode = 1
+unique_name_in_owner = true
+offset_left = 900.0
+offset_top = 90.0
+offset_right = 1264.0
+offset_bottom = 116.0
+horizontal_alignment = 2
+
+[node name="SurvivalWarning" type="Label" parent="HUD"]
+layout_mode = 1
+unique_name_in_owner = true
+offset_left = 340.0
+offset_top = 330.0
+offset_right = 940.0
+offset_bottom = 390.0
+horizontal_alignment = 1
+vertical_alignment = 1
+visible = false
+
+[node name="BottomBar" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 674.0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/separation = 0
+
+[node name="BtnCombat" type="Button" parent="HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⚔ สู้"
+
+[node name="BtnInventory" type="Button" parent="HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🎒 กระเป๋า"
+
+[node name="BtnCraft" type="Button" parent="HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🔨 คราฟ"
+
+[node name="BtnGacha" type="Button" parent="HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "✨ ดึง"
+
+[node name="BtnMenu" type="Button" parent="HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "☰ เมนู"

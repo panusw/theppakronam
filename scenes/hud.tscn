@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://tp_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 10
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 48.0
+theme_override_constants/separation = 12
+
+[node name="HpContainer" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblHP" type="Label" parent="TopBar/HpContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="TopBar/HpContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+value = 100.0
+
+[node name="EnergyContainer" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+
+[node name="LblWorldEnergy" type="Label" parent="TopBar/EnergyContainer"]
+layout_mode = 2
+text = "⚡ 100"
+
+[node name="LblBattleEnergy" type="Label" parent="TopBar/EnergyContainer"]
+layout_mode = 2
+text = "🔋 10"
+
+[node name="SurvivalContainer" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+
+[node name="LblHunger" type="Label" parent="TopBar/SurvivalContainer"]
+layout_mode = 2
+text = "🍖100"
+
+[node name="LblThirst" type="Label" parent="TopBar/SurvivalContainer"]
+layout_mode = 2
+text = "💧100"
+
+[node name="LblFatigue" type="Label" parent="TopBar/SurvivalContainer"]
+layout_mode = 2
+text = "😴100"
+
+[node name="MiniMap" type="SubViewportContainer" parent="."]
+layout_mode = 1
+offset_right = 200.0
+offset_top = 520.0
+offset_bottom = 720.0
+offset_left = 1080.0
+
+[node name="MiniMapViewport" type="SubViewport" parent="MiniMap"]
+size = Vector2i(200, 200)
+
+[node name="ToastContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 960.0
+offset_top = 56.0
+offset_right = 1264.0
+offset_bottom = 400.0
+
+[node name="StatusEffects" type="HFlowContainer" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 400.0
+offset_bottom = 100.0

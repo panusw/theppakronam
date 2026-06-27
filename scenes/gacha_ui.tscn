@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://tp_gacha_ui"]
+
+[node name="GachaUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.047, 0.047, 0.098, 0.92)
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 1248.0
+offset_bottom = 64.0
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gacha"
+
+[node name="GemLabel" type="Label" parent="Header"]
+layout_mode = 2
+text = "💎 0"
+
+[node name="PityLabel" type="Label" parent="Header"]
+layout_mode = 2
+text = "Pity: 0/50"
+
+[node name="ResultContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 80.0
+offset_right = 1216.0
+offset_bottom = 560.0
+
+[node name="ButtonRow" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 400.0
+offset_top = 600.0
+offset_right = 880.0
+offset_bottom = 652.0
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="BtnPull1" type="Button" parent="ButtonRow"]
+layout_mode = 2
+text = "สุ่ม ×1  (100 💎)"
+
+[node name="BtnPull10" type="Button" parent="ButtonRow"]
+layout_mode = 2
+text = "สุ่ม ×10  (900 💎)"
+
+[node name="BtnClose" type="Button" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 660.0
+offset_right = 160.0
+offset_bottom = 700.0
+text = "ปิด"

@@ -1,0 +1,109 @@
+[gd_scene load_steps=2 format=3 uid="uid://tp_char_select"]
+
+[ext_resource type="Script" path="res://scripts/ui/CharacterSelect.gd" id="1_cs"]
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_cs")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.047, 0.047, 0.098, 1)
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 24.0
+offset_right = 1280.0
+offset_bottom = 64.0
+text = "เลือกตัวละคร"
+horizontal_alignment = 1
+
+[node name="LblLoading" type="Label" parent="."]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 280.0
+offset_right = 1280.0
+offset_bottom = 320.0
+text = "กำลังโหลด..."
+horizontal_alignment = 1
+visible = false
+
+[node name="SlotContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 120.0
+offset_top = 100.0
+offset_right = 1160.0
+offset_bottom = 580.0
+theme_override_constants/separation = 32
+
+[node name="Slot1" type="PanelContainer" parent="SlotContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot2" type="PanelContainer" parent="SlotContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot3" type="PanelContainer" parent="SlotContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BtnBack" type="Button" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 660.0
+offset_right = 180.0
+offset_bottom = 696.0
+text = "กลับ"
+
+[node name="DeleteModal" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_left = 390.0
+offset_top = 200.0
+offset_right = 890.0
+offset_bottom = 480.0
+visible = false
+
+[node name="VBox" type="VBoxContainer" parent="DeleteModal"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LblDeleteTitle" type="Label" parent="DeleteModal/VBox"]
+layout_mode = 2
+text = "ลบตัวละคร"
+horizontal_alignment = 1
+
+[node name="LblDeleteWarning" type="Label" parent="DeleteModal/VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="InputDeleteConfirm" type="LineEdit" parent="DeleteModal/VBox"]
+layout_mode = 2
+placeholder_text = "พิมพ์ชื่อตัวละครเพื่อยืนยัน"
+
+[node name="HBox" type="HBoxContainer" parent="DeleteModal/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BtnDeleteConfirm" type="Button" parent="DeleteModal/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ยืนยันการลบ"
+disabled = true
+
+[node name="BtnDeleteCancel" type="Button" parent="DeleteModal/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ยกเลิก"

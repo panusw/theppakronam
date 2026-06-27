@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://tp_bestiary"]
+
+[node name="Bestiary" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.047, 0.047, 0.098, 0.95)
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 16.0
+offset_right = 1280.0
+offset_bottom = 56.0
+text = "บัญชีสัตว์ประหลาด"
+horizontal_alignment = 1
+
+[node name="FilterBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 60.0
+offset_right = 640.0
+offset_bottom = 96.0
+
+[node name="SearchInput" type="LineEdit" parent="FilterBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ค้นหา..."
+
+[node name="BandFilter" type="OptionButton" parent="FilterBar"]
+layout_mode = 2
+
+[node name="MonsterList" type="ScrollContainer" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 104.0
+offset_right = 560.0
+offset_bottom = 680.0
+
+[node name="MonsterVBox" type="VBoxContainer" parent="MonsterList"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DetailPanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 580.0
+offset_top = 60.0
+offset_right = 1256.0
+offset_bottom = 680.0
+theme_override_constants/separation = 12
+
+[node name="MonsterSprite" type="Sprite2D" parent="DetailPanel"]
+
+[node name="MonsterName" type="Label" parent="DetailPanel"]
+layout_mode = 2
+text = "เลือกสัตว์ประหลาด"
+horizontal_alignment = 1
+
+[node name="MonsterDesc" type="RichTextLabel" parent="DetailPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="CaptureCount" type="Label" parent="DetailPanel"]
+layout_mode = 2
+text = "จับได้: 0 ครั้ง"
+
+[node name="BtnClose" type="Button" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 670.0
+offset_right = 160.0
+offset_bottom = 710.0
+text = "ปิด"

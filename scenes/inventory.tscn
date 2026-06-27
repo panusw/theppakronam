@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://tp_inventory"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.047, 0.047, 0.098, 0.95)
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 1256.0
+offset_bottom = 56.0
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "กระเป๋า"
+
+[node name="GoldLabel" type="Label" parent="Header"]
+layout_mode = 2
+text = "Gold: 0"
+
+[node name="TabBar" type="TabBar" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 60.0
+offset_right = 640.0
+offset_bottom = 96.0
+
+[node name="ItemGrid" type="GridContainer" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 100.0
+offset_right = 640.0
+offset_bottom = 680.0
+columns = 8
+
+[node name="DetailPanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 660.0
+offset_top = 60.0
+offset_right = 1256.0
+offset_bottom = 680.0
+theme_override_constants/separation = 12
+
+[node name="ItemName" type="Label" parent="DetailPanel"]
+layout_mode = 2
+text = "เลือกไอเทม"
+
+[node name="ItemRarity" type="Label" parent="DetailPanel"]
+layout_mode = 2
+text = ""
+
+[node name="ItemDesc" type="RichTextLabel" parent="DetailPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="ActionButtons" type="HBoxContainer" parent="DetailPanel"]
+layout_mode = 2
+
+[node name="BtnEquip" type="Button" parent="DetailPanel/ActionButtons"]
+layout_mode = 2
+text = "สวมใส่"
+
+[node name="BtnIdentify" type="Button" parent="DetailPanel/ActionButtons"]
+layout_mode = 2
+text = "ระบุ"
+
+[node name="BtnSell" type="Button" parent="DetailPanel/ActionButtons"]
+layout_mode = 2
+text = "ขาย"
+
+[node name="BtnClose" type="Button" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 670.0
+offset_right = 160.0
+offset_bottom = 710.0
+text = "ปิด"
