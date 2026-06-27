@@ -540,6 +540,233 @@
 - Schema ใหม่: schema_marketplace_v1.sql (marketplace_listings)
 - schema_character_v1.sql เพิ่ม columns: difficulty, char_type (offline/online), death_locked
 
+### Session: Mask PNG สร้างครบทุก Action (มิถุนายน 2026)
+
+**สถานะ mask files:**
+
+| สิ่งที่ทำเสร็จแล้ว | จำนวน |
+|---|---|
+| Mask PNGs สร้างด้วย PowerShell (ทุก action, ทุกทรงผม) | 160 ไฟล์ |
+| ทุก folder ผ่านการตรวจ sprites = masks | 20/20 folder |
+
+**Action ที่มี mask แล้ว:** ATTACK / AXE / CARRY / CASTING / CAUGHT / DEATH / DIG / DOING / HAMMERING / HURT / IDLE / JUMP / MINING / REELING / ROLL / RUN / SWIMMING / WAITING / WALKING / WATERING
+
+---
+
+#### ⚠️ TODO (ต้องทำด้วยมือใน Godot Editor)
+
+**152 mask files ที่สร้างใหม่ยังไม่มี import settings ที่ถูกต้อง** — ถ้าไม่ตั้งค่า shader จะอ่านสีผิดเพราะ lossy compression
+
+วิธีทำ:
+1. เปิด Godot Editor → FileSystem panel
+2. เลือก mask PNG ทีละไฟล์ (หรือ shift-click หลายไฟล์พร้อมกัน) → Import tab
+3. ตั้งค่าให้ครบ:
+   - **Compress Mode = Lossless**
+   - **Mipmaps = Off**
+   - **Filter = Nearest**
+4. กด **Reimport**
+
+> IDLE masks 8 ไฟล์ถูกตั้งค่าไว้แล้วในรอบก่อน — ทำเฉพาะ 152 ไฟล์ที่เหลือ (19 action folders)
+
+---
+
+### Session: Character Creator — Mask Texture Color Swap System (มิถุนายน 2026)
+
+**ระบบ Palette Swap ที่ใช้งานอยู่ปัจจุบัน: Mask Texture + Luminance Interpolation**
+
+#### ทำไมถึงใช้ Mask แทน Color-Distance
+
+Sunnyside World sprites **ไม่ใช่** flat pixel art — แต่ละ "region" (ผิว/เสื้อ/เอี้ยม) มีหลาย shade ที่ไล่สีกัน
+Color-distance matching ล้มเหลวเพราะ tolerance ที่แคบพอ (0.04) ทำให้หา pixel ไม่เจอ
+Mask texture แก้ปัญหานี้โดย **กำหนด region ด้วย position** ไม่ใช่สี จากนั้นใช้ luminance interpolate สีใหม่
+
+#### ไฟล์ที่เกี่ยวข้อง
+
+| ไฟล์ | บทบาท |
+|---|---|
+| `assets/shaders/character_mask.gdshader` | Shader หลัก — อ่าน mask + interpolate สีตาม luminance |
+| `scripts/autoload/CharacterColors.gd` | Singleton — presets สี + สร้าง ShaderMaterial |
+| `assets/sprites/character/human/IDLE/mask_*.png` | Mask PNGs สำหรับแต่ละ sprite strip |
+
+#### Mask PNG Format
+
+Mask PNG คือภาพ RGB ขนาดเดียวกับ sprite strip (เช่น 864×64 สำหรับ 9-frame IDLE)
+แต่ละ pixel บอกว่า pixel นั้นอยู่ใน region ไหน:
+
+**Body sprites** (`base_idle_strip9.png`, `tools_idle_strip9.png`):
+- **R=255, G=0, B=0** → skin (ผิว)
+- **R=0, G=255, B=0** → outfit (เอี้ยม)
+- **R=0, G=0, B=255** → shirt (เสื้อตัวใน)
+- **R=0, G=0, B=0** → outline / ตา / พิกเซลที่ไม่ต้องเปลี่ยนสี
+
+**Hair sprites** (`bowlhair_idle_strip9.png` ฯลฯ):
+- **R=255, G=0, B=0** → hair (เส้นผม)
+- **R=0, G=255, B=0** → shirt-boundary (พิกเซลชายแดนที่เป็นสีเสื้อ)
+- **R=0, G=0, B=255** → outfit-boundary (พิกเซลชายแดนที่เป็นสีเอี้ยม)
+- **R=0, G=0, B=0** → ไม่เปลี่ยนสี
+
+> **สำคัญ**: Mask PNG ต้องเป็นสีบริสุทธิ์ (pure R, G, หรือ B) ห้ามมี anti-aliasing หรือสีผสม
+
+#### สร้าง Mask PNG ใหม่ด้วย PowerShell
+
+เมื่อเพิ่ม sprite strip ใหม่ ให้รัน script นี้เพื่อสร้าง mask อัตโนมัติ:
+
+```powershell
+Add-Type -AssemblyName System.Drawing
+
+function Make-Mask {
+    param($SpritePath, $MaskPath, $SkinColors, $OutfitColors, $ShirtColors)
+
+    $bmp    = [System.Drawing.Bitmap]::new($SpritePath)
+    $mask   = [System.Drawing.Bitmap]::new($bmp.Width, $bmp.Height,
+                [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    $thresh = 40   # ปรับถ้า region ใหญ่/เล็กเกินไป
+
+    for ($y = 0; $y -lt $bmp.Height; $y++) {
+        for ($x = 0; $x -lt $bmp.Width; $x++) {
+            $px = $bmp.GetPixel($x, $y)
+            if ($px.A -lt 10) { continue }
+
+            $r = [int]$px.R; $g = [int]$px.G; $b = [int]$px.B
+            $col = [System.Drawing.Color]::Black
+
+            foreach ($ref in $SkinColors) {
+                $dist = [Math]::Sqrt(($r-$ref[0])*($r-$ref[0]) + ($g-$ref[1])*($g-$ref[1]) + ($b-$ref[2])*($b-$ref[2]))
+                if ($dist -lt $thresh) { $col = [System.Drawing.Color]::FromArgb(255,255,0,0); break }
+            }
+            if ($col.R -eq 0) {
+                foreach ($ref in $OutfitColors) {
+                    $dist = [Math]::Sqrt(($r-$ref[0])*($r-$ref[0]) + ($g-$ref[1])*($g-$ref[1]) + ($b-$ref[2])*($b-$ref[2]))
+                    if ($dist -lt $thresh) { $col = [System.Drawing.Color]::FromArgb(255,0,255,0); break }
+                }
+            }
+            if ($col.R -eq 0 -and $col.G -eq 0) {
+                foreach ($ref in $ShirtColors) {
+                    $dist = [Math]::Sqrt(($r-$ref[0])*($r-$ref[0]) + ($g-$ref[1])*($g-$ref[1]) + ($b-$ref[2])*($b-$ref[2]))
+                    if ($dist -lt $thresh) { $col = [System.Drawing.Color]::FromArgb(255,0,0,255); break }
+                }
+            }
+
+            $mask.SetPixel($x, $y, $col)
+        }
+    }
+    $mask.Save($MaskPath, [System.Drawing.Imaging.ImageFormat]::Png)
+    $bmp.Dispose(); $mask.Dispose()
+    Write-Host "Saved: $MaskPath"
+}
+
+# === ค่าสีจาก Sunnyside World sprite (pixel scan) ===
+$skinColors   = @(@(200,127,91),@(232,173,125),@(232,173,109))
+$outfitColors = @(@(36,43,66),@(56,69,101))
+$shirtColors  = @(@(165,31,51),@(250,113,122))
+
+$base = "assets/sprites/character/human/IDLE"
+
+# Body sprites — R=skin, G=outfit, B=shirt
+Make-Mask "$base\base_idle_strip9.png"  "$base\mask_base_idle_strip9.png"  $skinColors $outfitColors $shirtColors
+Make-Mask "$base\tools_idle_strip9.png" "$base\mask_tools_idle_strip9.png" $skinColors $outfitColors $shirtColors
+
+# Hair sprites — R=hair, G=shirt-boundary, B=outfit-boundary
+# ค่าสี hair จาก pixel scan (เส้นผมทุกทรงใช้สี skin เดิมเป็น boundary pixel)
+$hairColors        = @(@(63,39,49),@(108,61,67),@(187,109,83))   # สี hair ใน Sunnyside default
+$shirtBoundary     = $shirtColors   # G channel = shirt-boundary (สีเดิมของเสื้อ)
+$outfitBoundary    = $outfitColors  # B channel = outfit-boundary (สีเดิมของเอี้ยม)
+
+foreach ($style in @("bowlhair","curlyhair","longhair","mophair","shorthair","spikeyhair")) {
+    Make-Mask "$base\${style}_idle_strip9.png" "$base\mask_${style}_idle_strip9.png" `
+              $hairColors $shirtBoundary $outfitBoundary
+}
+```
+
+#### Import Settings ใน Godot (บังคับ)
+
+mask PNG ต้อง import ด้วยการตั้งค่าเหล่านี้หรือ shader จะอ่านสีผิดเพราะ lossy compression:
+1. คลิก mask PNG ใน FileSystem → ไป **Import** tab
+2. **Compress Mode = Lossless**
+3. **Mipmaps = Off**
+4. **Filter = Nearest**
+5. กด **Reimport**
+
+#### กฎสำคัญ: texture และ mask ต้องเปลี่ยนพร้อมกันเสมอ
+
+> **ห้ามโหลด texture ใหม่โดยไม่โหลด mask ใหม่ตาม** — mask เก่าจะมี UV region ของ sprite เก่า ทำให้สีเปลี่ยนผิดตำแหน่ง
+
+```gdscript
+# ถูก — เปลี่ยนพร้อมกัน
+_body.texture = load(path + "base_walk_strip8.png")
+_body.hframes = 8
+_body_mat.set_shader_parameter("mask_texture", load(path + "mask_base_walk_strip8.png"))
+
+# ผิด — เปลี่ยน texture แต่ mask ยังเป็นของเก่า
+_body.texture = load(path + "base_walk_strip8.png")
+```
+
+#### เพิ่ม Hairstyle ใหม่
+
+1. วาง `{stylename}_idle_strip9.png` ใน `assets/sprites/character/human/IDLE/`
+2. รัน PowerShell script ด้านบน (เพิ่ม style เข้าไปใน foreach loop)
+3. Import `mask_{stylename}_idle_strip9.png` ด้วยการตั้งค่าด้านล่าง
+4. เพิ่มชื่อใน [CharacterCreator.gd:8-17](scripts/ui/CharacterCreator.gd#L8-L17):
+
+```gdscript
+const HAIR_STYLES: Array[String] = [
+    "",           # หัวล้าน
+    "bowlhair", "curlyhair", "longhair",
+    "mophair",  "shorthair", "spikeyhair",
+    "newhair",  # ← เพิ่มตรงนี้
+]
+const HAIR_LABELS: Array[String] = [
+    "HAIR_BALD",
+    "HAIR_BOWL", "HAIR_CURLY", "HAIR_LONG",
+    "HAIR_MOP",  "HAIR_SHORT", "HAIR_SPIKY",
+    "HAIR_NEW",  # ← และ label นี้
+]
+```
+
+5. เพิ่ม translation key `HAIR_NEW` ใน `.po` file
+
+#### เพิ่ม Sprite Action ใหม่ (เช่น WALK, ATTACK)
+
+เมื่อต้องการ palette swap สำหรับ action อื่นนอกจาก IDLE:
+
+1. สร้าง mask สำหรับทุก hairstyle ในตาม action นั้น:
+   - `mask_base_{action}_strip{N}.png`
+   - `mask_tools_{action}_strip{N}.png`
+   - `mask_{style}_{action}_strip{N}.png` สำหรับแต่ละทรงผม
+2. Import ด้วยการตั้งค่าด้านล่าง
+3. ใน GDScript เปลี่ยน texture และ mask พร้อมกันเสมอ (ดูกฎด้านบน)
+
+#### CharacterColors.gd API Reference
+
+```gdscript
+# สร้าง material (ทำครั้งเดียวตอน _setup_materials)
+var body_mat := CharacterColors.make_body_material()   # skin/outfit/shirt
+var hair_mat := CharacterColors.make_hair_material()   # hair + boundaries
+
+# อัปเดตสีทุกครั้งที่ผู้เล่นเปลี่ยน — เรียก apply ทั้ง body+hair พร้อมกัน
+CharacterColors.apply_body_colors(body_mat, skin_key, outfit_key, outfit2_key)
+CharacterColors.apply_hair_colors(hair_mat, hair_key, outfit_key, outfit2_key)
+
+# keys ที่ใช้ได้:
+# skin_key:    "light" | "medium" | "tan" | "dark" | "deep"
+# outfit_key:  "navy"  | "brown"  | "black" | "white" | "green" | "red" | "purple" | "grey"
+# outfit2_key: "red"   | "white"  | "blue"  | "black" | "yellow" | "green" | "purple" | "pink"
+# hair_key:    "black" | "brown"  | "auburn" | "blonde" | "grey" | "white" | "blue" | "gold"
+```
+
+#### Luminance Ranges (ค่าจาก pixel scan ของ Sunnyside sprites)
+
+ถ้าเปลี่ยน asset pack หรือสังเกตว่า color swap ดู "แบน" หรือ "เพี้ยน" ให้อัปเดตค่าเหล่านี้ใน `CharacterColors.gd`:
+
+```
+BODY_LUM1: 0.507–0.726  (skin:   #BB6D53 → #E8AD7D)
+BODY_LUM2: 0.171–0.270  (outfit: #242B42 → #384565)
+BODY_LUM3: 0.288–0.608  (shirt:  #A51F33 → #FA717A)
+HAIR_LUM1: 0.186–0.507  (hair:   #3F2731 → #BB6D53)
+```
+
+---
+
 ### Session: Character Creator + Sunnyside Assets (มิถุนายน 2026)
 - เลือกใช้ **Sunnyside World** by danieldiggle เป็น asset หลัก
   - License: commercial OK, ห้าม resell/AI training, credit ไม่บังคับ

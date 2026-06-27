@@ -76,25 +76,28 @@ func _process(delta: float) -> void:
 
 
 func _setup_materials() -> void:
-	_body_mat = CharacterColors.make_material()
-	_tool_mat = CharacterColors.make_material()
-	_hair_mat = CharacterColors.make_material()
+	_body_mat = CharacterColors.make_body_material()
+	_tool_mat = CharacterColors.make_body_material()
+	_hair_mat = CharacterColors.make_hair_material()
 
 	_body.material = _body_mat
 	_tool.material = _tool_mat
 	_hair.material = _hair_mat
 
-	# IDLE sprites are horizontal strip × 9 frames — show frame 0 for preview
-	_body.hframes = 9
+	_body.hframes = IDLE_FRAMES
 	_body.frame   = 0
-	_tool.hframes = 9
+	_tool.hframes = IDLE_FRAMES
 	_tool.frame   = 0
-	_hair.hframes = 9
+	_hair.hframes = IDLE_FRAMES
 	_hair.frame   = 0
 
 	_body.texture  = load(IDLE_PATH + "base_idle_strip9.png")
 	_tool.texture  = load(IDLE_PATH + "tools_idle_strip9.png")
 	_hair.visible  = false  # default index 0 = ล้าน
+
+	# โหลด mask texture สำหรับ body และ tools
+	_body_mat.set_shader_parameter("mask_texture", load(IDLE_PATH + "mask_base_idle_strip9.png"))
+	_tool_mat.set_shader_parameter("mask_texture", load(IDLE_PATH + "mask_tools_idle_strip9.png"))
 
 # ---------------------------------------------------------------------------
 # UI construction (all option rows built at runtime)
@@ -235,18 +238,9 @@ func _set_highlight(btns: Dictionary, selected: String) -> void:
 # ---------------------------------------------------------------------------
 
 func _update_preview() -> void:
-	CharacterColors.apply_to_material(
-		_body_mat, _skin_key, _outfit_key, _outfit2_key, "",
-		CharacterColors.Layer.BODY
-	)
-	CharacterColors.apply_to_material(
-		_tool_mat, _skin_key, _outfit_key, _outfit2_key, "",
-		CharacterColors.Layer.BODY
-	)
-	CharacterColors.apply_to_material(
-		_hair_mat, "", "", "", _hair_color_key,
-		CharacterColors.Layer.HAIR
-	)
+	CharacterColors.apply_body_colors(_body_mat, _skin_key, _outfit_key, _outfit2_key)
+	CharacterColors.apply_body_colors(_tool_mat, _skin_key, _outfit_key, _outfit2_key)
+	CharacterColors.apply_hair_colors(_hair_mat, _hair_color_key, _outfit_key, _outfit2_key)
 
 # ---------------------------------------------------------------------------
 # Selection handlers
@@ -260,8 +254,11 @@ func _select_hair_style(idx: int) -> void:
 		_hair.visible = false
 	else:
 		_hair.visible = true
-		_hair.texture = load(IDLE_PATH + "%s_idle_strip9.png" % HAIR_STYLES[idx])
+		var style := HAIR_STYLES[idx]
+		_hair.texture = load(IDLE_PATH + "%s_idle_strip9.png" % style)
 		_hair.hframes = IDLE_FRAMES
+		_hair_mat.set_shader_parameter("mask_texture",
+				load(IDLE_PATH + "mask_%s_idle_strip9.png" % style))
 	_update_preview()
 
 

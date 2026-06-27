@@ -1,33 +1,11 @@
 extends Node
-## Singleton — character palette presets and runtime palette texture builder.
-## Source colors verified against actual pixel values in the sprite sheets.
+## Singleton — character palette presets + mask-based color swap.
+## Shader: character_mask.gdshader
+## Mask format — body sprites: R=skin  G=outfit  B=shirt
+##               hair sprites: R=hair  G=shirt-boundary  B=outfit-boundary
 
 # ---------------------------------------------------------------------------
-# SOURCE COLORS — pixel-exact values from base_idle_strip9.png
-# (verified with System.Drawing pixel scan, not derived)
-# ---------------------------------------------------------------------------
-
-# ผิวหนัง (BODY layer)
-const SKIN_SHAD:    Color = Color(0.7843, 0.4980, 0.3569)  # #C87F5B  เงาผิว
-const SKIN_MID:     Color = Color(0.9098, 0.6784, 0.4902)  # #E8AD7D  ผิวกลาง
-
-# เอี้ยม / overalls (ชั้นนอก)
-const OUTFIT_SHAD:  Color = Color(0.1412, 0.1686, 0.2588)  # #242B42  เงาเอี้ยม
-const OUTFIT_MID:   Color = Color(0.2157, 0.2667, 0.3922)  # #374464  เอี้ยมกลาง
-const OUTFIT_HIGH:  Color = Color(0.2196, 0.2706, 0.3961)  # #384565  ไฮไลท์เอี้ยม
-
-# เสื้อตัวใน / shirt (ชั้นใน)
-const OUTFIT2_SHAD: Color = Color(0.6471, 0.1216, 0.2000)  # #A51F33  เงาเสื้อ
-const OUTFIT2_MID:  Color = Color(0.9137, 0.1961, 0.2706)  # #E93245  เสื้อกลาง
-const OUTFIT2_HIGH: Color = Color(0.9804, 0.4431, 0.4784)  # #FA717A  ไฮไลท์เสื้อ
-
-# ผม — pixel-exact จาก bowlhair_idle_strip9.png
-const HAIR_DARK: Color = Color(0.247, 0.153, 0.192)    # #3f2731 เงา / ด้านข้าง
-const HAIR_MID:  Color = Color(0.459, 0.235, 0.224)    # #753c39 สีหลัก / ด้านบน
-const HAIR_HIGH: Color = Color(0.733, 0.427, 0.325)    # #bb6d53 แสงสะท้อน
-
-# ---------------------------------------------------------------------------
-# PRESETS — skin tone (3 shades: shadow / midtone / highlight)
+# PRESETS — skin tone  [shadow, midtone, highlight]
 # ---------------------------------------------------------------------------
 const SKIN_PRESETS: Dictionary = {
 	"light":  [Color("#c89070"), Color("#e8ad7d"), Color("#f5cfa0")],
@@ -38,7 +16,7 @@ const SKIN_PRESETS: Dictionary = {
 }
 
 # ---------------------------------------------------------------------------
-# PRESETS — outfit outer / เอี้ยม (3 shades)
+# PRESETS — outfit outer / เอี้ยม  [shadow, midtone, highlight]
 # ---------------------------------------------------------------------------
 const OUTFIT_PRESETS: Dictionary = {
 	"navy":   [Color("#263040"), Color("#374464"), Color("#4e6080")],
@@ -52,7 +30,7 @@ const OUTFIT_PRESETS: Dictionary = {
 }
 
 # ---------------------------------------------------------------------------
-# PRESETS — outfit inner / เสื้อตัวใน (3 shades)
+# PRESETS — outfit inner / เสื้อตัวใน  [shadow, midtone, highlight]
 # ---------------------------------------------------------------------------
 const OUTFIT2_PRESETS: Dictionary = {
 	"red":    [Color("#a81830"), Color("#e93245"), Color("#f07070")],
@@ -66,8 +44,7 @@ const OUTFIT2_PRESETS: Dictionary = {
 }
 
 # ---------------------------------------------------------------------------
-# PRESETS — hair color (สำหรับ hair layer sprites: bowlhair_*, curlyhair_*, ฯลฯ)
-# 3 shades ต่อ option
+# PRESETS — hair color  [shadow, midtone, highlight]
 # ---------------------------------------------------------------------------
 const HAIR_PRESETS: Dictionary = {
 	"black":   [Color("#0a0808"), Color("#1e1818"), Color("#382c28")],
@@ -80,60 +57,90 @@ const HAIR_PRESETS: Dictionary = {
 	"gold":    [Color("#483000"), Color("#786010"), Color("#b89030")],
 }
 
-# Layer ที่ shader ใช้
-enum Layer { BODY, HAIR }
+# ---------------------------------------------------------------------------
+# Luminance ranges — ค่าความสว่างต่ำสุด/สูงสุดของแต่ละ region ในสไปรต์ต้นฉบับ
+# (คำนวณจาก pixel scan ของ Sunnyside World sprites)
+# ---------------------------------------------------------------------------
+const BODY_LUM1_MIN := 0.507  # skin  (#BB6D53 / #C87F5B darkest)
+const BODY_LUM1_MAX := 0.726  # skin  (#E8AD7D lightest)
+const BODY_LUM2_MIN := 0.171  # outfit (#242B42 darkest)
+const BODY_LUM2_MAX := 0.270  # outfit (#384565 lightest)
+const BODY_LUM3_MIN := 0.288  # shirt  (#A51F33 darkest)
+const BODY_LUM3_MAX := 0.608  # shirt  (#FA717A lightest)
+
+const HAIR_LUM1_MIN := 0.186  # hair (#3F2731 darkest)
+const HAIR_LUM1_MAX := 0.507  # hair (#BB6D53 lightest)
 
 # ---------------------------------------------------------------------------
-# Helpers
+# Public API
 # ---------------------------------------------------------------------------
 
-## สร้าง ImageTexture 1×N จาก Array of Color — ใช้เป็น shader uniform
-func build_texture(colors: Array) -> ImageTexture:
-	var img := Image.create(colors.size(), 1, false, Image.FORMAT_RGBA8)
-	for i in colors.size():
-		img.set_pixel(i, 0, colors[i])
-	return ImageTexture.create_from_image(img)
+## สร้าง ShaderMaterial สำหรับ body sprite (base / tools)
+func make_body_material() -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	mat.shader = _get_mask_shader()
+	mat.set_shader_parameter("lum1_min", BODY_LUM1_MIN)
+	mat.set_shader_parameter("lum1_max", BODY_LUM1_MAX)
+	mat.set_shader_parameter("lum2_min", BODY_LUM2_MIN)
+	mat.set_shader_parameter("lum2_max", BODY_LUM2_MAX)
+	mat.set_shader_parameter("lum3_min", BODY_LUM3_MIN)
+	mat.set_shader_parameter("lum3_max", BODY_LUM3_MAX)
+	return mat
 
 
-## ตั้ง shader uniforms บน ShaderMaterial ของ sprite layer ที่ระบุ
-##
-## BODY layer: src = 9 pixel-exact colors (3 per group: skin / outfit / shirt)
-## HAIR layer: src = 3 pixel-exact hair colors
-func apply_to_material(
+## สร้าง ShaderMaterial สำหรับ hair sprite
+func make_hair_material() -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	mat.shader = _get_mask_shader()
+	mat.set_shader_parameter("lum1_min", HAIR_LUM1_MIN)
+	mat.set_shader_parameter("lum1_max", HAIR_LUM1_MAX)
+	# boundary pixels ใน hair sprite: G=shirt, B=outfit (ใช้ range เดียวกันกับ body)
+	mat.set_shader_parameter("lum2_min", BODY_LUM3_MIN)
+	mat.set_shader_parameter("lum2_max", BODY_LUM3_MAX)
+	mat.set_shader_parameter("lum3_min", BODY_LUM2_MIN)
+	mat.set_shader_parameter("lum3_max", BODY_LUM2_MAX)
+	return mat
+
+
+## ตั้งสีบน body material — region1=skin  region2=outfit  region3=shirt
+func apply_body_colors(
 		mat:         ShaderMaterial,
 		skin_key:    String,
 		outfit_key:  String,
-		outfit2_key: String,
-		hair_key:    String,
-		layer:       Layer
+		outfit2_key: String
 ) -> void:
-	var src: Array
-	var tgt: Array
-
-	match layer:
-		Layer.BODY:
-			# ใช้ค่าสีจริงจากสไปรต์ (pixel-exact) — ไม่ derive จาก midtone
-			src = [SKIN_SHAD,    SKIN_MID,    SKIN_MID,
-			       OUTFIT_SHAD,  OUTFIT_MID,  OUTFIT_HIGH,
-			       OUTFIT2_SHAD, OUTFIT2_MID, OUTFIT2_HIGH]
-			tgt = (SKIN_PRESETS.get(skin_key,     SKIN_PRESETS["light"])
-				 + OUTFIT_PRESETS.get(outfit_key,  OUTFIT_PRESETS["navy"])
-				 + OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"]))
-
-		Layer.HAIR:
-			src = [HAIR_DARK, HAIR_MID, HAIR_HIGH]
-			tgt = HAIR_PRESETS.get(hair_key, HAIR_PRESETS["brown"])
-
-	mat.set_shader_parameter("source_palette", build_texture(src))
-	mat.set_shader_parameter("target_palette", build_texture(tgt))
-	mat.set_shader_parameter("palette_size",   src.size())
+	var sk  := SKIN_PRESETS.get(skin_key,      SKIN_PRESETS["light"])
+	var ok  := OUTFIT_PRESETS.get(outfit_key,  OUTFIT_PRESETS["navy"])
+	var s2k := OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"])
+	mat.set_shader_parameter("color1_dark",  sk[0])
+	mat.set_shader_parameter("color1_light", sk[2])
+	mat.set_shader_parameter("color2_dark",  ok[0])
+	mat.set_shader_parameter("color2_light", ok[2])
+	mat.set_shader_parameter("color3_dark",  s2k[0])
+	mat.set_shader_parameter("color3_light", s2k[2])
 
 
-func get_shader() -> Shader:
-	return load("res://assets/shaders/character_palette.gdshader")
+## ตั้งสีบน hair material — region1=hair  region2=shirt-boundary  region3=outfit-boundary
+func apply_hair_colors(
+		mat:         ShaderMaterial,
+		hair_key:    String,
+		outfit_key:  String,
+		outfit2_key: String
+) -> void:
+	var hk  := HAIR_PRESETS.get(hair_key,      HAIR_PRESETS["brown"])
+	var ok  := OUTFIT_PRESETS.get(outfit_key,  OUTFIT_PRESETS["navy"])
+	var s2k := OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"])
+	mat.set_shader_parameter("color1_dark",  hk[0])
+	mat.set_shader_parameter("color1_light", hk[2])
+	mat.set_shader_parameter("color2_dark",  s2k[0])   # G channel = shirt boundary
+	mat.set_shader_parameter("color2_light", s2k[2])
+	mat.set_shader_parameter("color3_dark",  ok[0])    # B channel = outfit boundary
+	mat.set_shader_parameter("color3_light", ok[2])
 
 
-func make_material() -> ShaderMaterial:
-	var mat := ShaderMaterial.new()
-	mat.shader = get_shader()
-	return mat
+# ---------------------------------------------------------------------------
+# Private
+# ---------------------------------------------------------------------------
+
+func _get_mask_shader() -> Shader:
+	return load("res://assets/shaders/character_mask.gdshader")
