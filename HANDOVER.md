@@ -6,11 +6,11 @@
 
 ## สถานะล่าสุด
 
-**วันที่อัปเดต:** 27 มิถุนายน 2026 (Session 3)
-**Phase ปัจจุบัน:** Phase 1 กำลังดำเนินการ — core gameplay loop ครบ, พร้อม test ใน Godot
-**สิ่งที่มีแล้ว:** SQL schemas ครบ 6 ไฟล์, Scripts ครบทุก scene, Gameplay loop: Menu→Character→WorldMap→Combat/Gacha/SkillWeb
+**วันที่อัปเดต:** 27 มิถุนายน 2026 (Session 4)
+**Phase ปัจจุบัน:** Phase 1 กำลังดำเนินการ — Godot เปิดได้ไม่มี parse error ทุก scene, Character Select flow ถูกต้องแล้ว
+**สิ่งที่มีแล้ว:** SQL schemas ครบ 6 ไฟล์, Scripts ครบทุก scene, Gameplay loop: Menu→Character→WorldMap→Combat/Gacha/SkillWeb, Character Creator sprite null-safe
 **Godot version:** 4.7
-**สิ่งที่ต้องทำต่อ:** เปิด Godot → test gameplay loop ทั้งหมด → แก้ runtime bugs ที่พบ
+**สิ่งที่ต้องทำต่อ:** เปิด Godot → reimport mask textures อัตโนมัติ → test gameplay loop → สังเกต runtime bug ที่เหลือ
 
 ### SQL Schemas ที่รันใน Supabase แล้ว (ครบทุกไฟล์)
 
@@ -43,6 +43,59 @@
   - `GameState.player_id` = Supabase auth UUID (set ตอน login, ใช้แค่ CharacterSelect query)
   - `GameState.character_id` = `players.id` UUID (set ตอนเลือก/สร้างตัวละคร)
 - **StatCalculator ไม่เคยถูกเรียก**: เพิ่ม `StatCalculator.request_refresh()` ใน `WorldMap._ready()`
+
+### Bug ที่แก้ใน Session 4 — Godot Parse Errors + Character Select Flow
+
+#### Godot Parse Errors (เปิด Godot แล้วพบ error ทั้งหมด)
+
+| ไฟล์ | ปัญหา | การแก้ไข |
+|---|---|---|
+| `scripts/systems/GachaEngine.gd` | `class_name GachaEngine` ซ้อนทับ autoload singleton | ลบ `class_name` ออก |
+| `scripts/systems/StatCalculator.gd` | `class_name StatCalculator` ซ้อนทับ autoload | ลบ `class_name` ออก |
+| `scripts/systems/SkillTreeGraph.gd` | `class_name SkillTreeGraph` ซ้อนทับ autoload | ลบ `class_name` ออก |
+| `scripts/ui/ToastManager.gd` | `class_name ToastManager` ซ้อนทับ autoload | ลบ `class_name` ออก |
+| `scripts/systems/SkillTreeGraph.gd` | `func get_node()` override ชนกับ `Node.get_node()` | เปลี่ยนชื่อเป็น `get_skill_node()` |
+| `scripts/systems/SkillTreeGraph.gd` | `func get_children()` override ชนกับ `Node.get_children()` | เปลี่ยนชื่อเป็น `get_node_children()` |
+| `scripts/ui/SkillWebRenderer.gd` | เรียก `SkillTreeGraph.get_node()` / `get_children()` | อัปเดตชื่อฟังก์ชันตาม (2 จุดต่อฟังก์ชัน) |
+| `scripts/autoload/CharacterColors.gd` | `Dictionary.get()` return Variant → `:=` inference error | เพิ่ม explicit type annotation (`var x: Array = ...`) |
+| `scripts/ui/GachaPanel.gd` | `RARITY_COLOR.get()` return Variant | เพิ่ม explicit type `var col: Color = ...` |
+
+**กฎ Godot 4 ที่ต้องจำ:**
+- Autoload script ห้ามมี `class_name` ตรงกับชื่อ autoload — Godot ถือว่า class type และ singleton instance ชนกัน
+- Script ที่ extend Node ห้าม override built-in methods (`get_node`, `get_children`) ด้วย signature ต่างกัน
+- `Dictionary.get()` return Variant — ใช้ `:=` ไม่ได้ ต้องระบุ type ชัดเจน
+
+#### Character Creator — Sprite Null Safety
+
+- **สาเหตุ sprite ไม่แสดง**: `.ctex` cache ยังไม่ถูกสร้าง เพราะเปิด Godot ครั้งแรก reimport ยังไม่เสร็จ
+- **การแก้ code**: เพิ่ม null check ใน `_setup_materials()` — ถ้า body_tex/mask_tex เป็น null แสดง push_error แทน crash
+- **การแก้ runtime**: เปิด Godot editor บนเครื่องที่ test → Godot reimport `.ctex` อัตโนมัติจาก `.import` sidecar ที่มีอยู่
+- **เพิ่ม PreviewBG** ColorRect ใน `scenes/character_creator.tscn` เป็น child แรกของ SubViewport — ป้องกัน background ดำทำให้ตัวละคร (navy outfit) มองไม่เห็น
+
+#### Character Select Flow — Guest Mode Fix
+
+ปัญหา: ผู้ใช้เคยสร้างตัวละครแล้ว กดเล่นต่อจาก Main Menu จะเข้า World Map ตรงโดยไม่ผ่าน Character Select ทำให้ไม่สามารถลบและสร้างตัวละครใหม่ได้
+
+**Entry points ทั้งหมดที่ต้องผ่าน Character Select:**
+
+| Path | เดิม | แก้เป็น |
+|---|---|---|
+| Login สำเร็จ | `character_select.tscn` | ✅ ถูกแล้ว ไม่เปลี่ยน |
+| Register สำเร็จ (ผ่าน CharacterCreator) | `character_select.tscn` | ✅ ถูกแล้ว (แก้ session ก่อน) |
+| Guest ไม่มี save | `character_creator.tscn` | ✅ ถูกแล้ว ไม่เปลี่ยน |
+| **Guest มี save** (MainMenu) | `world_map.tscn` ❌ | `character_select.tscn` ✅ |
+| **Guest สร้างตัวละครใหม่** (CharacterCreator) | `world_map.tscn` ❌ | `character_select.tscn` ✅ |
+
+**ไฟล์ที่แก้ไข:**
+
+- `scripts/ui/MainMenu.gd` `_on_guest()`: Guest มี save → `character_select.tscn`
+- `scripts/ui/CharacterCreator.gd` `_on_confirm()` (guest branch): หลัง `save_guest()` → `character_select.tscn`
+- `scripts/ui/CharacterSelect.gd`: เพิ่ม guest mode ทั้งหมด
+  - `_load_characters()`: ถ้า `GameState.is_guest` → `_populate_slots_guest()` แทน Supabase query
+  - `_populate_slots_guest()`: slot 0 = ตัวละคร guest (ข้อมูลจาก GameState), slot 1-2 = `_build_guest_locked_slot()`
+  - `_build_guest_locked_slot()`: แสดง "🔒 เฉพาะสมาชิก" สีเทา
+  - `_on_delete_confirmed()` (guest branch): ลบ save file → `reset_session()` → `is_guest = true` → `character_creator.tscn`
+- `locale/th.csv`: เพิ่ม `CS_GUEST_LOCKED` ("🔒 เฉพาะสมาชิก" / "🔒 Members only")
 
 ---
 
