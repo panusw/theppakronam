@@ -1,32 +1,54 @@
-Hi! My name is KipperFalcon,
-Thank you for using it, please read the following information to ensure proper use and avoid any issues.
+เทพปกรณัม (Theppakronam) — Tower of Convergence
+=================================================
 
-If you have any questions about the license or usage, feel free to contact me at:
-kipperfalcon@gmail.com
+PC RPG แนว survival-craft + gacha + ATB combat
+ผู้เล่นรับบทเป็น "ผู้ท้าชิงนิรนาม" ไต่หอเทวภพ สุ่ม gacha รับ item/weapon/armor/skill node
+ปลดล็อก passive skill tree จนกลายเป็นเทพ — มีระบบ gathering/farming/building/hunting/fishing เสริม
 
 
-🧩 Asset Details
+Stack
+-----
+Game engine : Godot 4.7 (GDScript)
+Backend / DB : Supabase (PostgreSQL + REST API)
+Art style    : 16-bit pixel art — Sunnyside World (danieldiggle)
+Platform     : PC (Windows / Mac)
 
-32×32 Pixel Isometric Tileset
 
-A complete tileset designed for both commercial and non-commercial use.
+Core Systems
+------------
+- Gacha        : สุ่ม item/weapon/armor/skill node (ไม่มีตัวละคร), pity ทุก 50 pulls
+- Skill Tree   : Graph-based 181 nodes, 5 tiers, ascension → Divinity level 0-10
+- ATB Combat   : FF7-style, 2 energy types (World / Battle), party sync
+- Tower Map    : Band → Floor → Camp, 6 Pantheons (thai/greek/norse/japanese/egyptian/primordial)
+- Life Skills  : smithing, fishing, farming, hunting, cooking, crafting และอื่น ๆ
+- Multiplayer  : Friend Session (ENet P2P) + Server List (dedicated)
 
-Included in this pack:
-Individual PNG files
-A full spritesheet for convenience
-💬 Feedback
 
-If you have any suggestions or feedback, I’d love to hear from you.
-Your input helps improve future updates!
+Progression
+-----------
+- Band unlock  : server-wide เมื่อ boss first kill
+- Boss Gate    : ต้องครบ 2 ใน 3 เงื่อนไข (camps cleared / mini-bosses / specific camps)
+- Divinity     : สะสม EXP → level 0-10 → title "เทพปกรณัม" เมื่อ max
+- Difficulty   : Normal / Hard / Ascendant / Eternal Path (hardcore one-life)
 
-📜 License (CC BY 0.0)
 
-By obtaining this asset pack, you are granted the following rights:
+Asset Credits
+-------------
+Character & Environment sprites: Sunnyside World by danieldiggle
+  https://danieldiggle.itch.io/sunnyside
+  License: commercial OK — ห้าม resell หรือใช้เพื่อ AI training
 
-✅ Use the assets in commercial and non-commercial projects
-(games, software, websites, print, etc.)
-✅ Modify and adapt the assets to fit your needs
-❌ You may not redistribute, resell, or repackage the assets
-(modified or unmodified) as standalone content or as part of an asset collection
+Palette swap: character_palette.gdshader (3 layers: Body / Outfit / Hair)
 
-Attribution is not required, but always appreciated ❤️
+
+Design Documents
+----------------
+GAME_DESIGN.md  — Game Design Document ฉบับสมบูรณ์ (§1-§66)
+HANDOVER.md     — ประวัติการออกแบบและบริบทการพัฒนา
+CLAUDE.md       — คำแนะนำสำหรับ AI assistant ที่ทำงานในโปรเจกต์นี้
+sql/            — Supabase schema files (reference)
+
+
+Contact
+-------
+panus.w@gmail.com
