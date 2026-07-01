@@ -50,11 +50,9 @@ var _tool_mat: ShaderMaterial
 var _hair_mat: ShaderMaterial
 
 # Button registries for highlight tracking
-var _hair_style_btns:  Array[Button] = []
-var _skin_btns:        Dictionary    = {}
-var _hair_color_btns:  Dictionary    = {}
-var _outfit_btns:      Dictionary    = {}
-var _outfit2_btns:     Dictionary    = {}
+var _hair_style_btns: Array[Button] = []
+var _outfit_btns:     Dictionary    = {}
+var _outfit2_btns:    Dictionary    = {}
 
 # ---------------------------------------------------------------------------
 # Lifecycle
@@ -78,11 +76,9 @@ func _process(delta: float) -> void:
 func _setup_materials() -> void:
 	_body_mat = CharacterColors.make_body_material()
 	_tool_mat = CharacterColors.make_body_material()
-	_hair_mat = CharacterColors.make_hair_material()
 
 	_body.material = _body_mat
 	_tool.material = _tool_mat
-	_hair.material = _hair_mat
 
 	_body.hframes = IDLE_FRAMES
 	_body.frame   = 0
@@ -94,16 +90,13 @@ func _setup_materials() -> void:
 	var body_tex := load(IDLE_PATH + "base_idle_strip9.png") as Texture2D
 	var tool_tex := load(IDLE_PATH + "tools_idle_strip9.png") as Texture2D
 	if body_tex == null or tool_tex == null:
-		push_error("CharacterCreator: ไม่พบ sprite ตัวละคร — ลอง Project > Tools > Reimport CSV / reimport assets ใน Godot editor")
+		push_error("CharacterCreator: ไม่พบ sprite ตัวละคร")
 	_body.texture = body_tex
 	_tool.texture = tool_tex
-	_hair.visible  = false  # default index 0 = ล้าน
+	_hair.visible = false
 
-	# โหลด mask texture สำหรับ body และ tools
 	var body_mask := load(IDLE_PATH + "mask_base_idle_strip9.png") as Texture2D
 	var tool_mask := load(IDLE_PATH + "mask_tools_idle_strip9.png") as Texture2D
-	if body_mask == null or tool_mask == null:
-		push_error("CharacterCreator: ไม่พบ mask texture — ต้อง reimport ใน Godot editor ก่อน (Project > Reimport All)")
 	if body_mask != null:
 		_body_mat.set_shader_parameter("mask_texture", body_mask)
 	if tool_mask != null:
@@ -138,23 +131,7 @@ func _build_ui() -> void:
 	_options_box.add_child(style_row)
 	_add_separator()
 
-	# --- Hair color ---
-	_add_label(tr("CC_HAIR_COLOR_LABEL"))
-	var hair_color_row := HBoxContainer.new()
-	_hair_color_btns = _build_color_row(hair_color_row, CharacterColors.HAIR_PRESETS, _select_hair_color)
-	_set_highlight(_hair_color_btns, _hair_color_key)
-	_options_box.add_child(hair_color_row)
-	_add_separator()
-
-	# --- Skin tone ---
-	_add_label(tr("CC_SKIN_LABEL"))
-	var skin_row := HBoxContainer.new()
-	_skin_btns = _build_color_row(skin_row, CharacterColors.SKIN_PRESETS, _select_skin)
-	_set_highlight(_skin_btns, _skin_key)
-	_options_box.add_child(skin_row)
-	_add_separator()
-
-	# --- Outfit outer (เอี้ยม) ---
+	# --- Outfit outer (เอี๊ยม) ---
 	_add_label(tr("CC_OUTFIT_LABEL"))
 	var outfit_row := HBoxContainer.new()
 	_outfit_btns = _build_color_row(outfit_row, CharacterColors.OUTFIT_PRESETS, _select_outfit)
@@ -250,7 +227,6 @@ func _set_highlight(btns: Dictionary, selected: String) -> void:
 func _update_preview() -> void:
 	CharacterColors.apply_body_colors(_body_mat, _skin_key, _outfit_key, _outfit2_key)
 	CharacterColors.apply_body_colors(_tool_mat, _skin_key, _outfit_key, _outfit2_key)
-	CharacterColors.apply_hair_colors(_hair_mat, _hair_color_key, _outfit_key, _outfit2_key)
 
 # ---------------------------------------------------------------------------
 # Selection handlers
@@ -264,8 +240,7 @@ func _select_hair_style(idx: int) -> void:
 		_hair.visible = false
 	else:
 		var style := HAIR_STYLES[idx]
-		var hair_tex  := load(IDLE_PATH + "%s_idle_strip9.png" % style) as Texture2D
-		var hair_mask := load(IDLE_PATH + "mask_%s_idle_strip9.png" % style) as Texture2D
+		var hair_tex := load(IDLE_PATH + "%s_idle_strip9.png" % style) as Texture2D
 		if hair_tex != null:
 			_hair.texture = hair_tex
 			_hair.hframes = IDLE_FRAMES
@@ -273,20 +248,6 @@ func _select_hair_style(idx: int) -> void:
 		else:
 			_hair.visible = false
 			push_error("CharacterCreator: ไม่พบ hair sprite '%s'" % style)
-		if hair_mask != null:
-			_hair_mat.set_shader_parameter("mask_texture", hair_mask)
-	_update_preview()
-
-
-func _select_skin(key: String) -> void:
-	_skin_key = key
-	_set_highlight(_skin_btns, key)
-	_update_preview()
-
-
-func _select_hair_color(key: String) -> void:
-	_hair_color_key = key
-	_set_highlight(_hair_color_btns, key)
 	_update_preview()
 
 

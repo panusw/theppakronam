@@ -30,14 +30,9 @@ create table if not exists public.items (
     'wand','mace','crossbow','shield','catalyst'
   )),
 
-  -- Food fields
-  is_food     boolean not null default false,
-  food_hunger_restore float,
-  food_thirst_restore float,
-  food_hp_restore     int,
-  food_buff_stat      text,
-  food_buff_amount    float,
-  food_buff_duration  int,  -- วินาที
+  -- Food fields (ไม่มี hunger/thirst — buff เท่านั้น)
+  is_food          boolean not null default false,
+  food_buff_effects jsonb,  -- [{stat, amount, duration_sec}] — duration_sec=0 คือ instant
 
   -- Durability (weapon/armor)
   max_durability int not null default 0,  -- 0 = ไม่มี durability system (consumable/material)
@@ -57,8 +52,6 @@ create table if not exists public.player_items (
   is_identified    boolean not null default true,
   durability       int,          -- null = consumable/material (ไม่มีค่า), 0 = broken
   affixes          jsonb   not null default '[]'::jsonb,  -- [{stat, amount}]
-  food_state       text    check (food_state in ('fresh','stale','rotten')) default null,
-  spoilage_timer   timestamptz,  -- ถึงเวลานี้ → ขยับ food_state ขั้น
   storage_type     text    not null check (storage_type in ('bag','stash','hotbar')) default 'bag',
   acquired_at      timestamptz not null default now()
 );
@@ -196,29 +189,20 @@ insert into public.items (name_th, name_en, item_type, rarity, base_value, is_st
   ('ข้าวผัด',           'Fried Rice',         'food', 'uncommon',80,  true, 3, 0)
 on conflict do nothing;
 
--- อัปเดต food fields สำหรับ food items
+-- อัปเดต food_buff_effects สำหรับ food items
 update public.items set
   is_food = true,
-  food_hunger_restore = 20,
-  food_thirst_restore = 5,
-  food_hp_restore = 0,
-  max_durability = 0
+  food_buff_effects = '[{"stat":"hp_regen","amount":3,"duration_sec":300}]'::jsonb
 where item_type = 'food' and name_en = 'Rice Porridge';
 
 update public.items set
   is_food = true,
-  food_hunger_restore = 30,
-  food_thirst_restore = 0,
-  food_hp_restore = 10,
-  max_durability = 0
+  food_buff_effects = '[{"stat":"atk","amount":0.1,"duration_sec":300},{"stat":"hp_flat","amount":10,"duration_sec":0}]'::jsonb
 where item_type = 'food' and name_en = 'Grilled Fish';
 
 update public.items set
   is_food = true,
-  food_hunger_restore = 40,
-  food_thirst_restore = 10,
-  food_hp_restore = 5,
-  max_durability = 0
+  food_buff_effects = '[{"stat":"atk","amount":0.05,"duration_sec":600},{"stat":"def","amount":0.05,"duration_sec":600}]'::jsonb
 where item_type = 'food' and name_en = 'Fried Rice';
 
 -- อัปเดต weapon_class (column อยู่ใน INSERT แต่ positional values ไม่ match — fix ด้วย UPDATE)

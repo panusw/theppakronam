@@ -99,10 +99,10 @@ func _build_occupied_slot(panel: PanelContainer, char_data: Dictionary) -> void:
 
 	var div: int   = char_data.get("divinity_level", 0)
 	var band: int  = char_data.get("current_band",  1)
-	var floor: int = char_data.get("current_floor", 1)
+	var floor_num: int = char_data.get("current_floor", 1)
 
 	var lbl_info := Label.new()
-	lbl_info.text                 = tr("CS_DIVINITY_INFO") % [div, band, floor]
+	lbl_info.text                 = tr("CS_DIVINITY_INFO") % [div, band, floor_num]
 	lbl_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(lbl_info)
 
@@ -213,7 +213,7 @@ func _select_character(char_data: Dictionary) -> void:
 	var appearance = char_data.get("appearance", {})
 	if appearance is Dictionary:
 		GameState.pending_appearance = appearance
-	get_tree().change_scene_to_file("res://scenes/world_map.tscn")
+	get_tree().change_scene_to_file("res://scenes/town.tscn")
 
 # ---------------------------------------------------------------------------
 # Delete flow (soft delete — sets deleted_at, 2-step confirm)

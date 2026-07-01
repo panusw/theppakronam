@@ -77,3 +77,38 @@ offset_left = 16.0
 offset_top = 56.0
 offset_right = 400.0
 offset_bottom = 100.0
+
+[node name="MenuBtn" type="Button" parent="."]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 674.0
+offset_right = 116.0
+offset_bottom = 712.0
+text = "เมนู"
+
+[node name="MenuPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+offset_left = 440.0
+offset_top = 250.0
+offset_right = 840.0
+offset_bottom = 470.0
+
+[node name="VBox" type="VBoxContainer" parent="MenuPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BtnCancel" type="Button" parent="MenuPanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ยกเลิก"
+
+[node name="BtnMainMenu" type="Button" parent="MenuPanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ออกไปหน้าแรก"
+
+[node name="BtnQuit" type="Button" parent="MenuPanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ออกจากเกม"

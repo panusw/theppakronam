@@ -5,9 +5,9 @@
 
 ## สรุปโปรเจกต์ใน 3 ประโยค
 
-เทพปกรณัม (Tower of Convergence) คือ PC RPG แนว survival-craft + gacha + ATB combat
-ผู้เล่นรับบทเป็น "ผู้ท้าชิงนิรนาม" ไต่หอเทวภพ สุ่ม gacha รับ item/weapon/armor/skill node
-ปลดล็อก passive skill tree จนกลายเป็นเทพ — มีระบบ gathering/farming/building/hunting/fishing เสริม
+เทพปกรณัม (Tower of Convergence) คือ PC RPG แนว open-class + gacha + ATB combat + life simulation
+ผู้เล่นรับบทเป็น "ผู้ท้าชิงนิรนาม" ไต่หอเทวภพ 6 อาณาจักร สุ่ม gacha รับ item/weapon/armor/skill node บูชาเทพหลายองค์
+ไม่มี fixed class — class ถูกกำหนดโดย weapon ที่ equip, มี weapon proficiency แยกต่างหาก, ปลดล็อก passive skill tree + deity ascension จนกลายเป็นเทพหลายประเภทผสมกันได้
 
 ---
 
@@ -126,12 +126,31 @@ theppakronam/
 - Divinity max = 10 → กลายเป็น "เทพปกรณัม"
 - Seed data: schema_skilltree_v2.sql (UUID ตายตัว)
 
-### 3. Stat Calculation (StatCalculator.gd)
-Port จาก `calcStats()` ใน prototype:
+### 3. Character Progression (3 tracks แยกกัน)
+
 ```
-effective_stat = base_stat
-              + divinity_bonus (per divinity_level — ดู §2 Divinity Level Table)
-              + equipment_bonus (รวม set bonus + affix)
+① Char Level (1–∞)
+   EXP จาก combat / quest / life activity
+   → เพิ่ม base HP, base ATK, base DEF ตาม level table
+
+② Weapon Proficiency (แยกต่างหากต่อ weapon_class)
+   ใช้ sword → sword_prof EXP เพิ่ม, ใช้ bow → bow_prof EXP เพิ่ม
+   → เพิ่ม damage multiplier + unlock weapon-specific active skills
+   → ตอน equip weapon class ใด = active class นั้น (no fixed class)
+
+③ Divinity Level (0–10)
+   จาก skill tree ascension node / boss kill / deity quest
+   → unlock title + passive special ability
+   → สามารถเป็นเทพหลายประเภทพร้อมกันได้ (ตาม deity worship)
+```
+
+### 3b. Stat Calculation (StatCalculator.gd)
+```
+effective_stat = char_level_base_stat          (จาก level table)
+              + weapon_proficiency_bonus        (จาก proficiency level ของ weapon_class ที่ equip)
+              + divinity_bonus                  (per divinity_level)
+              + equipment_bonus                 (รวม set bonus + affix + card/gem)
+              + active_buff_bonus               (จาก food/drink ที่ยังไม่หมดเวลา)
               + Σ(unlocked_skill_node_bonuses)
 ```
 คำนวณฝั่ง server (Supabase function) เท่านั้น — cache ใน `player_stat_cache`
@@ -155,7 +174,33 @@ effective_stat = base_stat
 - World Energy cost: normal 4 / elite 6 / mini_boss 8 / boss 10 / resource 2 / mystery 2
 - Boss Gate: เปิดเมื่อครบ **2 ใน 3** เงื่อนไข (camps_cleared_pct / mini_bosses_killed / specific_camps)
 
-### 6. Character Creator (character_creator.tscn)
+### 6. Food & Buff System
+- **ไม่มี Hunger/Thirst/Fatigue** — ตัดออกทั้งหมด
+- อาหาร/เครื่องดื่ม → ให้ **temporary buff** เท่านั้น (duration เป็นวินาที real-time)
+- Buff stacking: stat คนละประเภทซ้อนได้, stat เดียวกัน = ใช้ค่าสูงสุด (ไม่ stack)
+- ตัวอย่าง buff: `atk +15% / 300s`, `hp_regen +5 / 600s`, `crit_rate +0.1 / 180s`
+- เก็บไว้ใน `player_active_buffs` table — expire server-side
+
+### 6b. NPC Relationship & Hiring
+- **NPC Relationship level (0–10)** ต่อ NPC template แต่ละตัว
+- เพิ่มจาก: ทำ quest ให้ NPC / ให้ของขวัญ / ซื้อขายบ่อย
+- **Unlock rewards** ตาม level: สูตร craft / สูตรอาหาร / แผนที่สมบัติ / discount / ability พิเศษ
+- **NPC Hiring**: จ้าง NPC ทำงานให้ — ค่าจ้างเป็น gold/วัน
+  - `field_worker` — ทำงานในสวน/ฟาร์ม
+  - `combat_companion` — ร่วมปาร์ตี้ล่ามอนสเตอร์
+  - `guard` — ป้องกันอาณาเขต / รับ wave attack
+  - `merchant` — ดูแลร้านค้า / ซื้อขายอัตโนมัติ
+  - `crafter` — craft item ตามคำสั่งที่วางไว้
+
+### 6c. Deity Worship System
+- เลือกบูชาเทพได้ **หลายองค์** (ไม่จำกัด แต่ EXP แต่ละองค์แยกกัน)
+- เทพแต่ละองค์มี **Deity Quest** ชุดของตัวเอง → สำเร็จ = Deity EXP
+- Deity EXP ครบ threshold → ปลดล็อก **Deity Ability** และเพิ่ม stat bonus
+- Deity types (สามารถผสมกันได้):
+  `เทพกสิกรรม / เทพผู้สร้าง / เทพผู้ทำลาย / เทพสงคราม / เทพแห่งการรักษา`
+  `เทพแห่งอาหาร / เทพแห่งการค้าขาย / เทพสิ่งทอ / ศิวะเทพ (ผสมสร้าง+ทำลาย)` ฯลฯ
+
+### 7. Character Creator (character_creator.tscn)
 - แสดงก่อนเข้าเกมครั้งแรก (หลัง register) และที่ Character Select
 - Sunnyside assets: 7 hairstyles (animated), palette swap สำหรับ hair color / skin tone / outfit color
 - Palette swap ทำด้วย `character_palette.gdshader` บน 3 sprite layers: Body, Outfit, Hair
@@ -163,10 +208,35 @@ effective_stat = base_stat
 - ลบตัวละคร: soft delete (`deleted_at`) + confirm 2 ขั้น (modal + พิมพ์ชื่อ)
 - Asset source: https://danieldiggle.itch.io/sunnyside
 
-### 7. Supabase Connection (SupabaseClient.gd)
+### 7b. Supabase Connection (SupabaseClient.gd)
 - ใช้ Godot `HTTPRequest` node — REST API
 - ทุก stat-sensitive operation → server-side Supabase function
 - Client ส่ง action → server validate → return result
+
+### 8. UI Design Principles (RO-style)
+
+**Layout หลัก** (always visible, ไม่ขึ้นกับ scene):
+- **HP/Battle Energy bars** — มุมล่างซ้าย, แสดงตลอดเวลา
+- **Hotbar (slots 1–0)** — ด้านล่างกลาง, เหมือน RO action bar
+- **Mini-map** — มุมขวาบน
+- **Chat box** — มุมล่างขวา (party/global/whisper tabs)
+- **Char Level + Divinity Level** — แสดงใกล้ HP bar
+
+**Windows** (floating, draggable, closable):
+| Window | เปิดด้วย |
+|---|---|
+| Status (stat) | Alt+A |
+| Inventory (grid) | Alt+E |
+| Equipment | Alt+Q |
+| Skill Tree | Alt+S |
+| NPC Relationship | UI button |
+| Deity Worship | UI button |
+| Collection Book | UI button |
+
+**Inventory**: grid-based, drag-and-drop ระหว่าง slots, stack items คนละ stack ได้
+**Hotbar**: drag item/skill จาก window มาวาง, กด 1-0 ใช้งาน
+**NPC dialog**: modal กลางจอ แสดง NPC portrait + relationship bar + options
+**Windows ซ้อนกันได้** — Z-order ตาม click ล่าสุด (like RO)
 
 ---
 
@@ -215,9 +285,22 @@ const COLOR_RARITY = {
 | หัวข้อ | การตัดสินใจ |
 |---|---|
 | Gacha unit | **Item เท่านั้น** — ไม่มีตัวละคร |
-| Ascension | สะสม Divinity EXP จากหลายแหล่ง → level 0-10 |
+| Class system | **ไม่มี fixed class** — weapon ที่ equip กำหนด active class ทันที |
+| Weapon proficiency | แยกต่างหากต่อ weapon_class — เพิ่มจากการใช้งาน |
+| Char progression | **3 tracks**: Char Level + Weapon Proficiency + Divinity Level |
+| Deity | บูชาได้หลายองค์, Deity Quest → Deity EXP → ability + stat, ผสมประเภทเทพได้ |
+| Food/Drink | **Buff เท่านั้น** — ไม่มี Hunger/Thirst/Fatigue ในเกม |
+| Survival | **ตัดออก** — ไม่มี hunger/thirst/fatigue ทุกกรณี |
+| Ascension | Divinity Level 0-10 + Deity types (ผสมกันได้) |
 | Element system | **ไม่มี weakness system** — ใช้ stat type (fire_dmg ฯลฯ) + elemental resistance per enemy |
-| Combat | **ATB** — Attack (miss if SPD<) / Skill (energy) / Item (HOT) / Flee / Capture |
+| Combat | **ATB** — Attack (miss if SPD<) / Skill (energy) / Item / Flee / Capture |
+| Auto-tool | เครื่องมือเหมาะสมถูกเลือกอัตโนมัติ (ไม่ต้องกดเลือก) ตามบริบท (ตัดไม้/ทุบหิน/ต่อสู้) |
+| NPC Relationship | level 0-10 ต่อ NPC — unlock สูตร/แผนที่/discount/ability |
+| NPC Hiring | จ้าง NPC ทำงานด้วย gold/วัน — field_worker/combat/guard/merchant/crafter |
+| Monster wave | มอนสเตอร์โจมตี wave ตามเวลากำหนด — NPC guard ช่วยป้องกันได้ |
+| Treasure hunt | แผนที่สมบัติจาก quest/story/NPC relationship → ล่าสมบัติ |
+| Bounty | ตั้งค่าหัว/รับค่าหัว — target: player / NPC บางตัว / monster |
+| Collection | สมุด collection ครบทุก item/card/ore/monster/NPC |
 | Gold | **ไม่ drop จาก monster** — จาก Treasure Chest / ถุงเงิน / ขาย NPC |
 | Monster | สะสมเป็น bestiary (collector) — ไม่ได้ใช้ต่อสู้ |
 | Guild | Feature flag ปิดอยู่ — เปิด Phase 3 |
@@ -225,7 +308,7 @@ const COLOR_RARITY = {
 | Boss Gate | ต้องครบ **2 ใน 3** เงื่อนไข |
 | Boss Phases | Mini-boss ≥ 2 phases, Boss ≥ 3 phases — data-driven ผ่าน boss_templates |
 | Enemy AI | 5 archetypes (Berserker/Tactician/Support/Trickster/Tank), elemental resistance, night modifier |
-| Durability | Weapon เสื่อมเมื่อ hit โดน, Armor เมื่อรับ damage > 0, ×enemy_type_mult (Slime ×0 → Mythic ×3) |
+| Durability | Weapon เสื่อมเมื่อ hit โดน, Armor เมื่อรับ damage > 0, ×enemy_type_mult |
 | Difficulty | Normal / Hard / Ascendant / **Eternal Path** (hardcore one-life) |
 | Offline/Online | แยก slot — Offline (local) / Guest (anonymous cloud) / Account (cloud ถาวร) |
 | Auth | Username+Password / Google / Facebook / Steam / Apple / Discord (Supabase OAuth) |
@@ -233,10 +316,9 @@ const COLOR_RARITY = {
 | Hardcore marketplace | **Eternal-only** ซื้อขายได้ — normal อ่านราคาได้แต่ซื้อขายไม่ได้ |
 | Save | Offline = local encrypt, Guest = anonymous cloud, Account = cloud |
 | Upgrade/Refine fail | 3 penalty tiers (60%/30%/10%) — Guarantee Stone ข้ามทุก tier |
-| Skill | **Combat Skill (§26)** แยกจาก **Life Skill (§27)** — EXP pool แยก |
+| Skill | **Combat Skill** (weapon proficiency) แยกจาก **Life Skill** — EXP pool แยก |
 | Tool × Skill | item/tool rarity สูง + skill ต่ำ = ผลไม่เต็ม (ทุก Life Skill) |
-| Gold sink | Repair Loop (mandatory) + 13 รายการ optional — Town Treasury passive burn |
-| Survival | Hunger/Thirst/Fatigue — soft buff/debuff ไม่ตาย, decay หยุดเมื่อ offline |
+| Gold sink | Repair Loop (mandatory) + NPC hiring + Town Treasury passive burn |
 | Time | Day/Night ทุก 1 ชม. real time, ฤดูกาลตาม Pantheon แต่ละ Band |
 | Building | Grid-based ใน camp field map, shared server, Raid Mode opt-in |
 | NPC service | ทุก skill NPC ทำได้ ผู้เล่นทำได้เช่นกัน ถ้า Life Skill level เพียงพอ |
@@ -245,20 +327,26 @@ const COLOR_RARITY = {
 
 ## Schema Files (อย่าแก้โดยไม่จำเป็น)
 
-| File | Tables หลัก |
-|---|---|
-| schema_core_v2.sql | players (+hunger/thirst/fatigue/inventory_slots/energy/band_travel_cooldown_until/badge_slot_1/2/3), items (+food stats/base_value/is_food), player_items (+is_identified/durability/affixes/food_state/spoilage_timer/storage_type), player_equipment (+weapon_main_id/weapon_off_id) |
-| schema_tower_v2.sql | tower_bands, tower_floors, tower_camps, camp_connections, player_camp_state, battle_logs, bestiary_monsters, player_monsters, server_boss_kills (+difficulty), boss_clear_records, band_ascension_log, divinity_exp_log, auto_hunt_sessions, weather_pool |
-| schema_skilltree_v2.sql | seed data 181 nodes (UUID ตายตัว) ครบทุก Band tier 1-5 |
-| schema_character_v1.sql | accounts, players (+difficulty/char_type/death_locked/is_guest/guest_device_id), active_characters view |
-| schema_combat_v1.sql | combat_sessions (+party_id/is_party_combat/loot_mode/action_window_sec), combat_action_log, player_status_effects, party_combat_members (+join_order/is_downed/loot_received), party_loot_rolls, boss_templates, boss_phases, boss_drop_table, enemy_templates (+durability_damage_mult), enemy_patterns |
-| schema_upgrade_v1.sql | upgrade_attempts |
-| schema_marketplace_v1.sql | marketplace_listings (Eternal-only) |
-| schema_crafting_v1.sql | crafting_recipes, crafting_recipe_inputs, player_proficiency (+skill_type), camp_buildings (+trap/tower columns), farm_plots, tamed_animals, treasure_spots, merchant_catalog (+npc_role/sell_category), npc_services, achievements, player_achievements, mystery_events, player_mystery_log |
-| schema_social_v1.sql | friendships, friend_requests, player_notifications, player_blocks, active_friends view, room_codes, player_stash, quests, player_daily_stats, player_weekly_stats, leaderboard_history, player_reward_queue, guilds, guild_members, guild_stash_items, guild_stash_log, guild_quests |
-| schema_world_v1.sql | world_time_config (+current_weather/weather_end_at/raid_mode), get_game_time(), weather_pool, game_news, player_news_read |
-| schema_npc_v1.sql | npc_templates, camp_npcs, player_crimes, player_threat, player_reputation, jail_sentences, npc_damage_log, town_treasury, treasury_log |
-| schema_ecosystem_v1.sql | floor_species, species_relations, ecosystem_log, run_ecosystem_tick() |
+> ⚠️ **Schema ที่ต้องอัปเดต** (ยังไม่ได้รัน migration):
+> - `schema_character_v1.sql` — ลบ hunger/thirst/fatigue, เพิ่ม char_level/char_exp
+> - `schema_core_v2.sql` — ลบ food_hunger_restore/food_thirst_restore, เพิ่ม food_buff_effects JSONB; ลบ food_state/spoilage_timer จาก player_items
+> - `schema_progression_v1.sql` — **ไฟล์ใหม่** (ยังไม่สร้าง)
+
+| File | Tables หลัก | สถานะ |
+|---|---|---|
+| schema_core_v2.sql | players, items (**ลบ food_hunger/thirst_restore → เพิ่ม food_buff_effects JSONB**), player_items (**ลบ food_state/spoilage_timer**), player_equipment | ⚠️ ต้องอัปเดต |
+| schema_character_v1.sql | accounts, players (**เพิ่ม char_level INT, char_exp BIGINT; ลบ hunger/thirst/fatigue**), active_characters view | ⚠️ ต้องอัปเดต |
+| schema_progression_v1.sql | player_weapon_proficiency, player_active_buffs, deity_templates, player_deity_worship, deity_quests, npc_relationships, hired_npcs, bounties, treasure_maps | ❌ ยังไม่สร้าง |
+| schema_tower_v2.sql | tower_bands, tower_floors, tower_camps, camp_connections, player_camp_state, battle_logs, bestiary_monsters, player_monsters, server_boss_kills, boss_clear_records, band_ascension_log, divinity_exp_log, auto_hunt_sessions, weather_pool | ✅ ใช้งานได้ |
+| schema_skilltree_v2.sql | seed data 181 nodes (UUID ตายตัว) ครบทุก Band tier 1-5 | ✅ ใช้งานได้ |
+| schema_combat_v1.sql | combat_sessions, combat_action_log, player_status_effects, party_combat_members, party_loot_rolls, boss_templates, boss_phases, boss_drop_table, enemy_templates, enemy_patterns | ✅ ใช้งานได้ |
+| schema_upgrade_v1.sql | upgrade_attempts | ✅ ใช้งานได้ |
+| schema_marketplace_v1.sql | marketplace_listings (Eternal-only) | ✅ ใช้งานได้ |
+| schema_crafting_v1.sql | crafting_recipes, crafting_recipe_inputs, player_proficiency, camp_buildings, farm_plots, tamed_animals, treasure_spots, merchant_catalog, npc_services, achievements, player_achievements, mystery_events, player_mystery_log | ✅ ใช้งานได้ |
+| schema_social_v1.sql | friendships, friend_requests, player_notifications, player_blocks, room_codes, player_stash, quests, player_daily_stats, player_weekly_stats, leaderboard_history, player_reward_queue, guilds, guild_members, guild_stash_items, guild_stash_log, guild_quests | ✅ ใช้งานได้ |
+| schema_world_v1.sql | world_time_config, get_game_time(), weather_pool, game_news, player_news_read | ✅ ใช้งานได้ |
+| schema_npc_v1.sql | npc_templates, camp_npcs, player_crimes, player_threat, player_reputation, jail_sentences, npc_damage_log, town_treasury, treasury_log | ✅ ใช้งานได้ |
+| schema_ecosystem_v1.sql | floor_species, species_relations, ecosystem_log, run_ecosystem_tick() | ✅ ใช้งานได้ |
 
 ---
 

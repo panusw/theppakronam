@@ -153,7 +153,7 @@ func _process(_delta: float) -> void:
 		queue_redraw()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton):
 		return
 	var mev := event as InputEventMouseButton

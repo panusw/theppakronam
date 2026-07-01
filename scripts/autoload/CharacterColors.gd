@@ -65,8 +65,8 @@ const BODY_LUM1_MIN := 0.507  # skin  (#BB6D53 / #C87F5B darkest)
 const BODY_LUM1_MAX := 0.726  # skin  (#E8AD7D lightest)
 const BODY_LUM2_MIN := 0.171  # outfit (#242B42 darkest)
 const BODY_LUM2_MAX := 0.270  # outfit (#384565 lightest)
-const BODY_LUM3_MIN := 0.288  # shirt  (#A51F33 darkest)
-const BODY_LUM3_MAX := 0.608  # shirt  (#FA717A lightest)
+const BODY_LUM3_MIN := 0.24   # shirt  (#a81830 darkest — lum ≈ 0.273; 0.24 gives headroom)
+const BODY_LUM3_MAX := 0.62   # shirt  (#f07070 lightest — lum ≈ 0.589; 0.62 gives headroom)
 
 const HAIR_LUM1_MIN := 0.186  # hair (#3F2731 darkest)
 const HAIR_LUM1_MAX := 0.507  # hair (#BB6D53 lightest)
@@ -136,6 +136,24 @@ func apply_hair_colors(
 	mat.set_shader_parameter("color2_light", s2k[2])
 	mat.set_shader_parameter("color3_dark",  ok[0])    # B channel = outfit boundary
 	mat.set_shader_parameter("color3_light", ok[2])
+
+
+# ---------------------------------------------------------------------------
+# Shirt-only material (hue-detection — no mask file needed)
+# ---------------------------------------------------------------------------
+
+## สร้าง ShaderMaterial สำหรับ body/tool sprite ที่ต้องการเปลี่ยนสีเสื้อ
+func make_shirt_material() -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	mat.shader = load("res://assets/shaders/shirt_color.gdshader")
+	return mat
+
+
+## ตั้งสีเสื้อตัวใน (outfit2) บน material
+func apply_shirt_color(mat: ShaderMaterial, outfit2_key: String) -> void:
+	var s2: Array = OUTFIT2_PRESETS.get(outfit2_key, OUTFIT2_PRESETS["red"])
+	mat.set_shader_parameter("shirt_dark",  s2[0])
+	mat.set_shader_parameter("shirt_light", s2[2])
 
 
 # ---------------------------------------------------------------------------

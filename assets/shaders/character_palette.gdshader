@@ -31,28 +31,27 @@ void fragment() {
 	vec4 col = texture(TEXTURE, UV);
 	if (col.a < 0.01) {
 		COLOR = vec4(0.0);
-		return;
-	}
-
-	vec3 px = col.rgb;
-	float best_dist = tolerance;
-	int  best_idx   = -1;
-
-	for (int i = 0; i < palette_size; i++) {
-		float u     = (float(i) + 0.5) / float(palette_size);
-		vec3  ref   = texture(source_palette, vec2(u, 0.5)).rgb;
-		float dist  = distance(px, ref);
-		if (dist < best_dist) {
-			best_dist = dist;
-			best_idx  = i;
-		}
-	}
-
-	if (best_idx >= 0) {
-		float u   = (float(best_idx) + 0.5) / float(palette_size);
-		vec3  tgt = texture(target_palette, vec2(u, 0.5)).rgb;
-		COLOR = vec4(tgt, col.a);
 	} else {
-		COLOR = col; // no palette match — keep original pixel
+		vec3  px        = col.rgb;
+		float best_dist = tolerance;
+		int   best_idx  = -1;
+
+		for (int i = 0; i < palette_size; i++) {
+			float u    = (float(i) + 0.5) / float(palette_size);
+			vec3  ref  = texture(source_palette, vec2(u, 0.5)).rgb;
+			float dist = distance(px, ref);
+			if (dist < best_dist) {
+				best_dist = dist;
+				best_idx  = i;
+			}
+		}
+
+		if (best_idx >= 0) {
+			float u   = (float(best_idx) + 0.5) / float(palette_size);
+			vec3  tgt = texture(target_palette, vec2(u, 0.5)).rgb;
+			COLOR = vec4(tgt, col.a);
+		} else {
+			COLOR = col;
+		}
 	}
 }

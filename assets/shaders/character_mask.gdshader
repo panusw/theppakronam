@@ -36,22 +36,29 @@ uniform float lum3_max = 0.608;
 
 void fragment() {
 	vec4 orig = texture(TEXTURE, UV);
-	if (orig.a < 0.01) { COLOR = vec4(0.0); return; }
+	if (orig.a < 0.01) {
+		COLOR = vec4(0.0);
+	} else {
+		vec4  mask = texture(mask_texture, UV);
+		float lum  = dot(orig.rgb, vec3(0.299, 0.587, 0.114));
+		vec3  col  = orig.rgb;
 
-	vec4  mask = texture(mask_texture, UV);
-	float lum  = dot(orig.rgb, vec3(0.299, 0.587, 0.114));
-	vec3  col  = orig.rgb;
+		// The mask channel is authoritative — any pixel painted into a region gets
+		// recolored.  Luminance is used only for interpolating between the dark and
+		// light target shades; no luminance guard here (a guard was tried earlier but
+		// it caused dark shirt pixels, lum ≈ 0.27, to fall below the threshold and
+		// never be recolored, making color selection appear broken).
+		if (mask.r > 0.5) {
+			float t = clamp((lum - lum1_min) / max(lum1_max - lum1_min, 0.001), 0.0, 1.0);
+			col = mix(color1_dark, color1_light, t);
+		} else if (mask.g > 0.5) {
+			float t = clamp((lum - lum2_min) / max(lum2_max - lum2_min, 0.001), 0.0, 1.0);
+			col = mix(color2_dark, color2_light, t);
+		} else if (mask.b > 0.5) {
+			float t = clamp((lum - lum3_min) / max(lum3_max - lum3_min, 0.001), 0.0, 1.0);
+			col = mix(color3_dark, color3_light, t);
+		}
 
-	if (mask.r > 0.5) {
-		float t = clamp((lum - lum1_min) / max(lum1_max - lum1_min, 0.001), 0.0, 1.0);
-		col = mix(color1_dark, color1_light, t);
-	} else if (mask.g > 0.5) {
-		float t = clamp((lum - lum2_min) / max(lum2_max - lum2_min, 0.001), 0.0, 1.0);
-		col = mix(color2_dark, color2_light, t);
-	} else if (mask.b > 0.5) {
-		float t = clamp((lum - lum3_min) / max(lum3_max - lum3_min, 0.001), 0.0, 1.0);
-		col = mix(color3_dark, color3_light, t);
+		COLOR = vec4(col, orig.a);
 	}
-
-	COLOR = vec4(col, orig.a);
 }

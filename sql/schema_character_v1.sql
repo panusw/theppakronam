@@ -31,10 +31,9 @@ create table if not exists public.players (
   current_floor   int          not null default 1,
   current_camp_id uuid,
 
-  -- Survival
-  hunger          numeric(5,2) not null default 100 check (hunger  between 0 and 100),
-  thirst          numeric(5,2) not null default 100 check (thirst  between 0 and 100),
-  fatigue         numeric(5,2) not null default 100 check (fatigue between 0 and 100),
+  -- Character progression
+  char_level      int          not null default 1   check (char_level >= 1),
+  char_exp        bigint       not null default 0   check (char_exp >= 0),
 
   -- Energy
   world_energy    int          not null default 100 check (world_energy  between 0 and 100),

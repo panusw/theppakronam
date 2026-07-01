@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1u3b0n5kqa7p" path="res://scripts/ui/MainMenu.gd" id="1_mm"]
 
-[node name="MainMenu" type="Control" unique_id=1177137683]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mm")
 
-[node name="BG" type="ColorRect" parent="." unique_id=1255025733]
+[node name="BG" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.047, 0.047, 0.098, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1884857147]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,99 +28,47 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="CenterContainer" unique_id=505741706]
-custom_minimum_size = Vector2(380, 0)
+[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="CenterContainer/VBox" unique_id=550342679]
+[node name="Title" type="Label" parent="CenterContainer/VBox"]
 layout_mode = 2
 text = "Tower of Convergence"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="CenterContainer/VBox" unique_id=1250695627]
+[node name="Subtitle" type="Label" parent="CenterContainer/VBox"]
 layout_mode = 2
 text = "(เทพปกรณัม)"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="CenterContainer/VBox" unique_id=1694690040]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
-
-[node name="ModeToggle" type="HBoxContainer" parent="CenterContainer/VBox" unique_id=462580287]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="BtnLoginTab" type="Button" parent="CenterContainer/VBox/ModeToggle" unique_id=625619304]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-text = "เข้าสู่ระบบ"
-
-[node name="BtnRegisterTab" type="Button" parent="CenterContainer/VBox/ModeToggle" unique_id=980463774]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-text = "สมัครสมาชิก"
-
-[node name="FormContainer" type="VBoxContainer" parent="CenterContainer/VBox" unique_id=1805838602]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="InputEmail" type="LineEdit" parent="CenterContainer/VBox/FormContainer" unique_id=1570012257]
-layout_mode = 2
-placeholder_text = "อีเมล"
-
-[node name="InputPassword" type="LineEdit" parent="CenterContainer/VBox/FormContainer" unique_id=658959487]
-layout_mode = 2
-placeholder_text = "รหัสผ่าน"
-secret = true
-
-[node name="InputConfirm" type="LineEdit" parent="CenterContainer/VBox/FormContainer" unique_id=826693924]
-visible = false
-layout_mode = 2
-placeholder_text = "ยืนยันรหัสผ่าน"
-secret = true
-
-[node name="BtnSubmit" type="Button" parent="CenterContainer/VBox/FormContainer" unique_id=327490666]
-layout_mode = 2
-text = "เข้าสู่ระบบ"
-
-[node name="LblStatus" type="Label" parent="CenterContainer/VBox" unique_id=282511904]
+[node name="Spacer" type="Control" parent="CenterContainer/VBox"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-horizontal_alignment = 1
-autowrap_mode = 3
 
-[node name="Spacer2" type="Control" parent="CenterContainer/VBox" unique_id=1092921702]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-
-[node name="BtnGuest" type="Button" parent="CenterContainer/VBox" unique_id=683720620]
-layout_mode = 2
-text = "เล่นแบบผู้เยี่ยมชม"
-
-[node name="BtnQuit" type="Button" parent="CenterContainer/VBox" unique_id=1496842187]
-layout_mode = 2
-text = "ออกจากเกม"
-
-[node name="LangSpacer" type="Control" parent="CenterContainer/VBox"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-
-[node name="LangRow" type="HBoxContainer" parent="CenterContainer/VBox"]
-layout_mode = 2
-alignment = 1
-theme_override_constants/separation = 0
-
-[node name="BtnTH" type="Button" parent="CenterContainer/VBox/LangRow"]
+[node name="BtnCreateServer" type="Button" parent="CenterContainer/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-toggle_mode = true
-text = "ภาษาไทย"
+text = "สร้าง Server"
 
-[node name="BtnEN" type="Button" parent="CenterContainer/VBox/LangRow"]
+[node name="BtnJoinServer" type="Button" parent="CenterContainer/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-toggle_mode = true
-text = "English"
+text = "เข้าร่วม Server"
+
+[node name="BtnPlay" type="Button" parent="CenterContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "เล่นทันที"
+
+[node name="BtnSettings" type="Button" parent="CenterContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ตั้งค่า"
+
+[node name="BtnQuit" type="Button" parent="CenterContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ออก"
+

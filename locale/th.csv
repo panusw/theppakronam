@@ -6,8 +6,18 @@ MM_TAB_REGISTER,สมัครสมาชิก,Register
 MM_PLACEHOLDER_EMAIL,อีเมล,Email
 MM_PLACEHOLDER_PASSWORD,รหัสผ่าน,Password
 MM_PLACEHOLDER_CONFIRM,ยืนยันรหัสผ่าน,Confirm Password
-MM_BTN_GUEST,เล่นทันที,Play as Guest
-MM_BTN_QUIT,ออกจากเกม,Quit
+HUD_BTN_MENU,เมนู,Menu
+HUD_BTN_CANCEL,ยกเลิก,Cancel
+HUD_BTN_MAIN_MENU,ออกไปหน้าแรก,Back to Main Menu
+HUD_BTN_QUIT,ออกจากเกม,Quit Game
+SET_TITLE,ตั้งค่า,Settings
+SET_LANG_LABEL,ภาษา,Language
+SET_BTN_BACK,ย้อนกลับ,Back
+MM_BTN_CREATE_SERVER,สร้าง Server,Create Server
+MM_BTN_JOIN_SERVER,เข้าร่วม Server,Join Server
+MM_BTN_GUEST,เล่นทันที,Play Now
+MM_BTN_SETTINGS,ตั้งค่า,Settings
+MM_BTN_QUIT,ออก,Quit
 MM_ERR_EMAIL,อีเมลไม่ถูกต้อง,Invalid email address
 MM_ERR_PASSWORD_SHORT,รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร,Password must be at least 6 characters
 MM_ERR_PASSWORD_MISMATCH,รหัสผ่านไม่ตรงกัน,Passwords do not match
@@ -68,6 +78,10 @@ WM_BTN_MENU,☰ เมนู,☰ Menu
 WM_CAMP_ENERGY,"⚡ %d พลังงาน","⚡ %d Energy"
 WM_CAMP_ENERGY_FREE,⚡ ฟรี,⚡ Free
 WM_BTN_TRAVEL,เดินทาง,Travel
+WM_BTN_TOWN,กลับเมือง,Back to Town
+TN_BTN_MAP,🗺 แผนที่หอ,🗺 Tower Map
+TN_BTN_INVENTORY,🎒 กระเป๋า,🎒 Inventory
+TN_BTN_MENU,☰ เมนู,☰ Menu
 GACHA_TITLE,ห้องสุ่ม,Gacha
 GACHA_BTN_PULL1,"สุ่ม ×1  (100 💎)","Pull ×1  (100 💎)"
 GACHA_BTN_PULL10,"สุ่ม ×10  (900 💎)","Pull ×10  (900 💎)"

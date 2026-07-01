@@ -3,19 +3,26 @@ class_name HudOverlay
 ## Persistent HUD overlay — HP bar, energy, survival, status effects, toasts.
 ## Instantiate as child of any scene that needs the HUD.
 
-@onready var _hp_bar:       ProgressBar = $TopBar/HpContainer/HPBar
-@onready var _lbl_hp:       Label       = $TopBar/HpContainer/LblHP
-@onready var _lbl_world_en: Label       = $TopBar/EnergyContainer/LblWorldEnergy
-@onready var _lbl_battle_en:Label       = $TopBar/EnergyContainer/LblBattleEnergy
-@onready var _lbl_hunger:   Label       = $TopBar/SurvivalContainer/LblHunger
-@onready var _lbl_thirst:   Label       = $TopBar/SurvivalContainer/LblThirst
-@onready var _lbl_fatigue:  Label       = $TopBar/SurvivalContainer/LblFatigue
+@onready var _hp_bar:        ProgressBar    = $TopBar/HpContainer/HPBar
+@onready var _lbl_hp:        Label          = $TopBar/HpContainer/LblHP
+@onready var _lbl_world_en:  Label          = $TopBar/EnergyContainer/LblWorldEnergy
+@onready var _lbl_battle_en: Label          = $TopBar/EnergyContainer/LblBattleEnergy
+@onready var _lbl_hunger:    Label          = $TopBar/SurvivalContainer/LblHunger
+@onready var _lbl_thirst:    Label          = $TopBar/SurvivalContainer/LblThirst
+@onready var _lbl_fatigue:   Label          = $TopBar/SurvivalContainer/LblFatigue
+@onready var _menu_btn:      Button         = $MenuBtn
+@onready var _menu_panel:    PanelContainer = $MenuPanel
 
 func _ready() -> void:
 	_refresh_all()
+	_refresh_menu_text()
 	GameState.energy_changed.connect(_on_energy)
 	GameState.survival_changed.connect(_on_survival)
 	GameState.stats_updated.connect(_on_stats_updated)
+	_menu_btn.pressed.connect(_toggle_menu)
+	$MenuPanel/VBox/BtnCancel.pressed.connect(_toggle_menu)
+	$MenuPanel/VBox/BtnMainMenu.pressed.connect(_on_main_menu)
+	$MenuPanel/VBox/BtnQuit.pressed.connect(get_tree().quit)
 
 
 func _exit_tree() -> void:
@@ -52,6 +59,21 @@ func _on_stats_updated() -> void:
 	_hp_bar.max_value = max_hp
 	_hp_bar.value     = max_hp  # server-authoritative HP not tracked locally yet
 	_lbl_hp.text      = "HP"
+
+
+func _refresh_menu_text() -> void:
+	_menu_btn.text                        = tr("HUD_BTN_MENU")
+	$MenuPanel/VBox/BtnCancel.text        = tr("HUD_BTN_CANCEL")
+	$MenuPanel/VBox/BtnMainMenu.text      = tr("HUD_BTN_MAIN_MENU")
+	$MenuPanel/VBox/BtnQuit.text          = tr("HUD_BTN_QUIT")
+
+
+func _toggle_menu() -> void:
+	_menu_panel.visible = not _menu_panel.visible
+
+
+func _on_main_menu() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 func _survival_color(value: float) -> Color:

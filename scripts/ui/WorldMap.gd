@@ -24,6 +24,7 @@ class_name WorldMap
 @onready var _lbl_energy_cost:   Label              = %LblEnergyCost
 @onready var _btn_travel:        Button             = %BtnTravel
 @onready var _btn_close:         Button             = %BtnClose
+@onready var _menu_overlay:      Control            = %MenuOverlay
 
 # ---------------------------------------------------------------------------
 # Camp data (loaded from Supabase or guest fallback)
@@ -111,6 +112,12 @@ func _wire_bottom_bar() -> void:
 	$HUD/BottomBar/BtnGacha.pressed.connect(func():
 		get_tree().change_scene_to_file("res://scenes/gacha_ui.tscn"))
 	$HUD/BottomBar/BtnMenu.pressed.connect(_on_menu)
+	$HUD/MenuOverlay/MenuPanel/Margin/VBox/BtnCancel.pressed.connect(_on_menu)
+	$HUD/MenuOverlay/MenuPanel/Margin/VBox/BtnTown.pressed.connect(func():
+		get_tree().change_scene_to_file("res://scenes/town.tscn"))
+	$HUD/MenuOverlay/MenuPanel/Margin/VBox/BtnSettings.pressed.connect(_on_settings)
+	$HUD/MenuOverlay/MenuPanel/Margin/VBox/BtnMainMenu.pressed.connect(_on_go_main_menu)
+	$HUD/MenuOverlay/MenuPanel/Margin/VBox/BtnQuit.pressed.connect(get_tree().quit)
 
 
 func _wire_info_panel() -> void:
@@ -388,6 +395,14 @@ func _survival_color(value: float) -> Color:
 
 
 func _on_menu() -> void:
+	_menu_overlay.visible = not _menu_overlay.visible
+
+
+func _on_settings() -> void:
+	get_tree().change_scene_to_file("res://scenes/settings.tscn")
+
+
+func _on_go_main_menu() -> void:
 	if GameState.is_guest:
 		GameState.save_guest()
 	GameState.reset_session()
